@@ -1,0 +1,79 @@
+
+.SearchBar {
+  justify-content: center;
+  align-items: center;
+  height: 69px;
+  background: #E7E7E7;
+  border-radius: 5px;
+  margin-right:  -12px;
+  ::placeholder{
+    color: $gray-600;
+  }
+  &__magnify{
+    font-size: 32px;
+    margin: 10px;
+  }
+}
+
+
+
+
+/* Icon when the collapsible content is shown */
+.btn:after {
+  /* font-family: "Glyphicons Halflings";*/
+  /* content: "\e113";*/
+  float: right;
+  margin-left: -10px;
+  margin-top: 8px;
+  content: "";
+  background-image: url("/public/images/icons/chevron-up.svg");
+  pointer-events: none;
+  width: 1rem;
+  height: 1rem;
+  
+}
+/* Icon when the collapsible content is hidden */
+.btn.collapsed:after {
+  /*content: "\e114"; */
+  content: "";
+  background-image: url("/public/images/icons/chevron-down.svg");
+  place-content: "rechercher";
+  pointer-events: none;
+}
+
+
+
+.form-control{
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+font-size: 18px;
+}
+
+.recipes__wrapper {
+  position: relative;
+}
+
+.recipes {
+  position: absolute;
+  z-index: 999;
+}
+.recette {
+  width: 400px;
+}
+#ingredientList{
+  background-color: #3282F7;
+}
+
+.cards{
+  position: absolute;
+  top: 100px;
+}
+
+
+/*
+.card{
+  position: relative;
+  z-index: 1;
+}*/
+

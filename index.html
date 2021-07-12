@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>template bootstrap</title>
+    <script src="https://kit.fontawesome.com/29ee0bc57e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <script src="./js/main.js" type="module"></script>
+  </head>
+  <body>
+
+    <header>
+      <div class="container text-center  mb-5 mt-5">
+
+        <div>
+          <img class="header__logo mb-5" src="/public/images/logo/logo.svg" href="index.html" alt="Les petits plats logo">
+        </div>
+
+        <div class="d-flex SearchBar">
+            <input class="form-control bg-transparent border-0 shadow-none" type="text" placeholder="Rechercher un ingrédient, un ustensile, un appareil ou une recette"><i class=" SearchBar__magnify fas fa-search"></i>
+        </div>
+
+      </div>
+    </header>
+
+  <div class="container recipes__wrapper">  
+
+
+    <div class="row recipes">
+
+      <div id="recette" class="col-12 col-lg-3 mb-2"> 
+        <button id="ingredientBtn" type="button" class="btn btn-sm w-100 bg-info border-0 shadow-none collapsed d-flex applianceBtn" data-toggle="collapse" data-target="#ingredientList">
+          <input type="text" class="form-control border-0 bg-transparent text-white shadow-none" placeholder="Ingredients" id="Ingredients" aria-label="Rechercher des ingrédients">
+        </button>
+        <div id="ingredientList" class="collapse">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+      </div>
+
+      
+      <div class="col-12 col-lg-3 mb-2"> 
+        <button id="applianceBtn" type="button" class="btn btn-sm w-100 bg-success border-0 shadow-none collapsed d-flex applianceBtn" data-toggle="collapse" data-target="#applianceList">
+          <input type="text" class="form-control border-0 bg-transparent text-white shadow-none" placeholder="Appliances" id="Appliances" aria-label="Rechercher des appliances">
+        </button>
+        <div id="applianceList" class="collapse">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-3 mb-2"> 
+        <button id="ustensilsBtn" type="button" class="btn btn-sm w-100 bg-danger border-0 shadow-none collapsed d-flex ustensilsBtn" data-toggle="collapse" data-target="#ustensilsList">
+          <input type="text" class="form-control border-0 bg-transparent text-white shadow-none" placeholder="Ustensils" id="Ustensils" aria-label="Rechercher des ustensils">
+        </button>
+        <div id="ustensilsList" class="collapse">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row cards">
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some text to build on the card title and make up the card's content.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some text to build on the card title and make up the card's content.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some text to build on the card title and make up the card's content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  
+   
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
