@@ -1,4 +1,10 @@
 @charset "UTF-8";
+/* 
+Extra small <576px none
+Small ≥576px -sm 
+Medium ≥768px -md
+Large ≥992px -lg
+Extra large ≥1200px -xl */
 /*$btn-focus-width: 0px;
 $btn-focus-box-shadow: 0px;
 $input-focus-border-color: blue;
@@ -10758,6 +10764,11 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html,
+body {
+  font-family: "Lato" "Roboto", Arial, serif;
+}
+
 @font-face {
   /* Définition of font called DM Sans*/
   font-family: "Lato";
@@ -10772,16 +10783,11 @@ textarea.form-control-lg {
   font-weight: normal;
   font-style: normal;
 }
-html,
-body {
-  font-family: "Lato" "Roboto", Arial, serif;
-}
-
-/* Icon when the collapsible content is shown */
+/* Arrow up Icon on buttons when the collapsible content is shown */
 .btn:after {
   /* font-family: "Glyphicons Halflings";*/
-  /* content: "\e113";*/
-  float: right;
+  /* content: "\e113";
+  float: right;*/
   margin-left: -10px;
   margin-top: 8px;
   content: "";
@@ -10791,13 +10797,15 @@ body {
   height: 1rem;
 }
 
-/* Icon when the collapsible content is hidden */
+/* Arrow down Icon on buttons when the collapsible content is hidden */
 .btn.collapsed:after {
   /*content: "\e114"; */
   content: "";
   background-image: url("/public/images/icons/chevron-down.svg");
   place-content: "rechercher";
   pointer-events: none;
+  width: 1rem;
+  height: 1rem;
 }
 
 .SearchBar {
@@ -10833,18 +10841,36 @@ font-size: 18px;
 }
 
 .recette {
-  width: 400px;
+  width: 100%;
+}
+@media only screen and (min-width: 992px) {
+  .recette {
+    width: 400px;
+  }
 }
 
 #ingredientList {
   background-color: #3282F7;
 }
 
+#applianceList {
+  background-color: #68D9A4;
+}
+
+#ustensilsList {
+  background-color: #ED6454;
+}
+
 .cards {
   position: absolute;
-  top: 100px;
+  top: 180px;
   padding: unset;
   /* margin: -6px;*/
+}
+@media only screen and (min-width: 992px) {
+  .cards {
+    top: 70px;
+  }
 }
 
 .card {

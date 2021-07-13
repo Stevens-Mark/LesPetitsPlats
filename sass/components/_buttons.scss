@@ -1,8 +1,8 @@
-/* Icon when the collapsible content is shown */
+/* Arrow up Icon on buttons when the collapsible content is shown */
 .btn:after {
     /* font-family: "Glyphicons Halflings";*/
-    /* content: "\e113";*/
-    float: right;
+    /* content: "\e113";
+    float: right;*/
     margin-left: -10px;
     margin-top: 8px;
     content: "";
@@ -12,11 +12,13 @@
     height: 1rem;
     
   }
-  /* Icon when the collapsible content is hidden */
+  /* Arrow down Icon on buttons when the collapsible content is hidden */
   .btn.collapsed:after {
     /*content: "\e114"; */
     content: "";
     background-image: url("/public/images/icons/chevron-down.svg");
     place-content: "rechercher";
     pointer-events: none;
+    width: 1rem;
+    height: 1rem;
   }

@@ -36,7 +36,7 @@ const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 const changeInputtext = (id, item) => {
    const button = document.getElementById(id);
    if (button.parentNode.classList.contains('collapsed')) {
-      document.getElementById(id).placeholder = "Rechercher des " + item;
+      document.getElementById(id).placeholder = "Rechercher des " +item;
       
    } else {
       document.getElementById(id).placeholder = item;
@@ -98,12 +98,12 @@ inputButtons.forEach((btn) => {
       recipehtml += `
      <div class="col-12 col-md-6 col-lg-4 mb-4">
      <div class="card bg-light h-100">
-       <img class="card-img-top card__image" src="/public/images/logo/poulet_coco.jpg" height="178" alt="poulet_coco">
+       <img class="card-img-top card__image" src="./public/images/photos/${recipe.name}.jpg" height="178" alt="${recipe.name}">
        <div class="card-body bg-light">
          <div class="card__heading d-flex">
-           <h2 class="card__title">${recipe.name}</h2>
+           <h2 tabindex="0" class="card__title">${recipe.name}</h2>
            <div class="card__timing">
-             <i class="far fa-clock  mx-1"></i><span mx-1>${recipe.time} min</span>
+             <i class="far fa-clock mx-1"></i><span tabindex="0" mx-1>${recipe.time} min</span>
            </div>
          </div>
         
@@ -122,14 +122,14 @@ inputButtons.forEach((btn) => {
                      }
             </li>`).join('')}
            </ul>
-         <div class="card__description col-6">${recipe.description}</div>
+         <div tabindex="0" class="card__description col-6">${recipe.description}</div>
          </div>
         
        </div>
      </div>
    </div>`;
      recipeElement.innerHTML = recipehtml;
-     /* see sources P7 for if statements inside templat literals*/
+     /* see sources P7 for if statements inside template literals*/
    });
   }
 CreateRecipes(recipes);

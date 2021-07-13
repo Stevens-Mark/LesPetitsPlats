@@ -31,20 +31,35 @@ font-size: 18px;
   position: absolute;
   z-index: 999;
 }
+
 .recette {
+  width: 100%;
+  @media only screen and (min-width: $largeDevice) {
   width: 400px;
+  }
 }
 
+
+// Dropdown list background colours
 #ingredientList{
-  background-color: #3282F7;
+  background-color: $info;
+}
+#applianceList{
+  background-color: $success;
+}
+#ustensilsList{
+  background-color: $danger;
 }
 
 // RECIPE CARDS STYLING
 .cards{
   position: absolute;
-  top: 100px;
+  top:180px;
   padding: unset;
- /* margin: -6px;*/
+   /* margin: -6px;*/
+    @media only screen and (min-width: $largeDevice) {
+    top: 70px;
+  }
 }
 
 .card {
