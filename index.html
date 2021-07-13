@@ -14,19 +14,21 @@
   <body>
 
     <header>
-      <div class="container text-center  mb-5 mt-5">
-
-        <a href="#"> <img class="header__logo mb-5" src="/public/images/logo/logo.svg" alt="Les petits plats logo"></a>
-
-        <div class="d-flex SearchBar">
-            <input class="form-control bg-transparent border-0 shadow-none" type="text" placeholder="Rechercher un ingrédient, un ustensile, un appareil ou une recette"><i class=" SearchBar__magnify fas fa-search"></i>
+      <div class="container text-center mb-4 mt-4">
+        <div class="row">
+          <div class="col">
+          <a href="#"> <img class="header__logo mb-5" src="/public/images/logo/logo.svg" alt="Les petits plats logo"></a>
+          </div>
         </div>
-
+        <div class="row m-1">
+          <div class="col d-flex SearchBar">
+              <input class="form-control bg-transparent border-0 shadow-none text-truncate" type="text" placeholder="Rechercher un ingrédient, un ustensile, un appareil ou une recette"><i class=" SearchBar__magnify fas fa-search"></i>
+          </div>
+        </div>
       </div>
     </header>
 
   <div class="container recipes__wrapper">  
-
 
     <div class="row recipes">
 
@@ -40,7 +42,6 @@
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
       </div>
-
       
       <div class="col-12 col-lg-3 mb-2"> 
         <div id="applianceBtn" class="btn btn-sm w-100 bg-success border-0 shadow-none collapsed d-flex applianceBtn" data-toggle="collapse" data-target="#applianceList">
@@ -66,35 +67,11 @@
 
     </div>
 
-    <div class="row cards">
-      <div class="col-12 col-lg-4">
-        <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some text to build on the card title and make up the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some text to build on the card title and make up the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some text to build on the card title and make up the card's content.</p>
-          </div>
-        </div>
-      </div>
+    <div id="card-container" class="cards container row d-flex"> 
+         <!--Place to put recipe cards--> 
     </div>
 
-
-    </div>
+  </div>
 
   
    

@@ -1,4 +1,4 @@
-
+// MAIN SEARCH INPUT BAR STYLING
 .SearchBar {
   justify-content: center;
   align-items: center;
@@ -15,40 +15,13 @@
   }
 }
 
-
-
-
-/* Icon when the collapsible content is shown */
-.btn:after {
-  /* font-family: "Glyphicons Halflings";*/
-  /* content: "\e113";*/
-  float: right;
-  margin-left: -10px;
-  margin-top: 8px;
-  content: "";
-  background-image: url("/public/images/icons/chevron-up.svg");
-  pointer-events: none;
-  width: 1rem;
-  height: 1rem;
-  
-}
-/* Icon when the collapsible content is hidden */
-.btn.collapsed:after {
-  /*content: "\e114"; */
-  content: "";
-  background-image: url("/public/images/icons/chevron-down.svg");
-  place-content: "rechercher";
-  pointer-events: none;
-}
-
-
-
+/*
 .form-control{
 overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 18px;
-}
+}*/
 
 .recipes__wrapper {
   position: relative;
@@ -61,15 +34,47 @@ font-size: 18px;
 .recette {
   width: 400px;
 }
+
 #ingredientList{
   background-color: #3282F7;
 }
 
+// RECIPE CARDS STYLING
 .cards{
   position: absolute;
   top: 100px;
+  padding: unset;
+ /* margin: -6px;*/
 }
 
+.card {
+  border-radius: 5px;
+  &__heading {
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  &__image {
+    object-fit: cover;
+  }
+  &__timing {
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  &__information {
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  &__description {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 125px;
+  }
+  &__ingredient {
+    font-weight: 700;
+  }
+}
 
 /*
 .card{

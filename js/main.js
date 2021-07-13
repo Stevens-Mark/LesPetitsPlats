@@ -2,7 +2,6 @@
 
 import { recipes } from '../public/recipes.js';
 
-
 // get list of ingredients
 let allIngredientsList =[];
 recipes.forEach((recipe) => {
@@ -38,6 +37,7 @@ const changeInputtext = (id, item) => {
    const button = document.getElementById(id);
    if (button.parentNode.classList.contains('collapsed')) {
       document.getElementById(id).placeholder = "Rechercher des " + item;
+      
    } else {
       document.getElementById(id).placeholder = item;
    }
@@ -84,3 +84,42 @@ inputButtons.forEach((btn) => {
     optionChosen.classList.add('show');
     optionChosen.parentNode.classList.add('collapsed');
   };*/
+
+  const CreateRecipes = (recipes) => {
+     /* declare a place to put the recipes in the dom */
+   const recipeElement = document.querySelector('#card-container');
+     let recipehtml = '';
+ 
+   recipes.forEach((recipe) => {
+     /* Using DESTRUCTERING get just the tag array from photographers array */
+     const { ingredients } = recipe;
+     console.log(ingredients);
+     recipehtml += `
+     <div class="col-12 col-md-6 col-lg-4 mb-2">
+     <div class="card bg-light">
+       <img class="card-img-top card__image" src="/public/images/logo/poulet_coco.jpg" height="178" alt="poulet_coco">
+       <div class="card-body bg-light">
+         <div class="card__heading d-flex">
+           <h5 class="card-title">${recipe.name}</h5>
+           <div>
+             <i class="far fa-clock"></i><span class="card__timing mx-1">${recipe.time} min</span>
+           </div>
+         </div>
+        
+         <div class="card__information row">
+           <ul class="col-6"> ${ingredients.map((ingredient) => `<li tabindex="0" class="list-unstyled"><span class="card__ingredient">${ingredient.ingredient}</span> : ${ingredient.quantity} ${ingredient.unit}</li>`).join('')}
+           </ul>
+         <div class="card__description col-6">${recipe.description}</div>
+         </div>
+        
+       </div>
+     </div>
+   </div>`;
+     recipeElement.innerHTML = recipehtml;
+     /* map & join etc solution found in sources folder */
+   });
+  }
+
+  CreateRecipes(recipes);
+
+  
