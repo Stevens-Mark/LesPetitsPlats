@@ -10,7 +10,7 @@ recipes.forEach((recipe) => {
    });
 });
 const sortedIngredientsList = [...new Set(allIngredientsList)].sort();
-console.log(sortedIngredientsList);
+/*console.log(sortedIngredientsList);*/
 
 // get list of appliances
 let allAppliancesList =[];
@@ -18,7 +18,7 @@ recipes.forEach((recipe) => {
     allAppliancesList.push(recipe.appliance.toLowerCase());
 });
 const sortedAppliancesList = [...new Set(allAppliancesList)].sort();
-console.log(sortedAppliancesList);
+/*console.log(sortedAppliancesList);*/
 
 // get list of ustensils
 let allUstensilsList =[];
@@ -28,7 +28,7 @@ recipes.forEach((recipe) => {
    });
 });
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
-console.log(sortedUstensilsList);
+/*console.log(sortedUstensilsList);*/
 
 
 // change text in input field
@@ -50,7 +50,7 @@ inputButtons.forEach((btn) => {
       changeInputtext(event.target.id, event.target.id);
       console.log(event.target.id);
       event.target.parentNode.parentNode.classList.toggle('recette');
-      /*OptionSelected(event);*/  
+      /*OptionSelected(event);*/
    });
 });
 
@@ -93,8 +93,7 @@ inputButtons.forEach((btn) => {
    recipes.forEach((recipe) => {
      /* Using DESTRUCTERING get just the tag array from photographers array */
      const { ingredients } = recipe;
-     console.log(ingredients);
-     recipehtml += `
+      recipehtml += `
      <div class="col-12 col-md-6 col-lg-4 mb-4">
      <div class="card bg-light h-100">
        <img class="card-img-top card__image" src="/public/images/logo/poulet_coco.jpg" height="178" alt="poulet_coco">
@@ -119,7 +118,24 @@ inputButtons.forEach((btn) => {
      /* map & join etc solution found in sources folder */
    });
   }
+CreateRecipes(recipes);
 
+  /*
   CreateRecipes(recipes);
+  let ingredientsAndQuantity = "";
+recipes.forEach((recipe) => {
+   /* Using DESTRUCTERING get just the ingredient array from the recipes array 
+  const { ingredients } = recipe;
+  ingredients.forEach((ingredient) => {
+   if (ingredient.quantity) {
+      if (ingredient.quantity && ingredient.unit) {
+         ingredientsAndQuantity += `<li>>${ingredient.ingredient} : ${ingredient.quantity} ${ingredient.unit}</li>`;
+      } else {
+         ingrediensAndQuantity += `<li>${ingredient.ingredient} : ${ingredient.quantity}</li>`;
+      }
+    } else {
+      ingredientsAndQuantity += `<li>${ingredient.ingredient}</li>`;
+    }
+  });
+});*/
 
-  
