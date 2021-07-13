@@ -10875,6 +10875,11 @@ font-size: 18px;
 
 .card {
   border-radius: 5px;
+  transition: 0.3s;
+}
+.card:hover {
+  transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 .card__heading {
   align-items: baseline;
