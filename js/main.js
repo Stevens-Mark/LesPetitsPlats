@@ -95,14 +95,14 @@ inputButtons.forEach((btn) => {
      const { ingredients } = recipe;
      console.log(ingredients);
      recipehtml += `
-     <div class="col-12 col-md-6 col-lg-4 mb-2">
-     <div class="card bg-light">
+     <div class="col-12 col-md-6 col-lg-4 mb-4">
+     <div class="card bg-light h-100">
        <img class="card-img-top card__image" src="/public/images/logo/poulet_coco.jpg" height="178" alt="poulet_coco">
        <div class="card-body bg-light">
          <div class="card__heading d-flex">
-           <h5 class="card-title">${recipe.name}</h5>
-           <div>
-             <i class="far fa-clock"></i><span class="card__timing mx-1">${recipe.time} min</span>
+           <h2 class="card__title">${recipe.name}</h2>
+           <div class="card__timing">
+             <i class="far fa-clock  mx-1"></i><span mx-1>${recipe.time} min</span>
            </div>
          </div>
         

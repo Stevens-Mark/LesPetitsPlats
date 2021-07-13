@@ -10857,6 +10857,9 @@ font-size: 18px;
 .card__image {
   object-fit: cover;
 }
+.card__title {
+  font-size: 18px;
+}
 .card__timing {
   font-size: 18px;
   font-weight: 700;
@@ -10867,10 +10870,11 @@ font-size: 18px;
   font-size: 12px;
 }
 .card__description {
+  font-family: "Roboto";
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 125px;
+  height: 175px;
 }
 .card__ingredient {
   font-weight: 700;
