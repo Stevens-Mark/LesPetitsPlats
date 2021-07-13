@@ -85,6 +85,8 @@ inputButtons.forEach((btn) => {
     optionChosen.parentNode.classList.add('collapsed');
   };*/
 
+
+  // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
   const CreateRecipes = (recipes) => {
      /* declare a place to put the recipes in the dom */
    const recipeElement = document.querySelector('#card-container');
@@ -106,7 +108,19 @@ inputButtons.forEach((btn) => {
          </div>
         
          <div class="card__information row">
-           <ul class="col-6"> ${ingredients.map((ingredient) => `<li tabindex="0" class="list-unstyled"><span class="card__ingredient">${ingredient.ingredient}</span> : ${ingredient.quantity} ${ingredient.unit}</li>`).join('')}
+           <ul class="col-6"> ${ingredients.map((ingredient) => 
+            `<li tabindex="0" class="list-unstyled"><span class="card__ingredient">${ingredient.ingredient}</span> : 
+                  ${(() => {
+                        if(ingredient.quantity) { return `${ingredient.quantity}`;
+                        } else { return ``; }
+                     })()
+                  }
+                     ${(() => {
+                           if(ingredient.unit) { return `${ingredient.unit}`;
+                           } else { return ``; }
+                        })()
+                     }
+            </li>`).join('')}
            </ul>
          <div class="card__description col-6">${recipe.description}</div>
          </div>
@@ -115,27 +129,9 @@ inputButtons.forEach((btn) => {
      </div>
    </div>`;
      recipeElement.innerHTML = recipehtml;
-     /* map & join etc solution found in sources folder */
+     /* see sources P7 for if statements inside templat literals*/
    });
   }
 CreateRecipes(recipes);
 
-  /*
-  CreateRecipes(recipes);
-  let ingredientsAndQuantity = "";
-recipes.forEach((recipe) => {
-   /* Using DESTRUCTERING get just the ingredient array from the recipes array 
-  const { ingredients } = recipe;
-  ingredients.forEach((ingredient) => {
-   if (ingredient.quantity) {
-      if (ingredient.quantity && ingredient.unit) {
-         ingredientsAndQuantity += `<li>>${ingredient.ingredient} : ${ingredient.quantity} ${ingredient.unit}</li>`;
-      } else {
-         ingrediensAndQuantity += `<li>${ingredient.ingredient} : ${ingredient.quantity}</li>`;
-      }
-    } else {
-      ingredientsAndQuantity += `<li>${ingredient.ingredient}</li>`;
-    }
-  });
-});*/
-
+  
