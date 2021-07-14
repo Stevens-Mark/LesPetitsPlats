@@ -10845,12 +10845,12 @@ white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 18px;
 }*/
-.recipes__wrapper {
-  position: relative;
+@media (min-width: 768px) {
+  .col-md-30 {
+    width: 30% !important;
+  }
 }
-
 .recipes {
-  position: absolute;
   z-index: 999;
 }
 @media only screen and (min-width: 992px) {
@@ -10860,8 +10860,6 @@ font-size: 18px;
 }
 
 .cards {
-  position: absolute;
-  top: 180px;
   padding: unset;
   /* margin: -6px;*/
 }

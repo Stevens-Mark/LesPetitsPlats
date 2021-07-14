@@ -14,68 +14,65 @@
   </head>
   <body>
 
-    <header class="container text-center mb-4 mt-4">
-     
+      <div class="container text-center mb-4 mt-4">
         <div class="row">
           <div class="col">
-          <a href="#"> <img class="header__logo mb-5" src="/public/images/logo/logo.svg" alt="Les petits plats logo"></a>
+            <img class="header__logo mb-5" src="/public/images/logo/logo.svg" alt="Les petits plats logo">
           </div>
         </div>
-        <div class="row m-1">
-          <div class="col d-flex SearchBar">
+      </div>
+
+      <div class="container mb-2">
+        <div class="row">
+         
+          <div class="col d-flex SearchBar m-2">
               <input class="form-control bg-transparent border-0 text-truncate" type="text" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"><i class=" SearchBar__magnify fas fa-search"></i>
           </div>
         </div>
-   
-    </header>
-
-  <div class="container recipes__wrapper">  
-
-    <div class="row recipes">
-
-      <div class="col-12 col-lg-3 mb-2 "> 
-        <div id="ingredientBtn" class="btn btn-sm w-100 bg-info border-0 shadow-none collapsed d-flex applianceBtn" data-toggle="collapse" data-target="#ingredientList">
-          <input tabindex="0" type="text" class="form-control border-0 bg-transparent text-white shadow-none" placeholder="Ingredients" id="Ingredients" aria-label="Rechercher des ingrédients">
-        </div>
-        <div id="ingredientList" class="collapse bg-info rounded-bottom text-white">
-          <ul id="ingredientSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des ingrédients">
-              <!--Place to put ingredient dropdown search list-->
-          </ul> 
-        </div>
-      </div>
       
-      <div class="col-12 col-lg-3 mb-2"> 
-        <div id="applianceBtn" class="btn btn-sm w-100 bg-success border-0 shadow-none collapsed d-flex applianceBtn" data-toggle="collapse" data-target="#applianceList">
-          <input type="text" class="form-control border-0 bg-transparent text-white shadow-none" placeholder="Appliances" id="Appliances" aria-label="Rechercher des appliances">
-        </div>
-        <div id="applianceList" class="collapse bg-success rounded-bottom text-white">
-          <ul id="applianceSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des appliances">
-              <!--Place to put appliance dropdown search list-->
-          </ul> 
+        <div class="row recipes">
+
+          <div class="col-12 col-lg-3 mb-2"> 
+            <div id="ingredientBtn" class="btn btn-sm bg-info border-0 shadow-none collapsed d-flex" data-toggle="collapse" data-target="#ingredientList">
+              <input tabindex="0" type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Ingredients" id="Ingredients" aria-label="Rechercher des ingrédients">
+            </div>
+            <div id="ingredientList" class="collapse bg-info rounded-bottom text-white">
+              <ul id="ingredientSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des ingrédients">
+                  <!--Place to put ingredient dropdown search list-->
+              </ul> 
+            </div>
+          </div>
+          
+          <div class="col-12 col-lg-3 mb-2"> 
+            <div id="applianceBtn" class="btn btn-sm bg-success border-0 shadow-none collapsed d-flex" data-toggle="collapse" data-target="#applianceList">
+              <input type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Appliances" id="Appliances" aria-label="Rechercher des appliances">
+            </div>
+            <div id="applianceList" class="collapse bg-success rounded-bottom text-white">
+              <ul id="applianceSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des appliances">
+                  <!--Place to put appliance dropdown search list-->
+              </ul> 
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-3 mb-2"> 
+            <div id="ustensilsBtn" class="btn btn-sm bg-danger border-0 shadow-none collapsed d-flex" data-toggle="collapse" data-target="#ustensilsList">
+              <input type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Ustensils" id="Ustensils" aria-label="Rechercher des ustensils">
+            </div>
+            <div id="ustensilsList" class="collapse bg-danger rounded-bottom text-white">
+              <ul id="ustensilSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des ustensils">
+                <!--Place to put ustensil dropdown search list-->
+              </ul>  
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="col-12 col-lg-3 mb-2"> 
-        <div id="ustensilsBtn" class="btn btn-sm w-100 bg-danger border-0 shadow-none collapsed d-flex ustensilsBtn" data-toggle="collapse" data-target="#ustensilsList">
-          <input type="text" class="form-control border-0 bg-transparent text-white shadow-none" placeholder="Ustensils" id="Ustensils" aria-label="Rechercher des ustensils">
-        </div>
-        <div id="ustensilsList" class="collapse bg-danger rounded-bottom text-white">
-          <ul id="ustensilSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des ustensils">
-            <!--Place to put ustensil dropdown search list-->
-          </ul> 
-           
-        </div>
-      </div>
-
-    </div>
-
-    <div id="card-container" class="cards container row d-flex"> 
+      <div class="container">
+        <div id="card-container" class="cards row d-flex"> 
          <!--Place to put recipe cards--> 
-    </div>
-
-  </div>
-
-  
+        </div>
+      </div>
    
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
