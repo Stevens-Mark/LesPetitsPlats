@@ -10767,6 +10767,7 @@ textarea.form-control-lg {
 html,
 body {
   font-family: "Lato" "Roboto", Arial, serif;
+  margin: auto;
 }
 
 @font-face {
@@ -10824,6 +10825,19 @@ body {
   margin: 10px;
 }
 
+.dropDownExpand {
+  width: 100%;
+}
+@media only screen and (min-width: 992px) {
+  .dropDownExpand {
+    width: 540px;
+  }
+}
+
+.tags {
+  width: 165px;
+}
+
 /*
 .form-control{
 overflow: hidden;
@@ -10839,26 +10853,10 @@ font-size: 18px;
   position: absolute;
   z-index: 999;
 }
-
-.recette {
-  width: 100%;
-}
 @media only screen and (min-width: 992px) {
-  .recette {
-    width: 400px;
+  .recipes {
+    flex-wrap: nowrap;
   }
-}
-
-#ingredientList {
-  background-color: #3282F7;
-}
-
-#applianceList {
-  background-color: #68D9A4;
-}
-
-#ustensilsList {
-  background-color: #ED6454;
 }
 
 .cards {
@@ -10876,14 +10874,14 @@ font-size: 18px;
 .card {
   border-radius: 5px;
   transition: 0.3s;
+  /* &__heading {
+     align-items: baseline;
+     justify-content: space-between;
+   }*/
 }
 .card:hover {
   transition: 0.3s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-.card__heading {
-  align-items: baseline;
-  justify-content: space-between;
 }
 .card__image {
   object-fit: cover;
@@ -10894,10 +10892,10 @@ font-size: 18px;
 .card__timing {
   font-size: 18px;
   font-weight: 700;
-  white-space: nowrap;
+  /* white-space: nowrap;*/
 }
 .card__information {
-  justify-content: space-between;
+  /* justify-content: space-between;*/
   font-size: 12px;
 }
 .card__description {

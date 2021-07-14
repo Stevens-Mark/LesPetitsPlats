@@ -15,6 +15,18 @@
   }
 }
 
+// STYLING TO INCREASE WIDTH OF DROPDOWN MENUS WHEN OPEN
+.dropDownExpand {
+  width: 100%;
+  @media only screen and (min-width: $largeDevice) {
+  width: 540px;
+  }
+}
+// STYLING: WIDTH OF DROPDOWN MENU ITEMS
+.tags {
+  width: 165px;
+}
+
 /*
 .form-control{
 overflow: hidden;
@@ -30,25 +42,9 @@ font-size: 18px;
 .recipes {
   position: absolute;
   z-index: 999;
-}
-
-.recette {
-  width: 100%;
-  @media only screen and (min-width: $largeDevice) {
-  width: 400px;
-  }
-}
-
-
-// Dropdown list background colours
-#ingredientList{
-  background-color: $info;
-}
-#applianceList{
-  background-color: $success;
-}
-#ustensilsList{
-  background-color: $danger;
+    @media only screen and (min-width: $largeDevice) {
+      flex-wrap: nowrap;
+    }
 }
 
 // RECIPE CARDS STYLING
@@ -69,10 +65,10 @@ font-size: 18px;
     transition: 0.3s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
   }
-  &__heading {
+ /* &__heading {
     align-items: baseline;
     justify-content: space-between;
-  }
+  }*/
   &__image {
     object-fit: cover;
   }
@@ -82,10 +78,10 @@ font-size: 18px;
   &__timing {
     font-size: 18px;
     font-weight: 700;
-    white-space: nowrap;
+   /* white-space: nowrap;*/
   }
   &__information {
-    justify-content: space-between;
+   /* justify-content: space-between;*/
     font-size: 12px;
   }
   &__description {
