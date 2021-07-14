@@ -10830,12 +10830,36 @@ body {
 }
 @media only screen and (min-width: 992px) {
   .dropDownExpand {
-    width: 540px;
+    width: 480px;
   }
 }
 
 .tags {
-  width: 165px;
+  width: 140px;
+  font-size: 14px;
+}
+@media only screen and (min-width: 375px) {
+  .tags {
+    font-size: 16px;
+    width: 165px;
+  }
+}
+@media only screen and (min-width: 425px) {
+  .tags {
+    font-size: 16px;
+    width: 192px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .tags {
+    width: 220px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .tags {
+    width: 145px;
+    font-size: 14px;
+  }
 }
 
 /*
@@ -10850,22 +10874,25 @@ font-size: 18px;
     width: 30% !important;
   }
 }
-.recipes {
+.searchFilters {
+  position: absolute;
   z-index: 999;
 }
 @media only screen and (min-width: 992px) {
-  .recipes {
+  .searchFilters {
     flex-wrap: nowrap;
   }
 }
 
 .cards {
+  position: relative;
   padding: unset;
+  top: 150px;
   /* margin: -6px;*/
 }
 @media only screen and (min-width: 992px) {
   .cards {
-    top: 70px;
+    top: 55px;
   }
 }
 

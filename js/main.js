@@ -8,7 +8,7 @@ const createSearchArticles = (id, list) => {
    let Listshtml = '';
    list.forEach((item) => {
       Listshtml +=
-      `<li role="option" tabindex="0" class="tags list-unstyled d-inline-block text-truncate px-1 m-0" arial-label="${item}">${item}</li>`;
+      `<li role="option" tabindex="0" class="tags list-unstyled text-capitalize d-inline-block text-truncate px-2 m-0" arial-label="${item}">${item}</li>`;
       ListElement.innerHTML = Listshtml;
    });
 };
@@ -82,6 +82,14 @@ inputButtons.forEach((btn) => {
       console.log(event.target.id);
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
       /*OptionSelected(event);*/
+   });
+   btn.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter' || event.key === 13) {
+         changeInputtext(event.target.id, event.target.id);
+         console.log(event.target.id);
+         event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
+         /*OptionSelected(event);*/
+      }
    });
 });
 
