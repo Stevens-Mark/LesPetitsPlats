@@ -44,27 +44,26 @@ recipes.forEach((recipe) => {
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList);
 
-// EVENT LISTENERS ON ALL DROPDOWNS "TAGS" FOR SEARCHING
+// EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" FOR SEARCHING
 
 const tagList = document.querySelectorAll('.tags');
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
-      console.log(tagSelected);
+     /* console.log(tagSelected);*/
    });
    /* Event Listener (for keyboard) for the like feature */
    item.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
          /*  Make sure tag name is lowercase readt for search */
          const tagSelected = event.target.textContent.toLowerCase();
-         console.log(tagSelected);
+        /* console.log(tagSelected);*/
       }
    });
 });
 
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS WHEN SELECTED
-
 const changeInputtext = (id, item) => {
    const button = document.getElementById(id);
    if (button.parentNode.classList.contains('collapsed')) {
@@ -74,27 +73,39 @@ const changeInputtext = (id, item) => {
    }
 };
 
-
+// EVENT LISTENERS ON DROPDOWN BUTTONS
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
       changeInputtext(event.target.id, event.target.id);
-      console.log(event.target.id);
+    /*  console.log(event.target.id);*/
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-      /*OptionSelected(event);*/
+     
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
          changeInputtext(event.target.id, event.target.id);
-         console.log(event.target.id);
+       /*  console.log(event.target.id);*/
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-         /*OptionSelected(event);*/
+         
       }
    });
 });
 
 
+
+
 /*
+window.addEventListener('click', () => {
+   console.log('hello');
+   const inputButtons = document.querySelectorAll('.btn');
+   inputButtons.forEach((btn) => {
+     btn.parentNode.parentNode.classList.toggle('dropDownExpand');
+      });
+});
+
+/*
+
 const downdropToggle = (event) => {
    console.log(event.target);
 inputButtons.forEach((btn) => {
@@ -171,3 +182,33 @@ inputButtons.forEach((btn) => {
    });
   }
 CreateRecipes(recipes);
+
+
+// search filter attempt!!!!!!!!!!!!!!!!!!!!!!!
+const inputValue = document.querySelector('#Ingredients');
+inputValue.addEventListener('keyup', event => {
+   console.log(event.target.value);
+   filterFunction();
+});
+
+
+function filterFunction() {
+   var input, filter, ul, li, list, i;
+   input = document.querySelector('#Ingredients');
+   filter = input.value.toLowerCase();
+   console.log(filter);
+   const div = document.querySelector('#ingredientSearch');
+  
+   list = div.getElementsByTagName('li');
+   
+   for (i = 0; i < list.length; i++) {
+      
+     let txtValue = list[i].textContent || list[i].innerText;
+     console.log(txtValue);
+     if (txtValue.toLowerCase().indexOf(filter) > -1) {
+       list[i].style.display = 'block';
+     } else {
+       list[i].style.display = 'none';
+     }
+   }
+ }
