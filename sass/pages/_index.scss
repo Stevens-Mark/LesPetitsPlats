@@ -22,9 +22,9 @@
   width: 480px;
   }
 }
-// STYLING: WIDTH OF DROPDOWN MENU ITEMS
+/* STYLING: WIDTH OF DROPDOWN MENU ITEMS
 .tags {
-  width: 140px;
+  width: 150px;
   font-size: 14px;
   @media only screen and (min-width:  $mobileSDevice) {
     font-size: 16px;
@@ -49,13 +49,13 @@ overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 18px;
-}*/
+}
 
 @media (min-width:768px) {
   .col-md-30 {
       width: 30% !important;
   }
-}
+}*/
 
 .searchFilters {
   position: absolute;

@@ -8,7 +8,7 @@ const createSearchArticles = (id, list) => {
    let Listshtml = '';
    list.forEach((item) => {
       Listshtml +=
-      `<li role="option" tabindex="0" class="tags list-unstyled text-capitalize d-inline-block text-truncate px-2 m-0" arial-label="${item}">${item}</li>`;
+      `<li role="option" tabindex="0" class="tags col-6 col-md-3 col-lg-4 list-unstyled text-capitalize text-truncate px-2 m-0" arial-label="${item}">${item}</li>`;
       ListElement.innerHTML = Listshtml;
    });
 };
@@ -77,46 +77,33 @@ const changeInputtext = (id, item) => {
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
-      changeInputtext(event.target.id, event.target.id);
-    /*  console.log(event.target.id);*/
+      if (event.target.classList.contains('btn')) return;
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-     
+      changeInputtext(event.target.id, event.target.id);
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
-         changeInputtext(event.target.id, event.target.id);
-       /*  console.log(event.target.id);*/
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-         
+         changeInputtext(event.target.id, event.target.id);
+      }
+   });
+});
+
+document.addEventListener('click', (event) => {
+   inputButtons.forEach((btn) => {
+      if (btn.nextElementSibling.classList.contains('show')){
+      changeInputtext(btn.firstElementChild.id, btn.firstElementChild.id);
+      }
+      btn.nextElementSibling.classList.remove('show');
+      btn.parentNode.classList.remove('dropDownExpand');
+
+      if (event.target.parentNode.classList.contains('btn')){
+      event.target.parentNode.parentNode.classList.add('dropDownExpand');
       }
    });
 });
 
 
-
-
-/*
-window.addEventListener('click', () => {
-   console.log('hello');
-   const inputButtons = document.querySelectorAll('.btn');
-   inputButtons.forEach((btn) => {
-     btn.parentNode.parentNode.classList.toggle('dropDownExpand');
-      });
-});
-
-/*
-
-const downdropToggle = (event) => {
-   console.log(event.target);
-inputButtons.forEach((btn) => {
-   if (!btn.classList.contains('collapsed')) {
-      btn.parentNode.classList.remove("col-lg-2");
-      btn.parentNode.classList.add("col-lg-6");
-   } else {
-      btn.parentNode.classList.remove("col-lg-6");
-      btn.parentNode.classList.add("col-lg-2");
-   }
-})
 /*
 
   // WHEN USER MAKES A CHOICE IN DROPDOWN MENU

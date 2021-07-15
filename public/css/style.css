@@ -10834,32 +10834,25 @@ body {
   }
 }
 
+/* STYLING: WIDTH OF DROPDOWN MENU ITEMS
 .tags {
-  width: 140px;
+  width: 150px;
   font-size: 14px;
-}
-@media only screen and (min-width: 375px) {
-  .tags {
+  @media only screen and (min-width:  $mobileSDevice) {
     font-size: 16px;
     width: 165px;
   }
-}
-@media only screen and (min-width: 425px) {
-  .tags {
-    font-size: 16px;
-    width: 192px;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .tags {
-    width: 220px;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .tags {
-    width: 145px;
-    font-size: 14px;
-  }
+    @media only screen and (min-width:  $mobileMDevice) {
+      font-size: 16px;
+      width: 192px;
+    }
+    @media only screen and (min-width: $tabletteDevice) {
+      width: 220px;
+    }
+    @media only screen and (min-width:  $largeDevice) {
+      width: 145px;
+      font-size: 14px;
+    }
 }
 
 /*
@@ -10868,12 +10861,13 @@ overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 18px;
-}*/
-@media (min-width: 768px) {
-  .col-md-30 {
-    width: 30% !important;
-  }
 }
+
+@media (min-width:768px) {
+  .col-md-30 {
+      width: 30% !important;
+  }
+}*/
 .searchFilters {
   position: absolute;
   z-index: 999;
