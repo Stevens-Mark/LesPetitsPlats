@@ -1,6 +1,54 @@
 
 
+
 import { recipes } from '../public/recipes.js';
+
+// FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
+  const CreateRecipes = (recipes) => {
+   /* declare a place to put the recipes in the dom */
+ const recipeElement = document.querySelector('#card-container');
+   let recipehtml = '';
+
+ recipes.forEach((recipe) => {
+   /* Using DESTRUCTERING get just the tag array from photographers array */
+   const { ingredients } = recipe;
+    recipehtml += `
+ <div class="col-12 col-md-6 col-lg-4 mb-4">
+    <div class="card bg-light h-100">
+       <img class="card-img-top card__image" src="./public/images/photos/${recipe.name}.jpg" height="178" alt="${recipe.name}">
+       <div class="card-body bg-light">
+          <div class="card__heading d-flex justify-content-between align-items-baseline">
+             <h2 tabindex="0" class="card__title">${recipe.name}</h2>
+             <div class="card__timing text-nowrap">
+                <i class="far fa-clock mx-1"></i><span tabindex="0" mx-1>${recipe.time} min</span>
+             </div>
+          </div>
+       
+          <div class="card__information row">
+             <ul class="col-6"> ${ingredients.map((ingredient) => 
+                `<li tabindex="0" class="list-unstyled"><span class="card__ingredient">${ingredient.ingredient}</span> : 
+                      ${(() => {
+                            if(ingredient.quantity) { return `${ingredient.quantity}`;
+                            } else { return ``; }
+                         })()
+                      }
+                         ${(() => {
+                               if(ingredient.unit) { return `${ingredient.unit}`;
+                               } else { return ``; }
+                            })()
+                         }
+                </li>`).join('')}
+             </ul>
+             <div tabindex="0" class="card__description col-6">${recipe.description}</div>
+          </div>         
+       </div>
+    </div>
+ </div>`;
+   recipeElement.innerHTML = recipehtml;
+   /* see sources P7 for if statements inside template literals*/
+ });
+}
+CreateRecipes(recipes);
 
 // GENERATE EACH SEARCH LIST IN EACH DROPDOWN
 const createSearchArticles = (id, list) => {
@@ -44,24 +92,36 @@ recipes.forEach((recipe) => {
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList);
 
-// EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" FOR SEARCHING
+ // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN
+ // LISTS WHEN USER ENTERS A WORD IN THE INPUT FIELD
 
-const tagList = document.querySelectorAll('.tags');
-   tagList.forEach((item) => {
-   item.addEventListener('click', (event) => {
-      /* Make sure tag name is lowercase ready for search */
-      const tagSelected = event.target.textContent.toLowerCase();
-     /* console.log(tagSelected);*/
-   });
-   /* Event Listener (for keyboard) for the like feature */
-   item.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-         /*  Make sure tag name is lowercase readt for search */
-         const tagSelected = event.target.textContent.toLowerCase();
-        /* console.log(tagSelected);*/
+ const dropdownTextListSearch = (category, categoryListId) => {
+   const filter = document.getElementById(category);
+  if (typeof filter.addEventListener != "undefined") {
+    filter.addEventListener("keyup", function() {
+      filterFunction();
+      });
+    };
+  
+  const filterFunction = () => {
+    let input, filter, list, i;
+    input = document.getElementById(category);
+    filter = input.value.toUpperCase().trim();
+    const div = document.getElementById(categoryListId);
+    list = div.getElementsByTagName("li");
+    for (i = 0; i < list.length; i++) {
+      let txtValue = list[i].textContent || list[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        list[i].style.display = "";
+      } else {
+        list[i].style.display = "none";
       }
-   });
-});
+    }
+  }
+  };
+  dropdownTextListSearch('Ingredients','ingredientList');
+  dropdownTextListSearch('Appliances','applianceList');
+  dropdownTextListSearch('Ustensils','ustensilsList');
 
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS WHEN SELECTED
 const changeInputtext = (id, item) => {
@@ -104,77 +164,25 @@ document.addEventListener('click', (event) => {
    });
 });
 
-  // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
-  const CreateRecipes = (recipes) => {
-     /* declare a place to put the recipes in the dom */
-   const recipeElement = document.querySelector('#card-container');
-     let recipehtml = '';
- 
-   recipes.forEach((recipe) => {
-     /* Using DESTRUCTERING get just the tag array from photographers array */
-     const { ingredients } = recipe;
-      recipehtml += `
-   <div class="col-12 col-md-6 col-lg-4 mb-4">
-      <div class="card bg-light h-100">
-         <img class="card-img-top card__image" src="./public/images/photos/${recipe.name}.jpg" height="178" alt="${recipe.name}">
-         <div class="card-body bg-light">
-            <div class="card__heading d-flex justify-content-between align-items-baseline">
-               <h2 tabindex="0" class="card__title">${recipe.name}</h2>
-               <div class="card__timing text-nowrap">
-                  <i class="far fa-clock mx-1"></i><span tabindex="0" mx-1>${recipe.time} min</span>
-               </div>
-            </div>
-         
-            <div class="card__information row">
-               <ul class="col-6"> ${ingredients.map((ingredient) => 
-                  `<li tabindex="0" class="list-unstyled"><span class="card__ingredient">${ingredient.ingredient}</span> : 
-                        ${(() => {
-                              if(ingredient.quantity) { return `${ingredient.quantity}`;
-                              } else { return ``; }
-                           })()
-                        }
-                           ${(() => {
-                                 if(ingredient.unit) { return `${ingredient.unit}`;
-                                 } else { return ``; }
-                              })()
-                           }
-                  </li>`).join('')}
-               </ul>
-               <div tabindex="0" class="card__description col-6">${recipe.description}</div>
-            </div>         
-         </div>
-      </div>
-   </div>`;
-     recipeElement.innerHTML = recipehtml;
-     /* see sources P7 for if statements inside template literals*/
+// EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" FOR SEARCHING RECIPES
+
+const tagList = document.querySelectorAll('.tags');
+   tagList.forEach((item) => {
+   item.addEventListener('click', (event) => {
+      /* Make sure tag name is lowercase ready for search */
+      const tagSelected = event.target.textContent.toLowerCase();
+     /* console.log(tagSelected);*/
    });
-  }
-CreateRecipes(recipes);
+   /* Event Listener (for keyboard) for the like feature */
+   item.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+         /*  Make sure tag name is lowercase readt for search */
+         const tagSelected = event.target.textContent.toLowerCase();
+        /* console.log(tagSelected);*/
+      }
+   });
+});
 
 
-// search filter attempt!!!!!!!!!!!!!!!!!!!!!!!
 
 
- const filter = document.getElementById('Ingredients');
-if (typeof filter.addEventListener != "undefined") {
-  filter.addEventListener("keyup", function() {
-    filterFunction();
-    });
-  };
-
-
-const filterFunction = () => {
-  let input, filter, list, i;
-  input = document.getElementById('Ingredients');
-  filter = input.value.toUpperCase().trim();
-  const div = document.getElementById('ingredientList');
-  list = div.getElementsByTagName("li");
-  for (i = 0; i < list.length; i++) {
-    let txtValue = list[i].textContent || list[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      list[i].style.display = "";
-    } else {
-      list[i].style.display = "none";
-    }
-  }
-}
