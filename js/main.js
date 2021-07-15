@@ -83,6 +83,7 @@ inputButtons.forEach((btn) => {
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
+         if (event.target.classList.contains('btn')) return;
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
          changeInputtext(event.target.id, event.target.id);
       }
@@ -102,26 +103,6 @@ document.addEventListener('click', (event) => {
       }
    });
 });
-
-
-/*
-
-  // WHEN USER MAKES A CHOICE IN DROPDOWN MENU
-  const allOptionChoices = document.querySelectorAll('.btn'); /* sets array of all Button elements 
-  const OptionSelected = (event) => {
-
-    const optionChosen = event.target;
-    console.log(event.target);
-    if (!optionChosen) return;
-
-    allOptionChoices.forEach((element) => element.nextElementSibling.classList.remove('show'));
-    allOptionChoices.forEach((element) => element.classList.add('test'));
-
-    /* Now for the chosen option: set aria selected & selected class to highlight chosen choice 
-    optionChosen.classList.add('show');
-    optionChosen.parentNode.classList.add('collapsed');
-  };*/
-
 
   // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
   const CreateRecipes = (recipes) => {
@@ -172,30 +153,28 @@ CreateRecipes(recipes);
 
 
 // search filter attempt!!!!!!!!!!!!!!!!!!!!!!!
-const inputValue = document.querySelector('#Ingredients');
-inputValue.addEventListener('keyup', event => {
-   console.log(event.target.value);
-   filterFunction();
-});
 
 
-function filterFunction() {
-   var input, filter, ul, li, list, i;
-   input = document.querySelector('#Ingredients');
-   filter = input.value.toLowerCase();
-   console.log(filter);
-   const div = document.querySelector('#ingredientSearch');
-  
-   list = div.getElementsByTagName('li');
-   
-   for (i = 0; i < list.length; i++) {
-      
-     let txtValue = list[i].textContent || list[i].innerText;
-     console.log(txtValue);
-     if (txtValue.toLowerCase().indexOf(filter) > -1) {
-       list[i].style.display = 'block';
-     } else {
-       list[i].style.display = 'none';
-     }
-   }
- }
+ const filter = document.getElementById('Ingredients');
+if (typeof filter.addEventListener != "undefined") {
+  filter.addEventListener("keyup", function() {
+    filterFunction();
+    });
+  };
+
+
+const filterFunction = () => {
+  let input, filter, list, i;
+  input = document.getElementById('Ingredients');
+  filter = input.value.toUpperCase().trim();
+  const div = document.getElementById('ingredientList');
+  list = div.getElementsByTagName("li");
+  for (i = 0; i < list.length; i++) {
+    let txtValue = list[i].textContent || list[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      list[i].style.display = "";
+    } else {
+      list[i].style.display = "none";
+    }
+  }
+}
