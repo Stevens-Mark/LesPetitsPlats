@@ -187,14 +187,17 @@ const tagList = document.querySelectorAll('.tags');
       console.log(tagSelected);
    });
    /* Event Listener (for keyboard) */
-   item.addEventListener('keypress', (event) => {
+   item.addEventListener('keyup', (event) => {
       event.preventDefault();
       if (event.key === 'Enter' || event.key === 13) {
          event.preventDefault();
          item.click();
          /*  Make sure tag name is lowercase ready for search 
-         const tagSelected = event.target.textContent.toLowerCase();*/
-        
+         const tagSelected = event.target.textContent.toLowerCase();*/       
+      }
+      /* close dropdown on "Escape" key */
+      if (event.key === 'Escape' || event.key === 27) {
+         dropDownOpenClose(event);
       }
    });
 });
