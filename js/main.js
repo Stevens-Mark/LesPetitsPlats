@@ -99,7 +99,7 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList);
    const filter = document.getElementById(category);
   if (typeof filter.addEventListener != "undefined") {
     filter.addEventListener("keyup", function() {
-      filterFunction();
+     filterFunction();
       });
     };
   
@@ -123,7 +123,7 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList);
   dropdownTextListSearch('Appliances','applianceList');
   dropdownTextListSearch('Ustensils','ustensilsList');
 
-// CHANGE PLACEHOLDER TEXT IN DROPDOWNS WHEN SELECTED
+// CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
 const changeInputtext = (id, item) => {
    const button = document.getElementById(id);
    if (button.parentNode.classList.contains('collapsed')) {
@@ -140,17 +140,22 @@ inputButtons.forEach((btn) => {
       if (event.target.classList.contains('btn')) return;
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
       changeInputtext(event.target.id, event.target.id);
+   /*   dropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);
+      console.log(event.target.id);
+      console.log(event.target.parentNode.nextElementSibling.id);*/
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
-         if (event.target.classList.contains('btn')) return;
+         event.preventDefault();
+         btn.click();
+    /* if (event.target.classList.contains('btn')) return;*/
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
          changeInputtext(event.target.id, event.target.id);
       }
    });
 });
 
-document.addEventListener('click', (event) => {
+const dropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
       if (btn.nextElementSibling.classList.contains('show')){
       changeInputtext(btn.firstElementChild.id, btn.firstElementChild.id);
@@ -162,6 +167,16 @@ document.addEventListener('click', (event) => {
       event.target.parentNode.parentNode.classList.add('dropDownExpand');
       }
    });
+};
+
+document.addEventListener('click', (event) => {
+   dropDownOpenClose(event);
+});
+document.addEventListener('Keypress', (event) => {
+   if (event.key === 'Enter' || event.key === 13) {
+      event.preventDefault();
+      document.click();
+   }
 });
 
 // EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" FOR SEARCHING RECIPES
@@ -173,16 +188,16 @@ const tagList = document.querySelectorAll('.tags');
       const tagSelected = event.target.textContent.toLowerCase();
      /* console.log(tagSelected);*/
    });
-   /* Event Listener (for keyboard) for the like feature */
+   /* Event Listener (for keyboard) */
    item.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
+      if (event.key === 'Enter' || event.key === 13) {
+         event.preventDefault();
+         item.click();
          /*  Make sure tag name is lowercase readt for search */
          const tagSelected = event.target.textContent.toLowerCase();
         /* console.log(tagSelected);*/
       }
    });
 });
-
-
 
 
