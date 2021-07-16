@@ -124,12 +124,12 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList);
   dropdownTextListSearch('Ustensils','ustensilsList');
 
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
-const changeInputtext = (id, item) => {
+const changeInputtext = (id) => {
    const button = document.getElementById(id);
    if (button.parentNode.classList.contains('collapsed')) {
-      document.getElementById(id).placeholder = "Rechercher des " +item;
+      document.getElementById(id).placeholder = "Rechercher des " +id;
    } else {
-      document.getElementById(id).placeholder = item;
+      document.getElementById(id).placeholder = id;
    }
 };
 
@@ -140,9 +140,9 @@ inputButtons.forEach((btn) => {
       if (event.target.classList.contains('btn')) return;
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
       changeInputtext(event.target.id, event.target.id);
-   /*   dropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);
+   /*   dropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);*/
       console.log(event.target.id);
-      console.log(event.target.parentNode.nextElementSibling.id);*/
+      console.log(event.target.parentNode.nextElementSibling.id);
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
@@ -150,7 +150,7 @@ inputButtons.forEach((btn) => {
          btn.click();
     /* if (event.target.classList.contains('btn')) return;*/
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-         changeInputtext(event.target.id, event.target.id);
+         changeInputtext(event.target.id);
       }
    });
 });
@@ -158,7 +158,7 @@ inputButtons.forEach((btn) => {
 const dropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
       if (btn.nextElementSibling.classList.contains('show')){
-      changeInputtext(btn.firstElementChild.id, btn.firstElementChild.id);
+      changeInputtext(btn.firstElementChild.id);
       }
       btn.nextElementSibling.classList.remove('show');
       btn.parentNode.classList.remove('dropDownExpand');
