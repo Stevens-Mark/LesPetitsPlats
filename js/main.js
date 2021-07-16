@@ -126,7 +126,7 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList);
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
 const changeInputtext = (id) => {
    const button = document.getElementById(id);
-   if (button.parentNode.classList.contains('collapsed')) {
+   if (!button.parentNode.nextElementSibling.classList.contains('show')) {
       document.getElementById(id).placeholder = "Rechercher des " +id;
    } else {
       document.getElementById(id).placeholder = id;
@@ -139,18 +139,15 @@ inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
       if (event.target.classList.contains('btn')) return;
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-      changeInputtext(event.target.id, event.target.id);
+      changeInputtext(event.target.id);
    /*   dropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);*/
-      console.log(event.target.id);
-      console.log(event.target.parentNode.nextElementSibling.id);
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
-         event.preventDefault();
-         btn.click();
-    /* if (event.target.classList.contains('btn')) return;*/
-         event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
+         if (event.target.classList.contains('btn')) return;   
          changeInputtext(event.target.id);
+         btn.click();
+         event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
       }
    });
 });
@@ -158,7 +155,7 @@ inputButtons.forEach((btn) => {
 const dropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
       if (btn.nextElementSibling.classList.contains('show')){
-      changeInputtext(btn.firstElementChild.id);
+      changeInputtext(btn.firstElementChild.id,);
       }
       btn.nextElementSibling.classList.remove('show');
       btn.parentNode.classList.remove('dropDownExpand');
@@ -172,9 +169,10 @@ const dropDownOpenClose = (event) =>{
 document.addEventListener('click', (event) => {
    dropDownOpenClose(event);
 });
-document.addEventListener('Keypress', (event) => {
+document.addEventListener('Keyup', (event) => {
+   event.preventDefault();
    if (event.key === 'Enter' || event.key === 13) {
-      event.preventDefault();
+      dropDownOpenClose(event);
       document.click();
    }
 });
@@ -186,16 +184,17 @@ const tagList = document.querySelectorAll('.tags');
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
-     /* console.log(tagSelected);*/
+      console.log(tagSelected);
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keypress', (event) => {
+      event.preventDefault();
       if (event.key === 'Enter' || event.key === 13) {
          event.preventDefault();
          item.click();
-         /*  Make sure tag name is lowercase readt for search */
-         const tagSelected = event.target.textContent.toLowerCase();
-        /* console.log(tagSelected);*/
+         /*  Make sure tag name is lowercase ready for search 
+         const tagSelected = event.target.textContent.toLowerCase();*/
+        
       }
    });
 });
