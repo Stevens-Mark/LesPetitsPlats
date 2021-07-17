@@ -10,8 +10,12 @@ import { recipes } from '../public/recipes.js';
    let recipehtml = '';
 
  recipes.forEach((recipe) => {
-   /* Using DESTRUCTERING get just the tag array from photographers array */
+   /* Using DESTRUCTERING get just the ingredients arrays from recipes array */
    const { ingredients } = recipe;
+   /*truncate recipe description text after 230 chararcters */
+   if (recipe.description.length > 230) {
+      recipe.description = recipe.description.substring(0, 230) + "...";};
+     /*add recipe card to DOM */ 
     recipehtml += `
  <div class="col-12 col-md-6 col-lg-4 mb-4">
     <div class="card bg-light h-100">
@@ -102,8 +106,8 @@ const ChangeInputtext = (id) => {
    }
 };
 
- // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN
- // LISTS WHEN USER ENTERS A WORD IN THE INPUT FIELD
+ // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS
+ // WHEN USER ENTERS A WORD IN THE INPUT FIELD
 
 const DropdownTextListSearch = (category, categoryListId) => {
       const filter = document.getElementById(category);
@@ -211,7 +215,7 @@ const tagList = document.querySelectorAll('.tags');
 // GENERATE/DISPLAY THE TAG ABOVE DROPDOWNS
 
 const GenerateTag = (tagSelected, tagType) => {
-   /* declare a place to put the tag selected icon in the dom */
+   /* declare a place to put the tag selected icon in the DOM */
    const tagElements = document.getElementById('tags-container');
    let bgColor;
    /* set tag colour according to tag type */
