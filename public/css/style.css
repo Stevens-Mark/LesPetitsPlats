@@ -10803,7 +10803,6 @@ body {
   /*content: "\e114"; */
   content: "";
   background-image: url("/public/images/icons/chevron-down.svg");
-  place-content: "rechercher";
   pointer-events: none;
   width: 1rem;
   height: 1rem;
@@ -10823,6 +10822,30 @@ body {
 .SearchBar__magnify {
   font-size: 32px;
   margin: 10px;
+}
+
+.tags {
+  cursor: pointer;
+}
+.tags:hover {
+  color: #E7E7E7;
+}
+.tags__selected {
+  width: fit-content;
+  transition: 0.4s;
+}
+.tags__selected:hover {
+  transition: 0.3s;
+  /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  /* x,y,blur,spread*/
+}
+.tags__closeBtn {
+  cursor: pointer;
+}
+
+.ing {
+  background: #3282F7;
 }
 
 .dropDownExpand {
@@ -10892,7 +10915,7 @@ font-size: 18px;
 
 .card {
   border-radius: 5px;
-  transition: 0.3s;
+  transition: 0.4s;
   /* &__heading {
      align-items: baseline;
      justify-content: space-between;
@@ -10900,7 +10923,9 @@ font-size: 18px;
 }
 .card:hover {
   transition: 0.3s;
+  /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  /* x,y,blur,spread*/
 }
 .card__image {
   object-fit: cover;
@@ -10927,11 +10952,5 @@ font-size: 18px;
 .card__ingredient {
   font-weight: 700;
 }
-
-/*
-.card{
-  position: relative;
-  z-index: 1;
-}*/
 
 /*# sourceMappingURL=style.css.map */

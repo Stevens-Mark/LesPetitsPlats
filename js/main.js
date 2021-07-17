@@ -95,15 +95,15 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList);
  // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN
  // LISTS WHEN USER ENTERS A WORD IN THE INPUT FIELD
 
- const dropdownTextListSearch = (category, categoryListId) => {
+ const DropdownTextListSearch = (category, categoryListId) => {
    const filter = document.getElementById(category);
   if (typeof filter.addEventListener != "undefined") {
     filter.addEventListener("keyup", function() {
-     filterFunction();
+     FilterFunction();
       });
     };
   
-  const filterFunction = () => {
+  const FilterFunction = () => {
     let input, filter, list, i;
     input = document.getElementById(category);
     filter = input.value.toUpperCase().trim();
@@ -119,12 +119,12 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList);
     }
   }
   };
-  dropdownTextListSearch('Ingredients','ingredientList');
-  dropdownTextListSearch('Appliances','applianceList');
-  dropdownTextListSearch('Ustensils','ustensilsList');
+  DropdownTextListSearch('Ingredients','ingredientList');
+  DropdownTextListSearch('Appliances','applianceList');
+  DropdownTextListSearch('Ustensils','ustensilsList');
 
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
-const changeInputtext = (id) => {
+const ChangeInputtext = (id) => {
    const button = document.getElementById(id);
    if (!button.parentNode.nextElementSibling.classList.contains('show')) {
       document.getElementById(id).placeholder = "Rechercher des " +id;
@@ -139,23 +139,23 @@ inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
       if (event.target.classList.contains('btn')) return;
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-      changeInputtext(event.target.id);
-   /*   dropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);*/
+      ChangeInputtext(event.target.id);
+   /*   DropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);*/
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
          if (event.target.classList.contains('btn')) return;   
-         changeInputtext(event.target.id);
+         ChangeInputtext(event.target.id);
          btn.click();
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
       }
    });
 });
 
-const dropDownOpenClose = (event) =>{
+const DropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
       if (btn.nextElementSibling.classList.contains('show')){
-      changeInputtext(btn.firstElementChild.id,);
+      ChangeInputtext(btn.firstElementChild.id,);
       }
       btn.nextElementSibling.classList.remove('show');
       btn.parentNode.classList.remove('dropDownExpand');
@@ -167,12 +167,12 @@ const dropDownOpenClose = (event) =>{
 };
 
 document.addEventListener('click', (event) => {
-   dropDownOpenClose(event);
+   DropDownOpenClose(event);
 });
 document.addEventListener('Keyup', (event) => {
    event.preventDefault();
    if (event.key === 'Enter' || event.key === 13) {
-      dropDownOpenClose(event);
+      DropDownOpenClose(event);
       document.click();
    }
 });
@@ -184,7 +184,7 @@ const tagList = document.querySelectorAll('.tags');
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
-      console.log(tagSelected);
+      GenerateTag(tagSelected);
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -197,9 +197,25 @@ const tagList = document.querySelectorAll('.tags');
       }
       /* close dropdown on "Escape" key */
       if (event.key === 'Escape' || event.key === 27) {
-         dropDownOpenClose(event);
+         DropDownOpenClose(event);
       }
    });
 });
+
+const GenerateTag = (tagSelected) => {
+   /* declare a place to put the tag selected icon in the dom */
+  const tagElement = document.getElementById('tags-container');
+   tagElement.insertAdjacentHTML("afterbegin",
+   `<div class="tags__selected ing d-flex align-items-baseline rounded text-white m-1">
+   <p class="text-capitalize m-0 mx-1 p-1">${tagSelected}</p><i class="tags__closeBtn far fa-times-circle p-1"></i></div>    
+   `
+   );
+   const tagSelectedIcon = document.querySelectorAll('.tags__closeBtn');
+   tagSelectedIcon.forEach((icon) => {
+      icon.addEventListener('click', (event) => {
+         event.target.parentNode.remove();
+      });
+   });
+};
 
 

@@ -15,6 +15,29 @@
   }
 }
 
+// STYLING FOR TAGS (DROPDOWN LISTS & SELECTED TAG ICONS
+.tags {
+  cursor: pointer;
+    &:hover {
+      color: $light;
+    }
+  &__selected {
+  width: fit-content;
+  transition: 0.4s;
+    &:hover {
+      transition: 0.3s;
+      @include card-hovershadow;
+    }
+  }
+  &__closeBtn {
+    cursor: pointer;
+  }
+}
+
+.ing {
+  background: $info;
+}
+
 // STYLING TO INCREASE WIDTH OF DROPDOWN MENUS WHEN OPEN
 .dropDownExpand {
   width: 100%;
@@ -78,10 +101,10 @@ font-size: 18px;
 
 .card {
   border-radius: 5px;
-  transition: 0.3s;
+  transition: 0.4s;
   &:hover {
     transition: 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
+    @include card-hovershadow;
   }
  /* &__heading {
     align-items: baseline;
@@ -113,10 +136,4 @@ font-size: 18px;
     font-weight: 700;
   }
 }
-
-/*
-.card{
-  position: relative;
-  z-index: 1;
-}*/
 

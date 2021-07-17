@@ -1,0 +1,5 @@
+@mixin card-hovershadow {
+    /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
+    /* x,y,blur,spread*/
+}
