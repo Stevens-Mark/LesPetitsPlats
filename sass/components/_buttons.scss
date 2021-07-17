@@ -1,8 +1,6 @@
-/* Arrow up Icon on buttons when the collapsible content is shown */
+/* Arrow up Icon on buttons when the collapsible content is hidden*/
 .btn:after {
-    /* font-family: "Glyphicons Halflings";*/
-    /* content: "\e113";
-    float: right;*/
+    float: right;
     margin-left: -10px;
     margin-top: 8px;
     content: "";
@@ -12,9 +10,8 @@
     height: 1rem;
     
   }
-  /* Arrow down Icon on buttons when the collapsible content is hidden */
+  /* Arrow down Icon on buttons when the collapsible content is shown */
   .btn.collapsed:after {
-    /*content: "\e114"; */
     content: "";
     background-image: url("/public/images/icons/chevron-down.svg");
     pointer-events: none;

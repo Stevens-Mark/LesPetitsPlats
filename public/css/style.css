@@ -5,17 +5,6 @@ Small ≥576px -sm
 Medium ≥768px -md
 Large ≥992px -lg
 Extra large ≥1200px -xl */
-/*$btn-focus-width: 0px;
-$btn-focus-box-shadow: 0px;
-$input-focus-border-color: blue;
-$input-color:white;
-$input-placeholder-color: white;
-$input-bg: none;
-$input-focus-bg: 0px;
-$input-focus-width: 0px;
-$input-focus-box-shadow: none;
-$input-border-width: 0px;
-$input-font-family: "New Times";*/
 /*!
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10784,11 +10773,9 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-/* Arrow up Icon on buttons when the collapsible content is shown */
+/* Arrow up Icon on buttons when the collapsible content is hidden*/
 .btn:after {
-  /* font-family: "Glyphicons Halflings";*/
-  /* content: "\e113";
-  float: right;*/
+  float: right;
   margin-left: -10px;
   margin-top: 8px;
   content: "";
@@ -10798,9 +10785,8 @@ body {
   height: 1rem;
 }
 
-/* Arrow down Icon on buttons when the collapsible content is hidden */
+/* Arrow down Icon on buttons when the collapsible content is shown */
 .btn.collapsed:after {
-  /*content: "\e114"; */
   content: "";
   background-image: url("/public/images/icons/chevron-down.svg");
   pointer-events: none;
@@ -10844,10 +10830,6 @@ body {
   cursor: pointer;
 }
 
-.ing {
-  background: #3282F7;
-}
-
 .dropDownExpand {
   width: 100%;
 }
@@ -10857,40 +10839,6 @@ body {
   }
 }
 
-/* STYLING: WIDTH OF DROPDOWN MENU ITEMS
-.tags {
-  width: 150px;
-  font-size: 14px;
-  @media only screen and (min-width:  $mobileSDevice) {
-    font-size: 16px;
-    width: 165px;
-  }
-    @media only screen and (min-width:  $mobileMDevice) {
-      font-size: 16px;
-      width: 192px;
-    }
-    @media only screen and (min-width: $tabletteDevice) {
-      width: 220px;
-    }
-    @media only screen and (min-width:  $largeDevice) {
-      width: 145px;
-      font-size: 14px;
-    }
-}
-
-/*
-.form-control{
-overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
-font-size: 18px;
-}
-
-@media (min-width:768px) {
-  .col-md-30 {
-      width: 30% !important;
-  }
-}*/
 .searchFilters {
   position: absolute;
   z-index: 999;
@@ -10899,6 +10847,14 @@ font-size: 18px;
   .searchFilters {
     flex-wrap: nowrap;
   }
+}
+
+.form-control {
+  cursor: pointer;
+}
+
+input:focus::placeholder {
+  opacity: 60%;
 }
 
 .cards {

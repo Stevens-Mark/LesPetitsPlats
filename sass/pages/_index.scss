@@ -42,12 +42,22 @@
   }
 }
 
+// NEED FOR ALIGNMENT OF DROPDWON MENU FILTERS
 .searchFilters {
   position: absolute;
   z-index: 999;
     @media only screen and (min-width: $largeDevice) {
       flex-wrap: nowrap;
     }
+}
+
+.form-control {
+  cursor: pointer;
+}
+
+// change input "placeholder" text to 50% when user in SEARCH fields
+input:focus::placeholder {
+  opacity: 60%;
 }
 
 // RECIPE CARDS STYLING
