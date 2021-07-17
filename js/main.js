@@ -165,7 +165,7 @@ const DropDownOpenClose = (event) =>{
       }
    });
 };
-
+// EVENT LISTENER: CLOSE ALL DROPDOWNS WHEN USER CLICKS OUTSIDE THE MENUS
 document.addEventListener('click', (event) => {
    DropDownOpenClose(event);
 });
@@ -184,6 +184,7 @@ const tagList = document.querySelectorAll('.tags');
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
+      /* get category type in order to apply correct colour to tag icon & display tag icon */
       const tagType = event.target.getAttribute("data-category");
       getTagIconBGColor(tagSelected, tagType);
    });
@@ -203,13 +204,26 @@ const tagList = document.querySelectorAll('.tags');
    });
 });
 
+// GET TAG BACKGROUND COLOUR DEPENDING ON CATEGORY & CALL TAG GENERATE FUNCTION
 const getTagIconBGColor = (tagSelected, tagType) => {
+   let bgColor;
+   switch (tagType){
+      case 'ingredientTag': bgColor ='info'; break;
+      case 'applianceTag' : bgColor ='success'; break;
+      case 'ustensilTag' : bgColor ='danger'; break;
+      default: console.log('no color set');
+      };
+   GenerateTag(tagSelected, bgColor);
+};
+/*const getTagIconBGColor = (tagSelected, tagType) => {
    let bgColor;
    if (tagType ==="ingredientTag") { bgColor ='info'};
    if (tagType ==="applianceTag") { bgColor ='success'};
    if (tagType ==="ustensilTag") { bgColor ='danger'};
    GenerateTag(tagSelected, bgColor);
-};
+};*/
+
+// GENERATE/DISPLAY THE TAG ABOVE DROPDOWNS
 
 const GenerateTag = (tagSelected, bgColor) => {
    console.log(bgColor);
@@ -217,13 +231,19 @@ const GenerateTag = (tagSelected, bgColor) => {
   const tagElements = document.getElementById('tags-container');
    tagElements.insertAdjacentHTML("afterbegin",
    `<div class="tags__selected bg-${bgColor} d-flex align-items-baseline rounded text-white m-1">
-   <p class="text-capitalize m-0 mx-1 p-1">${tagSelected}</p><i class="tags__closeBtn far fa-times-circle p-1"></i></div>    
+   <p class="text-capitalize m-0 mx-1 p-1">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
    `
    );
+   // EVENT LISTENER ON TAG CLOSE BUTTON TO REMOVE DE-SELECTED TAG
    const tagSelectedIcon = document.querySelectorAll('.tags__closeBtn');
    tagSelectedIcon.forEach((icon) => {
       icon.addEventListener('click', (event) => {
          event.target.parentNode.remove();
+      });
+      icon.addEventListener('keyup', (event) => {
+         if (event.key === 'Enter' || event.key === 13) {
+         event.target.parentNode.remove();
+         }
       });
    });
 };
