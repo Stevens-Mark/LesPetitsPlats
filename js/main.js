@@ -92,37 +92,6 @@ recipes.forEach((recipe) => {
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
 
- // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN
- // LISTS WHEN USER ENTERS A WORD IN THE INPUT FIELD
-
- const DropdownTextListSearch = (category, categoryListId) => {
-   const filter = document.getElementById(category);
-  if (typeof filter.addEventListener != "undefined") {
-    filter.addEventListener("keyup", function() {
-     FilterFunction();
-      });
-    };
-  
-  const FilterFunction = () => {
-    let input, filter, list, i;
-    input = document.getElementById(category);
-    filter = input.value.toUpperCase().trim();
-    const div = document.getElementById(categoryListId);
-    list = div.getElementsByTagName("li");
-    for (i = 0; i < list.length; i++) {
-      let txtValue = list[i].textContent || list[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        list[i].style.display = "";
-      } else {
-        list[i].style.display = "none";
-      }
-    }
-  }
-  };
-  DropdownTextListSearch('Ingredients','ingredientList');
-  DropdownTextListSearch('Appliances','applianceList');
-  DropdownTextListSearch('Ustensils','ustensilsList');
-
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
 const ChangeInputtext = (id) => {
    const button = document.getElementById(id);
@@ -133,14 +102,47 @@ const ChangeInputtext = (id) => {
    }
 };
 
-// EVENT LISTENERS ON DROPDOWN BUTTONS
+ // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN
+ // LISTS WHEN USER ENTERS A WORD IN THE INPUT FIELD
+
+const DropdownTextListSearch = (category, categoryListId) => {
+      const filter = document.getElementById(category);
+      if (typeof filter.addEventListener != "undefined") {
+      filter.addEventListener("keyup", function() {
+      FilterFunction();
+         });
+      };
+   
+      const FilterFunction = () => {
+         let input,stringEntered, list, i;
+         input = document.getElementById(category);
+         stringEntered = input.value.toUpperCase().trim();
+         const div = document.getElementById(categoryListId);
+         list = div.getElementsByTagName("li");
+         for (i = 0; i < list.length; i++) {
+            let txtValue = list[i].textContent || list[i].innerText;
+            if (txtValue.toUpperCase().indexOf(stringEntered) > -1) {
+            list[i].style.display = "";
+            } else {
+            list[i].style.display = "none";
+            }
+         }
+      }
+   };
+   /*
+  DropdownTextListSearch('Ingredients','ingredientList');
+  DropdownTextListSearch('Appliances','applianceList');
+  DropdownTextListSearch('Ustensils','ustensilsList');*/
+
+// EVENT LISTENERS ON DROPDOWN BUTTONS &
+// CALL SEARCH DROPDOWN LIST FUNCTION (ABOVE)
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
       if (event.target.classList.contains('btn')) return;
       event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
       ChangeInputtext(event.target.id);
-   /*   DropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);*/
+      DropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);
    });
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
@@ -148,10 +150,11 @@ inputButtons.forEach((btn) => {
          ChangeInputtext(event.target.id);
          btn.click();
          event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
+         DropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);
       }
    });
 });
-
+// OPEN/CLOSE THE DROPDOWN MENUS
 const DropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
       if (btn.nextElementSibling.classList.contains('show')){
@@ -177,16 +180,17 @@ document.addEventListener('Keyup', (event) => {
    }
 });
 
-// EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" FOR SEARCHING RECIPES
+// EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" 
+// FOR SEARCHING RECIPES & TAG GENERATION
 
 const tagList = document.querySelectorAll('.tags');
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
-      /* get category type in order to apply correct colour to tag icon & display tag icon */
+      /* get category type & generate tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
-      getTagIconBGColor(tagSelected, tagType);
+      GenerateTag(tagSelected, tagType);
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -204,31 +208,19 @@ const tagList = document.querySelectorAll('.tags');
    });
 });
 
-// GET TAG BACKGROUND COLOUR DEPENDING ON CATEGORY & CALL TAG GENERATE FUNCTION
-const getTagIconBGColor = (tagSelected, tagType) => {
+// GENERATE/DISPLAY THE TAG ABOVE DROPDOWNS
+
+const GenerateTag = (tagSelected, tagType) => {
+   /* declare a place to put the tag selected icon in the dom */
+   const tagElements = document.getElementById('tags-container');
    let bgColor;
+   /* set tag colour according to tag type */
    switch (tagType){
       case 'ingredientTag': bgColor ='info'; break;
       case 'applianceTag' : bgColor ='success'; break;
       case 'ustensilTag' : bgColor ='danger'; break;
       default: console.log('no color set');
       };
-   GenerateTag(tagSelected, bgColor);
-};
-/*const getTagIconBGColor = (tagSelected, tagType) => {
-   let bgColor;
-   if (tagType ==="ingredientTag") { bgColor ='info'};
-   if (tagType ==="applianceTag") { bgColor ='success'};
-   if (tagType ==="ustensilTag") { bgColor ='danger'};
-   GenerateTag(tagSelected, bgColor);
-};*/
-
-// GENERATE/DISPLAY THE TAG ABOVE DROPDOWNS
-
-const GenerateTag = (tagSelected, bgColor) => {
-   console.log(bgColor);
-   /* declare a place to put the tag selected icon in the dom */
-  const tagElements = document.getElementById('tags-container');
    tagElements.insertAdjacentHTML("afterbegin",
    `<div class="tags__selected bg-${bgColor} d-flex align-items-baseline rounded text-white m-1">
    <p class="text-capitalize m-0 mx-1 p-1">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
