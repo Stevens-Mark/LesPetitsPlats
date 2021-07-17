@@ -51,12 +51,12 @@ import { recipes } from '../public/recipes.js';
 CreateRecipes(recipes);
 
 // GENERATE EACH SEARCH LIST IN EACH DROPDOWN
-const createSearchArticles = (id, list) => {
+const createSearchArticles = (id, list, tagType) => {
    const ListElement = document.querySelector(id);
    let Listshtml = '';
    list.forEach((item) => {
       Listshtml +=
-      `<li role="option" tabindex="0" class="tags col-6 col-md-3 col-lg-4 list-unstyled text-capitalize text-truncate px-2 m-0" arial-label="${item}">${item}</li>`;
+      `<li role="option" tabindex="0" class="tags col-6 col-md-3 col-lg-4 list-unstyled text-capitalize text-truncate px-2 m-0" data-category="${tagType}" arial-label="${item}">${item}</li>`;
       ListElement.innerHTML = Listshtml;
    });
 };
@@ -72,7 +72,7 @@ recipes.forEach((recipe) => {
    });
 });
 const sortedIngredientsList = [...new Set(allIngredientsList)].sort();
-createSearchArticles('#ingredientSearch', sortedIngredientsList);
+createSearchArticles('#ingredientSearch', sortedIngredientsList, 'ingredientTag');
 
 // get list of appliances from recipes array
 let allAppliancesList =[];
@@ -80,7 +80,7 @@ recipes.forEach((recipe) => {
     allAppliancesList.push(recipe.appliance.toLowerCase());
 });
 const sortedAppliancesList = [...new Set(allAppliancesList)].sort();
-createSearchArticles('#applianceSearch', sortedAppliancesList);
+createSearchArticles('#applianceSearch', sortedAppliancesList, 'applianceTag');
 
 // get list of ustensils from recipes array
 let allUstensilsList =[];
@@ -90,7 +90,7 @@ recipes.forEach((recipe) => {
    });
 });
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
-createSearchArticles('#ustensilSearch', sortedUstensilsList);
+createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
 
  // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN
  // LISTS WHEN USER ENTERS A WORD IN THE INPUT FIELD
@@ -184,7 +184,8 @@ const tagList = document.querySelectorAll('.tags');
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
-      GenerateTag(tagSelected);
+      const tagType = event.target.getAttribute("data-category");
+      getTagIconBGColor(tagSelected, tagType);
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -202,11 +203,20 @@ const tagList = document.querySelectorAll('.tags');
    });
 });
 
-const GenerateTag = (tagSelected) => {
+const getTagIconBGColor = (tagSelected, tagType) => {
+   let bgColor;
+   if (tagType ==="ingredientTag") { bgColor ='info'};
+   if (tagType ==="applianceTag") { bgColor ='success'};
+   if (tagType ==="ustensilTag") { bgColor ='danger'};
+   GenerateTag(tagSelected, bgColor);
+};
+
+const GenerateTag = (tagSelected, bgColor) => {
+   console.log(bgColor);
    /* declare a place to put the tag selected icon in the dom */
-  const tagElement = document.getElementById('tags-container');
-   tagElement.insertAdjacentHTML("afterbegin",
-   `<div class="tags__selected ing d-flex align-items-baseline rounded text-white m-1">
+  const tagElements = document.getElementById('tags-container');
+   tagElements.insertAdjacentHTML("afterbegin",
+   `<div class="tags__selected bg-${bgColor} d-flex align-items-baseline rounded text-white m-1">
    <p class="text-capitalize m-0 mx-1 p-1">${tagSelected}</p><i class="tags__closeBtn far fa-times-circle p-1"></i></div>    
    `
    );
