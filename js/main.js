@@ -276,19 +276,22 @@ console.log(newArray);*/
 
 let newArray = recipes;
 const FilterRecipes = (tagselected, tagType) => {
-if (tagType === 'ingredientTag') {
-   newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagselected));
+   switch (tagType) {
+   case 'ingredientTag' :
+   newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagselected)); 
    console.log(newArray);
-   CreateRecipes(newArray);
-}
-if (tagType === 'applianceTag') {
+   break;
+
+   case 'applianceTag' :
    newArray = newArray.filter(x => x.appliance.toLowerCase() === tagselected);
    console.log(newArray);
-   CreateRecipes(newArray);
-}
-if (tagType === 'ustensilTag') {
+   break;
+
+   case 'ustensilTag' :
    newArray  = newArray.filter(x => x.ustensils.indexOf(tagselected) > -1);
    console.log(newArray);
+   break;
+   default :console.log('no tag of this type');
+   }
    CreateRecipes(newArray);
-}
 };
