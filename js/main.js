@@ -9,6 +9,11 @@ import { recipes } from '../public/recipes.js';
  const recipeElement = document.querySelector('#card-container');
    let recipehtml = '';
 
+if (recipes.length < 1) {
+   recipehtml += `<div class="text-center mt-5">Désolé, mais vous avez saisi trop de critères, veuillez en supprimer.</div>`;
+   recipeElement.innerHTML = recipehtml;
+   };
+
  recipes.forEach((recipe) => {
    /* Using DESTRUCTERING get just the ingredients arrays from recipes array */
    const { ingredients } = recipe;
@@ -198,6 +203,7 @@ const tagList = document.querySelectorAll('.tags');
       /* get category type & generate tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
       GenerateTag(tagSelected, tagType);
+      FilterRecipes(tagSelected, tagType);
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -230,7 +236,7 @@ const GenerateTag = (tagSelected, tagType) => {
       };
    tagElements.insertAdjacentHTML("afterbegin",
    `<div class="tags__selected bg-${bgColor} d-flex align-items-baseline rounded text-white m-1">
-   <p class="text-capitalize m-0 mx-1 p-1">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
+   <p class="text-capitalize m-0 mx-1 p-1" data-category="${tagType}">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
    `
    );
    // EVENT LISTENER ON TAG CLOSE BUTTON TO REMOVE DE-SELECTED TAG
@@ -248,3 +254,41 @@ const GenerateTag = (tagSelected, tagType) => {
 };
 
 
+/*
+let recettes = recipes;
+
+
+let appliance ="Blender";
+let newArray = recettes.filter(x => x.appliance === appliance);
+console.log(newArray);
+
+let ustensil = "verres";
+newArray  = newArray.filter(x => x.ustensils.indexOf(ustensil) > -1);
+console.log(newArray);
+
+
+let enteredValue = "Sucre";
+
+ newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient === enteredValue));
+
+console.log(newArray);*/
+
+
+let newArray = recipes;
+const FilterRecipes = (tagselected, tagType) => {
+if (tagType === 'ingredientTag') {
+   newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagselected));
+   console.log(newArray);
+   CreateRecipes(newArray);
+}
+if (tagType === 'applianceTag') {
+   newArray = newArray.filter(x => x.appliance.toLowerCase() === tagselected);
+   console.log(newArray);
+   CreateRecipes(newArray);
+}
+if (tagType === 'ustensilTag') {
+   newArray  = newArray.filter(x => x.ustensils.indexOf(tagselected) > -1);
+   console.log(newArray);
+   CreateRecipes(newArray);
+}
+};

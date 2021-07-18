@@ -10860,12 +10860,12 @@ input:focus::placeholder {
 .cards {
   position: relative;
   padding: unset;
-  top: 150px;
+  top: 17 0px;
   /* margin: -6px;*/
 }
 @media only screen and (min-width: 992px) {
   .cards {
-    top: 55px;
+    top: 70px;
   }
 }
 
