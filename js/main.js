@@ -75,6 +75,7 @@ recipes.forEach((recipe) => {
     allIngredientsList.push(items.ingredient.toLowerCase());
    });
 });
+/* remove duplicate entries using "set" & order the list */
 const sortedIngredientsList = [...new Set(allIngredientsList)].sort();
 createSearchArticles('#ingredientSearch', sortedIngredientsList, 'ingredientTag');
 
@@ -83,6 +84,7 @@ let allAppliancesList =[];
 recipes.forEach((recipe) => {
     allAppliancesList.push(recipe.appliance.toLowerCase());
 });
+/* remove duplicate entries using "set" & order the list */
 const sortedAppliancesList = [...new Set(allAppliancesList)].sort();
 createSearchArticles('#applianceSearch', sortedAppliancesList, 'applianceTag');
 
@@ -93,6 +95,7 @@ recipes.forEach((recipe) => {
     allUstensilsList.push(items.toLowerCase());
    });
 });
+/* remove duplicate entries using "set" & order the list */
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
 

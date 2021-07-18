@@ -19,7 +19,7 @@
 .tags {
   cursor: pointer;
     &:hover {
-      color: $light;
+      opacity: 70%;
     }
   &__selected {
   width: fit-content;
@@ -57,7 +57,7 @@
 
 // change input "placeholder" text to 50% when user in SEARCH fields
 input:focus::placeholder {
-  opacity: 60%;
+  opacity: 70%;
 }
 
 // RECIPE CARDS STYLING

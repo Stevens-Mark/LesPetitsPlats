@@ -10814,7 +10814,7 @@ body {
   cursor: pointer;
 }
 .tags:hover {
-  color: #E7E7E7;
+  opacity: 70%;
 }
 .tags__selected {
   width: fit-content;
@@ -10854,7 +10854,7 @@ body {
 }
 
 input:focus::placeholder {
-  opacity: 60%;
+  opacity: 70%;
 }
 
 .cards {
