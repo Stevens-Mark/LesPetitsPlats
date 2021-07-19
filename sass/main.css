@@ -1,2 +1,223 @@
+@charset "UTF-8";
+/* 
+Extra small <576px none
+Small ≥576px -sm 
+Medium ≥768px -md
+Large ≥992px -lg
+Extra large ≥1200px -xl */
+html,
+body {
+  font-family: "Lato", "Roboto", Arial, serif;
+  margin: auto;
+}
 
+@font-face {
+  /* Définition of font called DM Sans*/
+  font-family: "Lato";
+  src: url("../fonts/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  /* Définition of font called Roboto*/
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Arrow up Icon on buttons when the collapsible content is hidden*/
+.btn:after {
+  float: right;
+  margin-left: -10px;
+  margin-top: 8px;
+  content: "";
+  background-image: url("/public/images/icons/chevron-up.svg");
+  pointer-events: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Arrow down Icon on buttons when the collapsible content is shown */
+.btn.collapsed:after {
+  content: "";
+  background-image: url("/public/images/icons/chevron-down.svg");
+  pointer-events: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+.SearchBar {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 69px;
+  background: #E7E7E7;
+  border-radius: 5px;
+  margin-right: -12px;
+}
+
+.SearchBar ::-webkit-input-placeholder {
+  color: grey;
+  /* $gray-600; */
+}
+
+.SearchBar :-ms-input-placeholder {
+  color: grey;
+  /* $gray-600; */
+}
+
+.SearchBar ::-ms-input-placeholder {
+  color: grey;
+  /* $gray-600; */
+}
+
+.SearchBar ::placeholder {
+  color: grey;
+  /* $gray-600; */
+}
+
+.SearchBar__magnify {
+  font-size: 32px;
+  margin: 10px;
+}
+
+.tags {
+  cursor: pointer;
+}
+
+.tags:hover {
+  opacity: 70%;
+}
+
+.tags__selected {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.tags__selected:hover {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  /* x,y,blur,spread*/
+}
+
+.tags__closeBtn {
+  cursor: pointer;
+}
+
+.dropDownExpand {
+  width: 100%;
+}
+
+@media only screen and (min-width: 992px) {
+  .dropDownExpand {
+    width: 480px;
+  }
+}
+
+.searchFilters {
+  position: absolute;
+  z-index: 999;
+}
+
+@media only screen and (min-width: 992px) {
+  .searchFilters {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+}
+
+.form-control {
+  cursor: pointer;
+}
+
+input:focus::-webkit-input-placeholder {
+  opacity: 70%;
+}
+
+input:focus:-ms-input-placeholder {
+  opacity: 70%;
+}
+
+input:focus::-ms-input-placeholder {
+  opacity: 70%;
+}
+
+input:focus::placeholder {
+  opacity: 70%;
+}
+
+.cards {
+  position: relative;
+  padding: unset;
+  top: 170px;
+  /* margin: -6px;*/
+}
+
+@media only screen and (min-width: 992px) {
+  .cards {
+    top: 70px;
+  }
+}
+
+.card {
+  border-radius: 5px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  /* &__heading {
+    align-items: baseline;
+    justify-content: space-between;
+  }*/
+}
+
+.card:hover {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  /* x,y,blur,spread*/
+}
+
+.card__image {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card__title {
+  font-size: 18px;
+}
+
+.card__timing {
+  font-size: 18px;
+  font-weight: 700;
+  /* white-space: nowrap;*/
+}
+
+.card__information {
+  /* justify-content: space-between;*/
+  font-size: 12px;
+}
+
+.card__description {
+  font-family: "Roboto";
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 175px;
+}
+
+.card__ingredient {
+  font-weight: 700;
+}
 /*# sourceMappingURL=main.css.map */

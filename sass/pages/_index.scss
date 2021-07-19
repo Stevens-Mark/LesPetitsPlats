@@ -7,7 +7,7 @@
   border-radius: 5px;
   margin-right:  -12px;
   ::placeholder{
-    color: $gray-600;
+    color: grey; /* $gray-600; */
   }
   &__magnify{
     font-size: 32px;

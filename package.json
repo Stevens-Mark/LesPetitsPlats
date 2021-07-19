@@ -10,10 +10,6 @@
   "author": "",
   "license": "ISC",
   "browserslist": "last 4 versions",
-  "dependencies": {
-    "bootstrap": "^5.0.2",
-    "bootstrap-icons": "^1.5.0"
-  },
   "devDependencies": {
     "eslint": "^7.30.0"
   }
