@@ -13,6 +13,9 @@
     font-size: 32px;
     margin: 10px;
   }
+  &__filter {
+    width: 100%;
+  }
 }
 
 // STYLING FOR TAGS (DROPDOWN LISTS & SELECTED TAG ICONS
@@ -108,4 +111,3 @@ input:focus::placeholder {
     font-weight: 700;
   }
 }
-

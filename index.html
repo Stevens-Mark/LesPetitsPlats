@@ -48,11 +48,13 @@
             <div class="col-12 col-lg-3 mb-2"> 
 
               <div class="dropdown">
-                <button class="btn btn-info d-flex dropdown-toggle border-0" type="button" id="ingredientBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-info d-flex dropdown-toggle border-0 SearchBar__filter" type="button" id="ingredientBtn" data-bs-toggle="dropdown" aria-expanded="false">
                   <input tabindex="0" type="text" class="form-control  border-0 bg-transparent text-white shadow-none text-truncate"  placeholder="Ingredients" id="Ingredients" aria-label="ingredientBtn" onblur="this.placeholder = 'Ingrédients'" onfocus="this.placeholder = 'Rechercher'">
                 </button>
-                <ul id="ingredientSearch" class="dropdown-menu flex-wrap m-0 p-2 bg-info" role="listbox" aria-labelledby="ingredientBtn">
-                   <!--Place to put ingredient dropdown search list-->
+                <ul  class="dropdown-menu m-0 p-2 bg-info" role="listbox" aria-labelledby="ingredientBtn">
+                  <div class="d-flex flex-wrap" id="ingredientSearch">
+                    <!--Place to put ingredient dropdown search list-->
+                  </div>
                 </ul>
               </div>
 
@@ -61,11 +63,13 @@
             <div class="col-12 col-lg-3 mb-2"> 
 
               <div class="dropdown">
-                <button class="btn btn-success d-flex dropdown-toggle border-0" type="button" id="applianceBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-success d-flex dropdown-toggle border-0 SearchBar__filter" type="button" id="applianceBtn" data-bs-toggle="dropdown" aria-expanded="false">
                   <input tabindex="0" type="text" class="form-control  border-0 bg-transparent text-white shadow-none text-truncate"  placeholder="Appliances" id="Appliances" aria-label="ingredientBtn" onblur="this.placeholder = 'Appliance'" onfocus="this.placeholder = 'Rechercher'">
                 </button>
-                <ul id="applianceSearch" class="dropdown-menu flex-wrap m-0 p-2 bg-success" role="listbox" aria-labelledby="applianceBtn">
-                   <!--Place to put appliance dropdown search list-->
+                <ul class="dropdown-menu flex-wrap m-0 p-2 bg-success" role="listbox" aria-labelledby="applianceBtn">
+                  <div class="d-flex flex-wrap"  id="applianceSearch">
+                      <!--Place to put appliance dropdown search list-->
+                  </div>
                 </ul>
               </div>
 
@@ -74,11 +78,13 @@
             <div class="col-12 col-lg-3 mb-2"> 
 
               <div class="dropdown">
-                <button class="btn btn-danger d-flex dropdown-toggle border-0" type="button" id="ustensilsBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-danger d-flex dropdown-toggle border-0 SearchBar__filter" type="button" id="ustensilsBtn" data-bs-toggle="dropdown" aria-expanded="false">
                   <input tabindex="0" type="text" class="form-control  border-0 bg-transparent text-white shadow-none text-truncate"  placeholder="Ustensils" id="Appliances" aria-label="ingredientBtn" onblur="this.placeholder = 'Ustensils'" onfocus="this.placeholder = 'Rechercher'">
                 </button>
-                <ul id="ustensilSearch" class="dropdown-menu flex-wrap m-0 p-2 bg-danger" role="listbox" aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu flex-wrap m-0 p-2 bg-danger" role="listbox" aria-labelledby="dropdownMenuButton1">
+                  <div class="d-flex flex-wrap"  id="ustensilSearch">
                    <!--Place to put ustensil dropdown search list-->
+                  </div>
                 </ul>
               </div>
 

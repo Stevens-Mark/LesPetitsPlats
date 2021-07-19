@@ -38,7 +38,7 @@ body {
 }
 
 /* Arrow down Icon on buttons when the collapsible content is shown */
-.btn.collapsed:after {
+.btn.show:after {
   content: "";
   background-image: url("/public/images/icons/chevron-down.svg");
   pointer-events: none;
@@ -61,6 +61,9 @@ body {
 .SearchBar__magnify {
   font-size: 32px;
   margin: 10px;
+}
+.SearchBar__filter {
+  width: 100%;
 }
 
 .tags {
