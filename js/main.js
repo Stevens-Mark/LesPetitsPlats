@@ -105,6 +105,7 @@ const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
 
 // CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
+
 const ChangeInputtext = (id) => {
    const button = document.getElementById(id);
    if (!button.parentNode.nextElementSibling.classList.contains('show')) {
@@ -114,8 +115,8 @@ const ChangeInputtext = (id) => {
    }
 };
 
- // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS
- // WHEN USER ENTERS A WORD IN THE INPUT FIELD
+// FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS
+// WHEN USER ENTERS A WORD IN THE INPUT FIELD
 
 const DropdownTextListSearch = (category, categoryListId) => {
       const filter = document.getElementById(category);
@@ -193,17 +194,22 @@ document.addEventListener('Keyup', (event) => {
 });
 
 // EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" 
-// FOR SEARCHING RECIPES & TAG GENERATION
+// FOR SEARCHING RECIPES & THE TAG GENERATION
 
 const tagList = document.querySelectorAll('.tags');
+   let tagListArray = [];
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
       /* get category type & generate tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
-      GenerateTag(tagSelected, tagType);
-      FilterRecipes(tagSelected, tagType);
+      /* if tag not already selected create a new tag */
+      if (!tagListArray.includes(tagSelected)) {
+         tagListArray.push(tagSelected);
+         GenerateTag(tagSelected, tagType);
+         FilterRecipes(tagSelected, tagType);    
+      }
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -211,8 +217,6 @@ const tagList = document.querySelectorAll('.tags');
       if (event.key === 'Enter' || event.key === 13) {
          event.preventDefault();
          item.click();
-         /*  Make sure tag name is lowercase ready for search 
-         const tagSelected = event.target.textContent.toLowerCase();*/       
       }
       /* close dropdown on "Escape" key */
       if (event.key === 'Escape' || event.key === 27) {
@@ -221,7 +225,7 @@ const tagList = document.querySelectorAll('.tags');
    });
 });
 
-// GENERATE/DISPLAY THE TAG ABOVE DROPDOWNS
+// GENERATE/DISPLAY THE TAGS ABOVE DROPDOWNS
 
 const GenerateTag = (tagSelected, tagType) => {
    /* declare a place to put the tag selected icon in the DOM */
@@ -244,35 +248,22 @@ const GenerateTag = (tagSelected, tagType) => {
    tagSelectedIcon.forEach((icon) => {
       icon.addEventListener('click', (event) => {
          event.target.parentNode.remove();
+         /* remove tag from taglist array (used to avoid duplicates) so a new tag can be made if needed */
+         const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
+         if (index !== -1) tagListArray.splice(index, 1);
       });
+      /* same as above but for keyboard */
       icon.addEventListener('keyup', (event) => {
          if (event.key === 'Enter' || event.key === 13) {
          event.target.parentNode.remove();
+         const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
+         if (index !== -1) tagListArray.splice(index, 1)
          }
       });
    });
 };
 
-
-/*
-let recettes = recipes;
-
-
-let appliance ="Blender";
-let newArray = recettes.filter(x => x.appliance === appliance);
-console.log(newArray);
-
-let ustensil = "verres";
-newArray  = newArray.filter(x => x.ustensils.indexOf(ustensil) > -1);
-console.log(newArray);
-
-
-let enteredValue = "Sucre";
-
- newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient === enteredValue));
-
-console.log(newArray);*/
-
+// SEARCH FILTER IN PROGRESS ?????????
 
 let newArray = recipes;
 const FilterRecipes = (tagselected, tagType) => {
