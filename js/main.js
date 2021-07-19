@@ -148,7 +148,7 @@ const DropdownTextListSearch = (category, categoryListId) => {
   DropdownTextListSearch('Ustensils','ustensilsList');*/
 
 // EVENT LISTENERS ON DROPDOWN BUTTONS &
-// CALL SEARCH DROPDOWN LIST FUNCTION (ABOVE)
+/* CALL SEARCH DROPDOWN LIST FUNCTION (ABOVE)
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
@@ -167,13 +167,13 @@ inputButtons.forEach((btn) => {
       }
    });
 });
-// OPEN/CLOSE THE DROPDOWN MENUS
+/* OPEN/CLOSE THE DROPDOWN MENUS
 const DropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
       if (btn.nextElementSibling.classList.contains('show')){
       ChangeInputtext(btn.firstElementChild.id,);
       }
-      btn.nextElementSibling.classList.remove('show');
+     /* btn.nextElementSibling.classList.remove('show');
       btn.parentNode.classList.remove('dropDownExpand');
 
       if (event.target.parentNode.classList.contains('btn')){
@@ -192,6 +192,7 @@ document.addEventListener('Keyup', (event) => {
       document.click();
    }
 });
+*/
 
 // EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" 
 // FOR SEARCHING RECIPES & THE TAG GENERATION

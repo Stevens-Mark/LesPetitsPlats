@@ -40,53 +40,49 @@
           <div id="tags-container" class="container  d-flex flex-wrap mb-3">
             <!--Place to put items selected (tags) from dropdown search list--> 
           </div> 
-          
+
+
                 <!--Three search dropdowns -->
           <div class="container px-0 row searchFilters">
-          <!--  <div class="dropdown col-12 col-lg-3 mb-2">
-              <button class="btn btn-secondary btn-sm bg-info border-0 d-flex dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
-                <input tabindex="0" type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Ingredients" id="Ingredients" aria-label="Rechercher des ingrédients" onblur="this.value = ''">
+          
+            <div class="col-12 col-lg-3 mb-2"> 
+
+              <div class="dropdown">
+                <button class="btn btn-info d-flex dropdown-toggle border-0" type="button" id="ingredientBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                  <input tabindex="0" type="text" class="form-control  border-0 bg-transparent text-white shadow-none text-truncate"  placeholder="Ingredients" id="Ingredients" aria-label="ingredientBtn" onblur="this.placeholder = 'Ingrédients'" onfocus="this.placeholder = 'Rechercher'">
+                </button>
+                <ul id="ingredientSearch" class="dropdown-menu flex-wrap m-0 p-2 bg-info" role="listbox" aria-labelledby="ingredientBtn">
+                   <!--Place to put ingredient dropdown search list-->
+                </ul>
               </div>
-              </button>
-              <div id="ingredientList" class="collapse bg-info rounded-bottom text-white">
-              <ul id="ingredientSearch" class="dropdown-menu d-flex flex-wrap m-0 p-2 bg-info" aria-labelledby="Rechercher des ingrédients">
-              </ul>
-            </div>
-          </div>-->
-            <div class="dropdown col-12 col-lg-3 mb-2"> 
-              <div id="ingredientBtn" class="btn btn-sm bg-info border-0 dropdown-toggle d-flex" data-bs-toggle="dropdown" data-target="#ingredientList" aria-expanded="false">
-                <input tabindex="0" type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Ingredients" id="Ingredients" aria-label="Rechercher des ingrédients" onblur="this.value = ''">
-              </div>
-              <div id="ingredientList" class="collapse bg-info rounded-bottom text-white">
-                <ul id="ingredientSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des ingrédients">
-                    <!--Place to put ingredient dropdown search list-->
-                </ul> 
-              </div>
+
             </div>
             
             <div class="col-12 col-lg-3 mb-2"> 
-              <div id="applianceBtn" class="btn btn-sm bg-success border-0 collapsed d-flex" data-toggle="collapse" data-target="#applianceList">
-                <input tabindex="0" type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Appliances" id="Appliances" aria-label="Rechercher des appliances" onblur="this.value = ''">
+
+              <div class="dropdown">
+                <button class="btn btn-success d-flex dropdown-toggle border-0" type="button" id="applianceBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                  <input tabindex="0" type="text" class="form-control  border-0 bg-transparent text-white shadow-none text-truncate"  placeholder="Appliances" id="Appliances" aria-label="ingredientBtn" onblur="this.placeholder = 'Appliance'" onfocus="this.placeholder = 'Rechercher'">
+                </button>
+                <ul id="applianceSearch" class="dropdown-menu flex-wrap m-0 p-2 bg-success" role="listbox" aria-labelledby="applianceBtn">
+                   <!--Place to put appliance dropdown search list-->
+                </ul>
               </div>
-              <div id="applianceList" class="collapse bg-success rounded-bottom text-white">
-                <ul id="applianceSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des appliances">
-                    <!--Place to put appliance dropdown search list-->
-                </ul> 
-              </div>
+
             </div>
 
             <div class="col-12 col-lg-3 mb-2"> 
-              <div id="ustensilsBtn" class="btn btn-sm bg-danger border-0 collapsed d-flex" data-toggle="collapse" data-target="#ustensilsList">
-                <input tabindex="0" type="text" class="form-control border-0 bg-transparent text-white shadow-none text-truncate" placeholder="Ustensils" id="Ustensils" aria-label="Rechercher des ustensils" onblur="this.value = ''">
-              </div>
-              <div id="ustensilsList" class="collapse bg-danger rounded-bottom text-white">
-                <ul id="ustensilSearch" role="listbox" class="d-flex flex-wrap m-0 p-2" aria-label="Rechercher des ustensils">
-                  <!--Place to put ustensil dropdown search list-->
-                </ul>  
-              </div>
-            </div>
 
-          </div>
+              <div class="dropdown">
+                <button class="btn btn-danger d-flex dropdown-toggle border-0" type="button" id="ustensilsBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                  <input tabindex="0" type="text" class="form-control  border-0 bg-transparent text-white shadow-none text-truncate"  placeholder="Ustensils" id="Appliances" aria-label="ingredientBtn" onblur="this.placeholder = 'Ustensils'" onfocus="this.placeholder = 'Rechercher'">
+                </button>
+                <ul id="ustensilSearch" class="dropdown-menu flex-wrap m-0 p-2 bg-danger" role="listbox" aria-labelledby="dropdownMenuButton1">
+                   <!--Place to put ustensil dropdown search list-->
+                </ul>
+              </div>
+
+            </div>
         </div>
       </section>
 

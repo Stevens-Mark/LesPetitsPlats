@@ -11,7 +11,7 @@
     
   }
   /* Arrow down Icon on buttons when the collapsible content is shown */
-  .btn.collapsed:after {
+  .btn.show:after {
     content: "";
     background-image: url("/public/images/icons/chevron-down.svg");
     pointer-events: none;
