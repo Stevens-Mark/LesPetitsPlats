@@ -254,7 +254,7 @@ const GenerateTag = (tagSelected, tagType) => {
       };
    tagElements.insertAdjacentHTML("afterbegin",
    `<div class="tags__selected bg-${bgColor} d-flex align-items-baseline rounded text-white m-1">
-   <p class="text-capitalize m-0 mx-1 p-1" data-category="${tagType}">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
+   <p class="text-capitalize m-0 mx-1 p-2" data-category="${tagType}">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
    `
    );
    // EVENT LISTENER ON TAG CLOSE BUTTON TO REMOVE DE-SELECTED TAG
