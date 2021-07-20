@@ -56,18 +56,18 @@
   flex-wrap: wrap;
   width: 100%;
   @media only screen and (min-width: $largeDevice) {
-   width: 440px;
+   width: 455px;
   }
 }
 
 .dropdown-item {
-  width: 33%;
+  width: 25%;
 }
 
 .buttonExpand {
   width: 100%;
   @media only screen and (min-width: $largeDevice) {
-  width: 465px;
+  width: 479px;
   }
 }
 
