@@ -18,3 +18,9 @@
     width: 1rem;
     height: 1rem;
   }
+
+  /* remove bootstrap icon from button */
+  .dropdown-toggle::after{
+    border: none;
+    content: '';
+   }

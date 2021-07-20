@@ -46,6 +46,12 @@ body {
   height: 1rem;
 }
 
+/* remove bootstrap icon from button */
+.dropdown-toggle::after {
+  border: none;
+  content: "";
+}
+
 .SearchBar {
   justify-content: center;
   align-items: center;
