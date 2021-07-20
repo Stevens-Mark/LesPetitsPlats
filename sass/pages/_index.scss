@@ -1,3 +1,15 @@
+// STYLING FOR DROPDOWN INPUTS
+.form-control {
+  cursor: pointer;
+}
+
+.form-control::placeholder { 
+  color: white;
+  opacity: 80%; 
+  font-family: "Lato";
+  font-size: 1.125rem;
+}
+
 // MAIN SEARCH INPUT BAR STYLING
 .SearchBar {
   justify-content: center;
@@ -7,18 +19,18 @@
   border-radius: 5px;
   margin-right:  -12px;
   ::placeholder{
-    color: grey; /* $gray-600; */
+    color: grey; 
   }
   &__magnify{
     font-size: 32px;
     margin: 10px;
   }
-  &__filter { //width for drtopdown menus
+  &__filter { //width for drtopdown menus when on mobile/tablette
     width: 100%;
   }
 }
 
-// STYLING FOR TAGS (DROPDOWN LISTS & SELECTED TAG ICONS
+// STYLING FOR TAGS (DROPDOWN LISTS & SELECTED TAG ICONS)
 .tags {
   cursor: pointer;
     &:hover {
@@ -50,13 +62,13 @@
 .dropdown-item {
   width: 33%;
 }
-/*
-.dropDownExpand {
+
+.buttonExpand {
   width: 100%;
   @media only screen and (min-width: $largeDevice) {
-  width: 480px;
+  width: 465px;
   }
-}*/
+}
 
 // NEED FOR ALIGNMENT OF DROPDWON MENU FILTERS
 .searchFilters {
@@ -67,20 +79,11 @@
     }
 }
 
-.form-control {
-  cursor: pointer;
-}
-
-// change input "placeholder" text to 50% when user in SEARCH fields
-input:focus::placeholder {
-  opacity: 70%;
-}
-
 // RECIPE CARDS STYLING
 .cards{
   position: relative;
   padding: unset;
-  top: 170px;
+  top: 190px;
    /* margin: -6px;*/
     @media only screen and (min-width: $largeDevice) {
     top: 70px;

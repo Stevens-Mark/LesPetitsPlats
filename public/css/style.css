@@ -52,6 +52,17 @@ body {
   content: "";
 }
 
+.form-control {
+  cursor: pointer;
+}
+
+.form-control::placeholder {
+  color: white;
+  opacity: 80%;
+  font-family: "Lato";
+  font-size: 1.125rem;
+}
+
 .SearchBar {
   justify-content: center;
   align-items: center;
@@ -62,7 +73,6 @@ body {
 }
 .SearchBar ::placeholder {
   color: grey;
-  /* $gray-600; */
 }
 .SearchBar__magnify {
   font-size: 32px;
@@ -106,13 +116,15 @@ body {
   width: 33%;
 }
 
-/*
-.dropDownExpand {
+.buttonExpand {
   width: 100%;
-  @media only screen and (min-width: $largeDevice) {
-  width: 480px;
+}
+@media only screen and (min-width: 992px) {
+  .buttonExpand {
+    width: 465px;
   }
-}*/
+}
+
 .searchFilters {
   position: absolute;
   z-index: 999;
@@ -123,18 +135,10 @@ body {
   }
 }
 
-.form-control {
-  cursor: pointer;
-}
-
-input:focus::placeholder {
-  opacity: 70%;
-}
-
 .cards {
   position: relative;
   padding: unset;
-  top: 170px;
+  top: 190px;
   /* margin: -6px;*/
 }
 @media only screen and (min-width: 992px) {

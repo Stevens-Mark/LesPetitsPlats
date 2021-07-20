@@ -142,31 +142,42 @@ const DropdownTextListSearch = (category, categoryListId) => {
          }
       }
    };
-   /*
-  DropdownTextListSearch('Ingredients','ingredientList');
-  DropdownTextListSearch('Appliances','applianceList');
-  DropdownTextListSearch('Ustensils','ustensilsList');*/
 
-// EVENT LISTENERS ON DROPDOWN BUTTONS &
-/* CALL SEARCH DROPDOWN LIST FUNCTION (ABOVE)
+// EVENT LISTENERS ON DROPDOWN BUTTONS:
+// CHANGES BUTTON WIDTH &
+// CALLS SEARCH DROPDOWN LIST FUNCTION (ABOVE)
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
-      if (event.target.classList.contains('btn')) return;
-      event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-      ChangeInputtext(event.target.id);
+      event.preventDefault();
+      inputButtons.forEach((btn) => {
+          btn.parentNode.parentNode.classList.remove('buttonExpand');
+       });
+       /* if user hit button */
+       if (event.target.classList.contains('btn'))  { 
+         event.target.parentNode.parentNode.classList.add('buttonExpand'); 
+         if (event.target.nextElementSibling.classList.contains('show')) {
+            event.target.parentNode.parentNode.classList.remove('buttonExpand');
+         }
+         DropdownTextListSearch(event.target.firstElementChild.id, event.target.nextElementSibling.id);
+         return;   
+      }/* otherwise user hit input field */
+      event.target.parentNode.parentNode.parentNode.classList.add('buttonExpand');
+      if (event.target.parentNode.nextElementSibling.classList.contains('show')) {
+         event.target.parentNode.parentNode.parentNode.classList.remove('buttonExpand');
+      }
       DropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);
    });
+   /* for keyboard users*/
    btn.addEventListener('keypress', (event) => {
       if (event.key === 'Enter' || event.key === 13) {
-         if (event.target.classList.contains('btn')) return;   
-         ChangeInputtext(event.target.id);
          btn.click();
-         event.target.parentNode.parentNode.classList.toggle('dropDownExpand');
-         DropdownTextListSearch(event.target.id,event.target.parentNode.nextElementSibling.id);
       }
    });
 });
+
+// EVENT LISTENER: CLOSE ALL DROPDOWNS WHEN USER CLICKS OUTSIDE THE MENUS
+
 /* OPEN/CLOSE THE DROPDOWN MENUS
 const DropDownOpenClose = (event) =>{
    inputButtons.forEach((btn) => {
@@ -193,6 +204,8 @@ document.addEventListener('Keyup', (event) => {
    }
 });
 */
+// EVENT LISTENER: CLOSE ALL DROPDOWNS WHEN USER CLICKS OUTSIDE THE MENUS
+
 
 // EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" 
 // FOR SEARCHING RECIPES & THE TAG GENERATION
@@ -209,7 +222,7 @@ const tagList = document.querySelectorAll('.tags');
       if (!tagListArray.includes(tagSelected)) {
          tagListArray.push(tagSelected);
          GenerateTag(tagSelected, tagType);
-         FilterRecipes(tagSelected, tagType);    
+       /*  FilterRecipes(tagSelected, tagType);    */
       }
    });
    /* Event Listener (for keyboard) */
@@ -221,7 +234,7 @@ const tagList = document.querySelectorAll('.tags');
       }
       /* close dropdown on "Escape" key */
       if (event.key === 'Escape' || event.key === 27) {
-         DropDownOpenClose(event);
+        /* DropDownOpenClose(event);*/
       }
    });
 });
@@ -264,7 +277,7 @@ const GenerateTag = (tagSelected, tagType) => {
    });
 };
 
-// SEARCH FILTER IN PROGRESS ?????????
+/* SEARCH FILTER IN PROGRESS ?????????
 
 let newArray = {...recipes};
 const FilterRecipes = (tagselected, tagType) => {
@@ -286,5 +299,5 @@ const FilterRecipes = (tagselected, tagType) => {
    default :console.log('no tag of this type');
    }
    CreateRecipes(newArray);
-};
+};*/
 
