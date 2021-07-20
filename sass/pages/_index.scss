@@ -54,6 +54,7 @@
 .dropdown-menu.show {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   @media only screen and (min-width: $largeDevice) {
    width: 440px;
   }
