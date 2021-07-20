@@ -13,7 +13,7 @@
     font-size: 32px;
     margin: 10px;
   }
-  &__filter {
+  &__filter { //width for drtopdown menus
     width: 100%;
   }
 }
@@ -38,12 +38,25 @@
 }
 
 // STYLING TO INCREASE WIDTH OF DROPDOWN MENUS WHEN OPEN
+
+.dropdown-menu.show {
+  display: flex;
+  flex-wrap: wrap;
+  @media only screen and (min-width: $largeDevice) {
+   width: 440px;
+  }
+}
+
+.dropdown-item {
+  width: 33%;
+}
+/*
 .dropDownExpand {
   width: 100%;
   @media only screen and (min-width: $largeDevice) {
   width: 480px;
   }
-}
+}*/
 
 // NEED FOR ALIGNMENT OF DROPDWON MENU FILTERS
 .searchFilters {

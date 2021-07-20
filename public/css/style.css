@@ -86,15 +86,27 @@ body {
   cursor: pointer;
 }
 
-.dropDownExpand {
-  width: 100%;
+.dropdown-menu.show {
+  display: flex;
+  flex-wrap: wrap;
 }
 @media only screen and (min-width: 992px) {
-  .dropDownExpand {
-    width: 480px;
+  .dropdown-menu.show {
+    width: 440px;
   }
 }
 
+.dropdown-item {
+  width: 33%;
+}
+
+/*
+.dropDownExpand {
+  width: 100%;
+  @media only screen and (min-width: $largeDevice) {
+  width: 480px;
+  }
+}*/
 .searchFilters {
   position: absolute;
   z-index: 999;
