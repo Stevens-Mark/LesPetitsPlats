@@ -231,11 +231,14 @@ const tagList = document.querySelectorAll('.tags');
       if (event.key === 'Enter' || event.key === 13) {
          event.preventDefault();
          item.click();
+         /* refocus user on input field after choosing an item */
+         let inputId = event.target.parentNode.previousElementSibling.firstElementChild.id;
+         document.getElementById(inputId).focus();
       }
-      /* close dropdown on "Escape" key */
+      /* close dropdown on "Escape" key 
       if (event.key === 'Escape' || event.key === 27) {
-        /* DropDownOpenClose(event);*/
-      }
+        /* DropDownOpenClose(event);
+      }*/
    });
 });
 
