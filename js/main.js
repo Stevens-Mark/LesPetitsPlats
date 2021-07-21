@@ -212,7 +212,7 @@ document.addEventListener('Keyup', (event) => {
 
 const tagList = document.querySelectorAll('.tags');
    let tagListArray = [];
-   let testArray =[];
+  
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
@@ -220,14 +220,14 @@ const tagList = document.querySelectorAll('.tags');
       /* get category type & generate tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
       /* if tag not already selected create a new tag */
-      if (!tagListArray.includes(tagSelected)) {
-         tagListArray.push(tagSelected);
-       /*  let obj = {itemSelected : tagSelected, itemType : tagType };
-         testArray.push(obj);
-         console.log(testArray);*/
+     /* if (!tagListArray.includes(tagSelected)) { 
+         tagListArray.push(tagSelected);}*/
+       let obj = {itemSelected : tagSelected, itemType : tagType };
+       tagListArray.push(obj);
+         console.log(tagListArray);
          GenerateTag(tagSelected, tagType);
-         
-      }
+         FilterRecipes(tagListArray, recipes);
+     
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -269,13 +269,14 @@ const GenerateTag = (tagSelected, tagType) => {
    tagSelectedIcon.forEach((icon) => {
       icon.addEventListener('click', (event) => {
          event.target.parentNode.remove();
-         /* remove tag from taglist array (used to avoid duplicates) so a new tag can be made if needed */
+         /* remove tag from taglist array (used to avoid duplicates) so a new tag can be made if needed 
          const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
-         if (index !== -1) tagListArray.splice(index, 1);
+         if (index !== -1) tagListArray.splice(index, 1);*/
     
-       /*  let tagIndex = tagListArray.map(function (img) { return img.itemSelected; }).indexOf(event.target.previousElementSibling.textContent);
+        let tagIndex = tagListArray.map(function (img) { return img.itemSelected; }).indexOf(event.target.previousElementSibling.textContent);
          if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
-         console.log(tagListArray);*/
+         console.log(tagListArray);
+         FilterRecipes(tagListArray, recipes);
 
       });
       /* same as above but for keyboard */
@@ -290,32 +291,60 @@ const GenerateTag = (tagSelected, tagType) => {
 };
 
 /* SEARCH FILTER IN PROGRESS ?????????
-/*let newArray = {...recipes};
-let newArray = recipes;
-const FilterRecipes = (tagselected, tagType) => {
-   switch (tagType) {
+/*let newArray = {...recipes};*/
+
+const FilterRecipes = (tagListArray, newArray) => {
+   
+tagListArray.forEach((tagItem) => {
+ 
+   switch (tagItem.itemType) {
    case 'ingredientTag' :
-   newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagselected)); 
-   console.log(newArray);
-   break;
+   newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagItem.itemSelected)); 
+    break;
 
    case 'applianceTag' :
-   newArray = newArray.filter(x => x.appliance.toLowerCase() === tagselected);
-   console.log(newArray);
+   newArray = newArray.filter(x => x.appliance.toLowerCase() === tagItem.itemSelected);
    break;
 
    case 'ustensilTag' :
-   newArray  = newArray.filter(x => x.ustensils.indexOf(tagselected) > -1);
-   console.log(newArray);
+   newArray  = newArray.filter(x => x.ustensils.indexOf(tagItem.itemSelected) > -1);
    break;
+
    default :console.log('no tag of this type');
    }
+});
    CreateRecipes(newArray);
-};*/
+};
 
+const normalize = (text) => {
+   return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+  };
 
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 searchNavigationInput.addEventListener("input", (event) => {
-   console.log(event.target.value);
+   let NormalizedInput = normalize(event.target.value);
+   
+   let testArray =[];
+
+   recipes.forEach((recipe) => {
+      let NormalizedRecipeName = normalize(recipe.name);
+      let NormalizedDescription = normalize(recipe.description);
+
+      if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
+         testArray.push(recipe);
+      }
+      recipe.ingredients.forEach((item) => {
+         let NormalizedIngredient = normalize(item.ingredient);
+         if (NormalizedIngredient.includes(NormalizedInput)) {
+            testArray.push(recipe);
+         }       
+       });
+      
+   });
+   const sortedTestArray = [...new Set(testArray)].sort();
+   console.log(sortedTestArray);
 });
