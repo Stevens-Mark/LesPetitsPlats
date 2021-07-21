@@ -313,3 +313,9 @@ const FilterRecipes = (tagselected, tagType) => {
    CreateRecipes(newArray);
 };*/
 
+
+
+const searchNavigationInput = document.getElementById('searchNavigation');
+searchNavigationInput.addEventListener("input", (event) => {
+   console.log(event.target.value);
+});
