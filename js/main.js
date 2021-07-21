@@ -212,6 +212,7 @@ document.addEventListener('Keyup', (event) => {
 
 const tagList = document.querySelectorAll('.tags');
    let tagListArray = [];
+   let testArray =[];
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
@@ -221,8 +222,11 @@ const tagList = document.querySelectorAll('.tags');
       /* if tag not already selected create a new tag */
       if (!tagListArray.includes(tagSelected)) {
          tagListArray.push(tagSelected);
+       /*  let obj = {itemSelected : tagSelected, itemType : tagType };
+         testArray.push(obj);
+         console.log(testArray);*/
          GenerateTag(tagSelected, tagType);
-       /*  FilterRecipes(tagSelected, tagType);    */
+         
       }
    });
    /* Event Listener (for keyboard) */
@@ -268,6 +272,11 @@ const GenerateTag = (tagSelected, tagType) => {
          /* remove tag from taglist array (used to avoid duplicates) so a new tag can be made if needed */
          const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
          if (index !== -1) tagListArray.splice(index, 1);
+    
+       /*  let tagIndex = tagListArray.map(function (img) { return img.itemSelected; }).indexOf(event.target.previousElementSibling.textContent);
+         if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
+         console.log(tagListArray);*/
+
       });
       /* same as above but for keyboard */
       icon.addEventListener('keyup', (event) => {
@@ -281,8 +290,8 @@ const GenerateTag = (tagSelected, tagType) => {
 };
 
 /* SEARCH FILTER IN PROGRESS ?????????
-
-let newArray = {...recipes};
+/*let newArray = {...recipes};
+let newArray = recipes;
 const FilterRecipes = (tagselected, tagType) => {
    switch (tagType) {
    case 'ingredientTag' :
