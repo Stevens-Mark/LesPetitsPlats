@@ -57,7 +57,6 @@ if (recipes.length < 1) {
    /* see sources P7 for if statements inside template literals*/
  });
 }
-CreateRecipes(recipes);
 
 // GENERATE EACH SEARCH LIST IN EACH DROPDOWN
 const createSearchArticles = (id, list, tagType) => {
@@ -73,6 +72,7 @@ const createSearchArticles = (id, list, tagType) => {
 // EXTRACT & SORT INGREDIENTS, APPLIANCES & USTENSILS FROM ARRAY &
 // CALL FUNCTION (ABOVE) TO CREATE EACH DROPDOWN
 
+const CreateListForDropdown = (recipes) => {
 // get list of ingredients from recipes array
 let allIngredientsList =[];
 recipes.forEach((recipe) => {
@@ -103,8 +103,9 @@ recipes.forEach((recipe) => {
 /* remove duplicate entries using "set" & order the list */
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
+};
 
-// CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
+/*CHANGE PLACEHOLDER TEXT IN DROPDOWNS INPUT FIELD WHEN SELECTED
 
 const ChangeInputtext = (id) => {
    const button = document.getElementById(id);
@@ -113,7 +114,7 @@ const ChangeInputtext = (id) => {
    } else {
       document.getElementById(id).placeholder = id;
    }
-};
+};*/
 
 // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS
 // WHEN USER ENTERS A WORD IN THE INPUT FIELD
@@ -146,6 +147,7 @@ const DropdownTextListSearch = (category, categoryListId) => {
 // EVENT LISTENERS ON DROPDOWN BUTTONS:
 // CHANGES BUTTON WIDTH &
 // CALLS SEARCH DROPDOWN LIST FUNCTION (ABOVE)
+
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
    btn.addEventListener('click', (event) => {
@@ -154,12 +156,12 @@ inputButtons.forEach((btn) => {
           btn.parentNode.parentNode.classList.remove('buttonExpand');
        });
        /* if user hit button */
-       if (event.target.classList.contains('btn'))  { 
-         event.target.parentNode.parentNode.classList.add('buttonExpand'); 
-         if (event.target.nextElementSibling.classList.contains('show')) {
-            event.target.parentNode.parentNode.classList.remove('buttonExpand');
-         }
-         DropdownTextListSearch(event.target.firstElementChild.id, event.target.nextElementSibling.id);
+      if (event.target.classList.contains('btn'))  { 
+      event.target.parentNode.parentNode.classList.add('buttonExpand'); 
+      if (event.target.nextElementSibling.classList.contains('show')) {
+         event.target.parentNode.parentNode.classList.remove('buttonExpand');
+      }
+      DropdownTextListSearch(event.target.firstElementChild.id, event.target.nextElementSibling.id);
          return;   
       }/* otherwise user hit input field */
       event.target.parentNode.parentNode.parentNode.classList.add('buttonExpand');
@@ -210,9 +212,10 @@ document.addEventListener('Keyup', (event) => {
 // EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" 
 // FOR SEARCHING RECIPES & THE TAG GENERATION
 
+let tagListArray = [];
+const LoadDropdownListeners = () => {
 const tagList = document.querySelectorAll('.tags');
-   let tagListArray = [];
-  
+   
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
@@ -222,11 +225,10 @@ const tagList = document.querySelectorAll('.tags');
       /* if tag not already selected create a new tag */
      /* if (!tagListArray.includes(tagSelected)) { 
          tagListArray.push(tagSelected);}*/
-       let obj = {itemSelected : tagSelected, itemType : tagType };
-       tagListArray.push(obj);
-         console.log(tagListArray);
-         GenerateTag(tagSelected, tagType);
-         FilterRecipes(tagListArray, recipes);
+      let obj = {itemSelected : tagSelected, itemType : tagType };
+      tagListArray.push(obj);
+      GenerateTag(tagSelected, tagType);
+      FilterRecipes(tagListArray, recipes);
      
    });
    /* Event Listener (for keyboard) */
@@ -245,6 +247,7 @@ const tagList = document.querySelectorAll('.tags');
       }*/
    });
 });
+};
 
 // GENERATE/DISPLAY THE TAGS ABOVE DROPDOWNS
 
@@ -275,47 +278,25 @@ const GenerateTag = (tagSelected, tagType) => {
     
         let tagIndex = tagListArray.map(function (img) { return img.itemSelected; }).indexOf(event.target.previousElementSibling.textContent);
          if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
+         console.log('after delete');
          console.log(tagListArray);
          FilterRecipes(tagListArray, recipes);
+        
 
       });
       /* same as above but for keyboard */
       icon.addEventListener('keyup', (event) => {
          if (event.key === 'Enter' || event.key === 13) {
          event.target.parentNode.remove();
-         const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
-         if (index !== -1) tagListArray.splice(index, 1)
+        /* const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
+         if (index !== -1) tagListArray.splice(index, 1)*/
+         icon.click();
          }
       });
    });
 };
 
-/* SEARCH FILTER IN PROGRESS ?????????
-/*let newArray = {...recipes};*/
-
-const FilterRecipes = (tagListArray, newArray) => {
-   
-tagListArray.forEach((tagItem) => {
- 
-   switch (tagItem.itemType) {
-   case 'ingredientTag' :
-   newArray = newArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagItem.itemSelected)); 
-    break;
-
-   case 'applianceTag' :
-   newArray = newArray.filter(x => x.appliance.toLowerCase() === tagItem.itemSelected);
-   break;
-
-   case 'ustensilTag' :
-   newArray  = newArray.filter(x => x.ustensils.indexOf(tagItem.itemSelected) > -1);
-   break;
-
-   default :console.log('no tag of this type');
-   }
-});
-   CreateRecipes(newArray);
-};
-
+// USED TO CLEAN TEXT (FOR SEARCHING)
 const normalize = (text) => {
    return text
     .normalize('NFD')
@@ -323,12 +304,44 @@ const normalize = (text) => {
     .toLowerCase();
   };
 
+/* SEARCH FILTER IN PROGRESS ?????????
+/*let newArray = {...recipes};*/
+
+const FilterRecipes = (tagListArray, tagSearchArray) => {
+tagListArray.forEach((tagItem) => {
+ 
+   switch (tagItem.itemType) {
+   case 'ingredientTag' :
+      tagSearchArray =  tagSearchArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagItem.itemSelected)); 
+   break;
+
+   case 'applianceTag' :
+      tagSearchArray =  tagSearchArray.filter(x => x.appliance.toLowerCase() === tagItem.itemSelected);
+   break;
+
+   case 'ustensilTag' :
+      tagSearchArray  =  tagSearchArray.filter(x => x.ustensils.indexOf(tagItem.itemSelected) > -1);
+   break;
+
+   default :console.log('no tag of this type');
+   }
+});
+console.log('tagSearchArray');
+   console.log(tagSearchArray);
+};
+
+// MAIN SEARCH BAR INPUT
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 searchNavigationInput.addEventListener("input", (event) => {
    let mainSearchArray =[];
    let NormalizedInput = normalize(event.target.value.trim());
-   if (NormalizedInput.length < 3) {CreateRecipes(recipes);}
+   if (NormalizedInput.length < 1) { 
+      /*let tes = recipes.filter(val => !tagSearchArray.includes(val));*/
+      CreateRecipes(recipes);
+      CreateListForDropdown(recipes);
+      LoadDropdownListeners();
+   }
    if (NormalizedInput.length > 2) {
 
    recipes.forEach((recipe) => {
@@ -341,13 +354,27 @@ searchNavigationInput.addEventListener("input", (event) => {
       recipe.ingredients.forEach((item) => {
          let NormalizedIngredient = normalize(item.ingredient);
          if (NormalizedIngredient.includes(NormalizedInput)) {
-            mainSearchArray.push(recipe);
+            mainSearchArray.push(recipe);    
          }       
        });
       
    });
    const sortedMainSearchArray = [...new Set(mainSearchArray)].sort();
-   console.log(sortedMainSearchArray);
    CreateRecipes(sortedMainSearchArray);
+   CreateListForDropdown(sortedMainSearchArray);
+   LoadDropdownListeners();
    }
 });
+
+/*array1 = array1.filter(val => !array2.includes(val));
+
+const test = () => {
+   console.log(tagSearchArray);
+   console.log(mainSearchArray);
+   mainSearchArray = mainSearchArray.filter(val => !tagSearchArray.includes(val));
+   console.log(mainSearchArray);
+};*/
+
+CreateRecipes(recipes);
+CreateListForDropdown(recipes);
+LoadDropdownListeners();

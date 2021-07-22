@@ -11,6 +11,10 @@ body {
   margin: auto;
 }
 
+.hidden {
+  display: none;
+}
+
 @font-face {
   /* Définition of font called DM Sans*/
   font-family: "Lato";
