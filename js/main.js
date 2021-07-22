@@ -10,7 +10,7 @@ import { recipes } from '../public/recipes.js';
    let recipehtml = '';
 
 if (recipes.length < 1) {
-   recipehtml += `<div class="text-center mt-5">Désolé, mais vous avez saisi trop de critères, veuillez en supprimer.</div>`;
+   recipehtml += `<div class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`;
    recipeElement.innerHTML = recipehtml;
    };
 
@@ -326,25 +326,28 @@ const normalize = (text) => {
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 searchNavigationInput.addEventListener("input", (event) => {
-   let NormalizedInput = normalize(event.target.value);
-   
-   let testArray =[];
+   let mainSearchArray =[];
+   let NormalizedInput = normalize(event.target.value.trim());
+   if (NormalizedInput.length < 3) {CreateRecipes(recipes);}
+   if (NormalizedInput.length > 2) {
 
    recipes.forEach((recipe) => {
       let NormalizedRecipeName = normalize(recipe.name);
       let NormalizedDescription = normalize(recipe.description);
 
       if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-         testArray.push(recipe);
+         mainSearchArray.push(recipe);
       }
       recipe.ingredients.forEach((item) => {
          let NormalizedIngredient = normalize(item.ingredient);
          if (NormalizedIngredient.includes(NormalizedInput)) {
-            testArray.push(recipe);
+            mainSearchArray.push(recipe);
          }       
        });
       
    });
-   const sortedTestArray = [...new Set(testArray)].sort();
-   console.log(sortedTestArray);
+   const sortedMainSearchArray = [...new Set(mainSearchArray)].sort();
+   console.log(sortedMainSearchArray);
+   CreateRecipes(sortedMainSearchArray);
+   }
 });
