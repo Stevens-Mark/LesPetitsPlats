@@ -22,7 +22,7 @@ if (recipes.length < 1) {
       recipe.description = recipe.description.substring(0, 230) + "...";};
      /*add recipe card to DOM */ 
     recipehtml += `
- <div class="col-12 col-md-6 col-lg-4 mb-4">
+ <article class="col-12 col-md-6 col-lg-4 mb-4">
     <div class="card bg-light h-100">
        <img class="card-img-top card__image" src="./public/images/photos/${recipe.name}.jpg" height="178" alt="${recipe.name}">
        <div class="card-body bg-light">
@@ -52,7 +52,7 @@ if (recipes.length < 1) {
           </div>         
        </div>
     </div>
- </div>`;
+ </article>`;
    recipeElement.innerHTML = recipehtml;
    /* see sources P7 for if statements inside template literals*/
  });
@@ -330,14 +330,15 @@ console.log('tagSearchArray');
    console.log(tagSearchArray);
 };
 
-// MAIN SEARCH BAR INPUT
+/*MAIN SEARCH BAR INPUT
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 searchNavigationInput.addEventListener("input", (event) => {
+   
    let mainSearchArray =[];
    let NormalizedInput = normalize(event.target.value.trim());
    if (NormalizedInput.length < 1) { 
-      /*let tes = recipes.filter(val => !tagSearchArray.includes(val));*/
+      /*let tes = recipes.filter(val => !tagSearchArray.includes(val));
       CreateRecipes(recipes);
       CreateListForDropdown(recipes);
       LoadDropdownListeners();
@@ -349,7 +350,7 @@ searchNavigationInput.addEventListener("input", (event) => {
       let NormalizedDescription = normalize(recipe.description);
 
       if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-         mainSearchArray.push(recipe);
+         mainSearchArray.push(recipe);        
       }
       recipe.ingredients.forEach((item) => {
          let NormalizedIngredient = normalize(item.ingredient);
@@ -366,15 +367,33 @@ searchNavigationInput.addEventListener("input", (event) => {
    }
 });
 
-/*array1 = array1.filter(val => !array2.includes(val));
-
-const test = () => {
-   console.log(tagSearchArray);
-   console.log(mainSearchArray);
-   mainSearchArray = mainSearchArray.filter(val => !tagSearchArray.includes(val));
-   console.log(mainSearchArray);
-};*/
+/*array1 = array1.filter(val => !array2.includes(val));*/
 
 CreateRecipes(recipes);
 CreateListForDropdown(recipes);
 LoadDropdownListeners();
+
+
+
+const searchNavigationInput = document.getElementById('searchNavigation');
+searchNavigationInput.addEventListener("input", (event) => {
+   const allRecipes = document.getElementsByTagName('article');
+
+   for (let i = 0; i < recipes.length; i++) {
+     let showRecipe = false;
+     if(recipes[i].name.includes(event.target.value.trim()) || recipes[i].description.includes(event.target.value.trim())) {
+      showRecipe = true;
+     }
+      for (let j = 0; j < recipes[i].ingredients; j++) {
+         if (recipes[i].ingredient[j].includes(event.target.value.trim())) {
+            showRecipe = true;
+         }
+      }
+      if (showRecipe) {
+         allRecipes[i].style.display = 'flex';
+      } else {
+         allRecipes[i].style.display = 'none';
+      }
+   }
+});
+ 
