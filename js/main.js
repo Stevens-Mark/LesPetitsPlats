@@ -397,8 +397,10 @@ searchNavigationInput.addEventListener("input", (event) => {
          showRecipe = true;
          recipesLeftArray.push(recipes[i]);
      }
-     if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput))
-                  {console.log('true'); recipesLeftArray.push(recipes[i]); showRecipe = true;}
+     if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
+        recipesLeftArray.push(recipes[i]);
+         showRecipe = true;
+      }
 
     /*  for (let j = 0; j < recipes[i].ingredients; j++) {
          let NonNormalizedIngredient = recipes[i].ingredient[j]; 
