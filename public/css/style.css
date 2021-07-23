@@ -11,10 +11,6 @@ body {
   margin: auto;
 }
 
-.hidden {
-  display: none;
-}
-
 @font-face {
   /* Définition of font called DM Sans*/
   font-family: "Lato";
@@ -190,6 +186,10 @@ body {
 }
 .card__ingredient {
   font-weight: 700;
+}
+
+.hide {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
