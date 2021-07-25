@@ -310,8 +310,26 @@ tagListArray.forEach((tagItem) => {
    default :console.log('no tag of this type');
    }
 });
-console.log('tagSearchArray');
-   console.log(tagSearchArray);
+   updateDropdownList(tagSearchArray);
+   DisplayRecipe(tagSearchArray);
+};
+
+const DisplayRecipe = (tagSearchArray) => {
+   const allRecipes = document.getElementsByTagName('article');
+   for (let i = 0; i < recipes.length; i++) {
+      let showRecipe = false;
+      tagSearchArray.forEach((item) => {
+         if (recipes[i].name == item.name) {  
+            showRecipe = true;
+            }
+      });
+
+      if (showRecipe) {
+         allRecipes[i].style.display = 'flex';
+      } else {
+         allRecipes[i].style.display = 'none';
+      }
+   } 
 };
 
 /*MAIN SEARCH BAR INPUT
@@ -424,7 +442,8 @@ searchNavigationInput.addEventListener("input", (event) => {
       recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
    }
    const sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
-   updateDropdownList(sortedrecipesLeftArray);
+   FilterRecipes(tagListArray, sortedrecipesLeftArray);
+   /*updateDropdownList(sortedrecipesLeftArray);*/
 }
 });
  
@@ -449,7 +468,8 @@ const updateDropdownList = (recipesLeftArray) => {
          if (normalizedTag === Normalizedappliance) {
             tag.classList.remove("hide");
          }  
-         if (recipe.ustensils.includes(tag.innerHTML)) {
+         if (recipe.ustensils.includes(normalizedTag)) {
+            console.log(recipe.ustensils);
             tag.classList.remove("hide");
          } 
       });
