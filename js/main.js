@@ -300,10 +300,15 @@ const normalize = (text) => {
     .toLowerCase();
   };
 
-// SEARCH FILTER BT TAG
+// SEARCH FILTER
 /*let newArray = {...recipes};*/
 
 const FilterRecipes = (tagListArray, RecipeArray) => {
+   /*if no recipe error message displayed then remove it */
+   let errorMessage = document.querySelector('#norecipes');
+   if (errorMessage) { 
+      errorMessage.remove();
+   }
    console.log(RecipeArray);
 tagListArray.forEach((tagItem) => {
  
@@ -323,6 +328,10 @@ tagListArray.forEach((tagItem) => {
    default :console.log('no tag of this type');
    }
 });
+if (RecipeArray.length < 1) {
+   noRecipeMessage();
+};
+
    updateDropdownList(RecipeArray);
    DisplayRecipe(RecipeArray);
    console.log('RecipeArray');
@@ -345,6 +354,11 @@ const DisplayRecipe = (RecipeArray) => {
          allRecipes[i].style.display = 'none';
       }
    } 
+};
+
+const noRecipeMessage = () => {
+   const recipeElement = document.querySelector('#card-container');
+   recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
 };
 
 /*MAIN SEARCH BAR INPUT
@@ -403,19 +417,6 @@ searchNavigationInput.addEventListener("input", (event) => {
       errorMessage.remove();
    }
 
-   // TEMP CODE : RESET ALL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   if (NormalizedInput.length < 3) {
-  
-       if (tagListArray.length < 1) {
-      for (let i = 0; i < recipes.length; i++) {
-      allRecipes[i].style.display = 'flex';
-       }
-       tagList.forEach((item) => {
-          item.classList.remove('hide');
-        });
-      } 
-   }
-
    // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
          for (let i = 0; i < recipes.length; i++) {
@@ -452,15 +453,25 @@ searchNavigationInput.addEventListener("input", (event) => {
 
          }  /*if no recipes left then display no recipes error message*/
          if (recipesLeftArray.length < 1) {
-            const recipeElement = document.querySelector('#card-container');
-            recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
+            noRecipeMessage();
+           /* const recipeElement = document.querySelector('#card-container');
+            recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`); */
          }
          sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
-
-         FilterRecipes(tagListArray, sortedrecipesLeftArray);
-         console.log('sortedrecipesLeftArray in search');
-         console.log(sortedrecipesLeftArray);
       }
+      //  IF les than THREE  LETTERS THEN RESET
+      if (NormalizedInput.length < 3) {
+         sortedrecipesLeftArray = recipes;
+         if (tagListArray.length < 1) {
+      for (let i = 0; i < recipes.length; i++) {
+      allRecipes[i].style.display = 'flex';
+         }
+         tagList.forEach((item) => {
+            item.classList.remove('hide');
+         });
+      } 
+   }
+   FilterRecipes(tagListArray, sortedrecipesLeftArray);
 });
  
 // UPDATE DROPDOWN LISTS 
