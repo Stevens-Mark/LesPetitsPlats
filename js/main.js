@@ -2,6 +2,7 @@
 
 
 import { recipes } from '../public/recipes.js';
+let sortedrecipesLeftArray =[];
 
 // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
   const CreateRecipes = (recipes) => {
@@ -67,7 +68,6 @@ const createSearchArticles = (id, list, tagType) => {
 // EXTRACT & SORT INGREDIENTS, APPLIANCES & USTENSILS FROM ARRAY &
 // CALL FUNCTION (ABOVE) TO CREATE EACH DROPDOWN
 
-const CreateListForDropdown = (recipes) => {
 // get list of ingredients from recipes array
 let allIngredientsList =[];
 recipes.forEach((recipe) => {
@@ -98,7 +98,12 @@ recipes.forEach((recipe) => {
 /* remove duplicate entries using "set" & order the list */
 const sortedUstensilsList = [...new Set(allUstensilsList)].sort();
 createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
-};
+
+
+
+
+
+
 
 // FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS
 // WHEN USER ENTERS A WORD IN THE INPUT FIELD
@@ -197,8 +202,6 @@ document.addEventListener('Keyup', (event) => {
 // FOR SEARCHING RECIPES & THE TAG GENERATION
 
 let tagListArray = [];
-
-const LoadDropdownListeners = () => {
 const tagList = document.querySelectorAll('.tags');
 
    tagList.forEach((item) => {
@@ -215,8 +218,11 @@ const tagList = document.querySelectorAll('.tags');
       GenerateTag(tagSelected, tagType);
       console.log('tagListArray before delete');
       console.log(tagListArray);
-      FilterRecipesByTag(tagListArray, recipes);
-     
+      if (sortedrecipesLeftArray.length < 1) {
+      FilterRecipes(tagListArray, recipes);
+      } else {
+         FilterRecipes(tagListArray, sortedrecipesLeftArray);
+      }
    });
    /* Event Listener (for keyboard) */
    item.addEventListener('keyup', (event) => {
@@ -234,7 +240,7 @@ const tagList = document.querySelectorAll('.tags');
       }*/
    });
 });
-};
+
 
 // GENERATE/DISPLAY THE TAGS ABOVE DROPDOWNS
 
@@ -267,8 +273,12 @@ const GenerateTag = (tagSelected, tagType) => {
          if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
          console.log('tagListArray after delete');
          console.log(tagListArray);
-         FilterRecipesByTag(tagListArray, recipes);
-        
+         if (sortedrecipesLeftArray.length < 1) {
+            FilterRecipes(tagListArray, recipes);
+            } else {
+               FilterRecipes(tagListArray, sortedrecipesLeftArray);
+               console.log(tagListArray);
+            }      
       });
       /* same as above but for keyboard */
       icon.addEventListener('keyup', (event) => {
@@ -290,40 +300,40 @@ const normalize = (text) => {
     .toLowerCase();
   };
 
-/* SEARCH FILTER IN PROGRESS ?????????
+// SEARCH FILTER BT TAG
 /*let newArray = {...recipes};*/
 
-const FilterRecipesByTag = (tagListArray, tagSearchArray) => {
-   console.log(tagSearchArray);
+const FilterRecipes = (tagListArray, RecipeArray) => {
+   console.log(RecipeArray);
 tagListArray.forEach((tagItem) => {
  
    switch (tagItem.itemType) {
    case 'ingredientTag' :
-      tagSearchArray =  tagSearchArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
+      RecipeArray =  RecipeArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
    break;
 
    case 'applianceTag' :
-      tagSearchArray =  tagSearchArray.filter(x => x.appliance.toLowerCase() === tagItem.itemSelected);
+      RecipeArray =  RecipeArray.filter(x => x.appliance.toLowerCase() === tagItem.itemSelected);
    break;
 
    case 'ustensilTag' :
-      tagSearchArray  =  tagSearchArray.filter(x => x.ustensils.indexOf(tagItem.itemSelected) > -1);
+      RecipeArray  =  RecipeArray.filter(x => x.ustensils.indexOf(tagItem.itemSelected) > -1);
    break;
 
    default :console.log('no tag of this type');
    }
 });
-   updateDropdownList(tagSearchArray);
-   DisplayRecipe(tagSearchArray);
-   console.log('tagSearchArray');
-   console.log(tagSearchArray);
+   updateDropdownList(RecipeArray);
+   DisplayRecipe(RecipeArray);
+   console.log('RecipeArray');
+   console.log(RecipeArray);
 };
 
-const DisplayRecipe = (tagSearchArray) => {
+const DisplayRecipe = (RecipeArray) => {
    const allRecipes = document.getElementsByTagName('article');
    for (let i = 0; i < recipes.length; i++) {
       let showRecipe = false;
-      tagSearchArray.forEach((item) => {
+      RecipeArray.forEach((item) => {
          if (recipes[i].name == item.name) {  
             showRecipe = true;
             }
@@ -377,8 +387,6 @@ searchNavigationInput.addEventListener("input", (event) => {
 /*array1 = array1.filter(val => !array2.includes(val));*/
 
 CreateRecipes(recipes);
-CreateListForDropdown(recipes);
-LoadDropdownListeners();
 
 
 // MAIN SEARCH BAR INPUT
@@ -397,64 +405,62 @@ searchNavigationInput.addEventListener("input", (event) => {
 
    // TEMP CODE : RESET ALL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    if (NormalizedInput.length < 3) {
-      if (tagListArray.length < 1) {
+  
+       if (tagListArray.length < 1) {
       for (let i = 0; i < recipes.length; i++) {
       allRecipes[i].style.display = 'flex';
        }
-       const tagList = document.querySelectorAll('.tags');
        tagList.forEach((item) => {
           item.classList.remove('hide');
         });
-      } else {
-         FilterRecipesByTag(tagListArray, recipes);
-      }
+      } 
    }
 
-// START SEARCH IF THREE OR MORE LETTERS ENTERED
+   // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
-   for (let i = 0; i < recipes.length; i++) {
-      /* clean recipe data for search */
-      let NonNormalizedName = recipes[i].name; 
-      let NormalizedName = normalize(NonNormalizedName);
-      let NonNormalizedDescription = recipes[i].description; 
-      let NormalizedDescription = normalize(NonNormalizedDescription);
-      let showRecipe = false;
+         for (let i = 0; i < recipes.length; i++) {
+            /* clean recipe data for search */
+            let NonNormalizedName = recipes[i].name; 
+            let NormalizedName = normalize(NonNormalizedName);
+            let NonNormalizedDescription = recipes[i].description; 
+            let NormalizedDescription = normalize(NonNormalizedDescription);
+            let showRecipe = false;
 
-      if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-         showRecipe = true;
-         recipesLeftArray.push(recipes[i]);
-     }
-     if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
-        recipesLeftArray.push(recipes[i]);
-         showRecipe = true;
-      }
-
-    /*  for (let j = 0; j < recipes[i].ingredients; j++) {
-         let NonNormalizedIngredient = recipes[i].ingredient[j]; 
-         let NormalizedIngredient = normalize(NonNormalizedIngredient);
-         console.log(NormalizedIngredient);
-
-         if (NormalizedIngredient.includes(NormalizedInput)) {
-            showRecipe = true;
-            recipesLeftArray.push(recipes[i]);
+            if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
+               showRecipe = true;
+               recipesLeftArray.push(recipes[i]);
          }
-      }*/
-      if (showRecipe) {
-         allRecipes[i].style.display = 'flex';
-      } else {
-         allRecipes[i].style.display = 'none';
-      }
+         if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
+            recipesLeftArray.push(recipes[i]);
+            showRecipe = true;
+            }
+               /*  for (let j = 0; j < recipes[i].ingredients; j++) {
+               let NonNormalizedIngredient = recipes[i].ingredient[j]; 
+               let NormalizedIngredient = normalize(NonNormalizedIngredient);
+               console.log(NormalizedIngredient);
 
-   }  /*if no recipes left then display no recipes error message*/
-   if (recipesLeftArray.length < 1) {
-      const recipeElement = document.querySelector('#card-container');
-      recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
-   }
-   const sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
-   FilterRecipesByTag(tagListArray, sortedrecipesLeftArray);
-   console.log(sortedrecipesLeftArray);
-   /*updateDropdownList(sortedrecipesLeftArray);*/
-}
+               if (NormalizedIngredient.includes(NormalizedInput)) {
+                  showRecipe = true;
+                  recipesLeftArray.push(recipes[i]);
+               }
+               }*/
+            if (showRecipe) {
+               allRecipes[i].style.display = 'flex';
+            } else {
+               allRecipes[i].style.display = 'none';
+            }
+
+         }  /*if no recipes left then display no recipes error message*/
+         if (recipesLeftArray.length < 1) {
+            const recipeElement = document.querySelector('#card-container');
+            recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
+         }
+         sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
+
+         FilterRecipes(tagListArray, sortedrecipesLeftArray);
+         console.log('sortedrecipesLeftArray in search');
+         console.log(sortedrecipesLeftArray);
+      }
 });
  
 // UPDATE DROPDOWN LISTS 
