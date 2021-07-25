@@ -213,7 +213,9 @@ const tagList = document.querySelectorAll('.tags');
       let obj = {itemSelected : tagSelected, itemType : tagType };
       tagListArray.push(obj);
       GenerateTag(tagSelected, tagType);
-      FilterRecipes(tagListArray, recipes);
+      console.log('tagListArray before delete');
+      console.log(tagListArray);
+      FilterRecipesByTag(tagListArray, recipes);
      
    });
    /* Event Listener (for keyboard) */
@@ -263,9 +265,9 @@ const GenerateTag = (tagSelected, tagType) => {
     
         let tagIndex = tagListArray.map(function (img) { return img.itemSelected; }).indexOf(event.target.previousElementSibling.textContent);
          if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
-         console.log('after delete');
+         console.log('tagListArray after delete');
          console.log(tagListArray);
-         FilterRecipes(tagListArray, recipes);
+         FilterRecipesByTag(tagListArray, recipes);
         
       });
       /* same as above but for keyboard */
@@ -291,12 +293,13 @@ const normalize = (text) => {
 /* SEARCH FILTER IN PROGRESS ?????????
 /*let newArray = {...recipes};*/
 
-const FilterRecipes = (tagListArray, tagSearchArray) => {
+const FilterRecipesByTag = (tagListArray, tagSearchArray) => {
+   console.log(tagSearchArray);
 tagListArray.forEach((tagItem) => {
  
    switch (tagItem.itemType) {
    case 'ingredientTag' :
-      tagSearchArray =  tagSearchArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() == tagItem.itemSelected)); 
+      tagSearchArray =  tagSearchArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
    break;
 
    case 'applianceTag' :
@@ -312,6 +315,8 @@ tagListArray.forEach((tagItem) => {
 });
    updateDropdownList(tagSearchArray);
    DisplayRecipe(tagSearchArray);
+   console.log('tagSearchArray');
+   console.log(tagSearchArray);
 };
 
 const DisplayRecipe = (tagSearchArray) => {
@@ -392,6 +397,7 @@ searchNavigationInput.addEventListener("input", (event) => {
 
    // TEMP CODE : RESET ALL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    if (NormalizedInput.length < 3) {
+      if (tagListArray.length < 1) {
       for (let i = 0; i < recipes.length; i++) {
       allRecipes[i].style.display = 'flex';
        }
@@ -399,6 +405,9 @@ searchNavigationInput.addEventListener("input", (event) => {
        tagList.forEach((item) => {
           item.classList.remove('hide');
         });
+      } else {
+         FilterRecipesByTag(tagListArray, recipes);
+      }
    }
 
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
@@ -442,7 +451,8 @@ searchNavigationInput.addEventListener("input", (event) => {
       recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
    }
    const sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
-   FilterRecipes(tagListArray, sortedrecipesLeftArray);
+   FilterRecipesByTag(tagListArray, sortedrecipesLeftArray);
+   console.log(sortedrecipesLeftArray);
    /*updateDropdownList(sortedrecipesLeftArray);*/
 }
 });
@@ -469,7 +479,6 @@ const updateDropdownList = (recipesLeftArray) => {
             tag.classList.remove("hide");
          }  
          if (recipe.ustensils.includes(normalizedTag)) {
-            console.log(recipe.ustensils);
             tag.classList.remove("hide");
          } 
       });
