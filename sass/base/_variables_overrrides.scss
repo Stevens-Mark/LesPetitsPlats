@@ -1,8 +1,24 @@
-$headings-font-family: "Lato";
-$font-family-base: "Lato";
+$headings-font-family: "Lato"!important;
+$font-family-base: "Lato"!important;
 
-$input-placeholder-color: white;
-$info: #3282F7 !default;
-$danger:#ED6454 !default;
-$success:#68D9A4 !default;
-$light: #E7E7E7;
+$input-placeholder-color: white!important;
+$light: #E7E7E7!important;
+
+.bg-success {
+    background: #68D9A4!important;
+}
+
+.bg-info {
+    background: #3282F7!important;
+}
+
+.bg-danger {
+    background: #ED6454!important;
+}
+
+ul {
+    margin: 0px!important;
+    transform: translate(0px, 51px)!important;
+    border-radius: unset!important;
+    border-top: 0px!important;
+}

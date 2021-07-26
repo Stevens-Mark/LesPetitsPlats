@@ -1,5 +1,7 @@
 
 import { recipes } from '../public/recipes.js';
+import  normalize  from './dropDown.js';
+
 /*let sortedrecipesLeftArray = [];*/
 
 // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
@@ -281,13 +283,13 @@ const GenerateTag = (tagSelected, tagType) => {
    });
 };
 
-// USED TO CLEAN TEXT (REMOVE ACCENTS ETC FOR SEARCHING)
+/* USED TO CLEAN TEXT (REMOVE ACCENTS ETC FOR SEARCHING)
 const normalize = (text) => {
    return text
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
-  };
+  };*/
 
   // NO RECIPE ERROR MESSAGE
 const noRecipeMessage = () => {
@@ -299,11 +301,13 @@ const noRecipeMessage = () => {
 
 const updateDropdownList = (recipesLeftArray) => {
    const tagList = document.querySelectorAll('.tags');
+
    tagList.forEach((item) => {
       item.classList.add('hide');
     });
 
    tagList.forEach((tag) => {
+
       let normalizedTag = normalize(tag.innerHTML);
 
        recipesLeftArray.forEach((recipe) => {
@@ -312,12 +316,14 @@ const updateDropdownList = (recipesLeftArray) => {
             let NormalizedIngredient = normalize(items.ingredient);
          if (normalizedTag === NormalizedIngredient) {
             tag.classList.remove("hide");
+
           } 
          });
          let Normalizedappliance = normalize(recipe.appliance);
          if (normalizedTag === Normalizedappliance) {
             tag.classList.remove("hide");
-         }  
+          }  
+
          if (recipe.ustensils.includes(normalizedTag)) {
             tag.classList.remove("hide");
          } 
@@ -326,7 +332,8 @@ const updateDropdownList = (recipesLeftArray) => {
    RemoveDuplicates();
 };
 
-// REMOVE INGREDIENTS ALREADY SELECTED FROM THE DROPDOWN MENUS (avoid duplicate tags)
+// REMOVE INGREDIENTS ALREADY SELECTED FROM THE DROPDOWN MENUS (avoids duplicate tags)
+
 const RemoveDuplicates = () => {
    const tagAlreadySelectedList = document.querySelectorAll('.tags__selected');
    const tagList = document.querySelectorAll('.tags');
@@ -337,6 +344,25 @@ const RemoveDuplicates = () => {
            }
          });
    });
+};
+
+// DISPLAYS RECIPES (TAG ONLY or MAIN/TAG COMBINED)
+
+const DisplayRecipe = (RecipeArray) => {
+   const allRecipes = document.getElementsByTagName('article');
+   for (let i = 0; i < recipes.length; i++) {
+      let showRecipe = false;
+      RecipeArray.forEach((item) => {
+         if (recipes[i].name == item.name) {  
+            showRecipe = true;
+            }
+      });
+      if (showRecipe) {
+         allRecipes[i].style.display = 'flex';
+      } else {
+         allRecipes[i].style.display = 'none';
+      }
+   } 
 };
 
 // SEARCH FILTER (ADVANCED)
@@ -379,30 +405,12 @@ if (RecipeArray.length < 1) {
    console.log(RecipeArray);
 };
 
-// DISPLAYS RECIPES (TAG ONLY or MAIN/TAG COMBINED)
-const DisplayRecipe = (RecipeArray) => {
-   const allRecipes = document.getElementsByTagName('article');
-   for (let i = 0; i < recipes.length; i++) {
-      let showRecipe = false;
-      RecipeArray.forEach((item) => {
-         if (recipes[i].name == item.name) {  
-            showRecipe = true;
-            }
-      });
-      if (showRecipe) {
-         allRecipes[i].style.display = 'flex';
-      } else {
-         allRecipes[i].style.display = 'none';
-      }
-   } 
-};
-
 // MAIN SEARCH BAR INPUT
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 let sortedrecipesLeftArray = [];
 searchNavigationInput.addEventListener("input", (event) => {
-   const allRecipes = document.getElementsByTagName('article');
+   /*const allRecipes = document.getElementsByTagName('article');*/
    let recipesLeftArray = [];
    /* clean input data (remove accents etc) */
    let NormalizedInput = normalize(event.target.value.trim());
@@ -420,15 +428,16 @@ searchNavigationInput.addEventListener("input", (event) => {
             let NormalizedName = normalize(NonNormalizedName);
             let NonNormalizedDescription = recipes[i].description; 
             let NormalizedDescription = normalize(NonNormalizedDescription);
-            let showRecipe = false;
+            /* let showRecipe = false;*/
 
+            /* check title & description */
             if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-               showRecipe = true;
+              /* showRecipe = true;*/
                recipesLeftArray.push(recipes[i]);
-         }
+         } /* check ingredients */
          if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
             recipesLeftArray.push(recipes[i]);
-            showRecipe = true;
+           /* showRecipe = true;*/
             }
             DisplayRecipe(recipesLeftArray);
                /*  for (let j = 0; j < recipes[i].ingredients; j++) {
@@ -441,7 +450,7 @@ searchNavigationInput.addEventListener("input", (event) => {
                   recipesLeftArray.push(recipes[i]);
                }
                }*/
-       /*     if (showRecipe) {
+            /* if (showRecipe) {
                allRecipes[i].style.display = 'flex';
             } else {
                allRecipes[i].style.display = 'none';
@@ -474,10 +483,13 @@ searchNavigationInput.addEventListener("input", (event) => {
  
 
 
-/*
+
 const ing = document.querySelectorAll("[data-category ='ingredientTag']");
 const app = document.querySelectorAll("[data-category ='applianceTag']");
-console.log (app);*/
+const ust = document.querySelectorAll("[data-category ='ustensilTag']");
+console.log (ing.length);
+console.log (app.length);
+console.log (ust.length);
 
 
 

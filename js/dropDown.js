@@ -4,3 +4,5 @@ const normalize = (text) => {
      .replace(/[\u0300-\u036f]/g, '')
      .toLowerCase();
    };
+
+   export default normalize;
