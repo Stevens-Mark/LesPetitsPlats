@@ -16,9 +16,9 @@ $light: #E7E7E7!important;
     background: #ED6454!important;
 }
 
-ul {
+ul.dropdown-menu {
     margin: 0px!important;
     transform: translate(0px, 51px)!important;
-    border-radius: unset!important;
-    border-top: 0px!important;
+    border-radius: 0px 0px 5px 5px!important;
+    border: 0px!important;
 }

@@ -112,7 +112,6 @@ const DropdownTextListSearch = (category, categoryListId) => {
       FilterFunction();
          });
       };
-   
       const FilterFunction = () => {
          let input,stringEntered, list, i;
          input = document.getElementById(category);
@@ -163,37 +162,6 @@ inputButtons.forEach((btn) => {
       }
    });
 });
-
-// EVENT LISTENER: CLOSE ALL DROPDOWNS WHEN USER CLICKS OUTSIDE THE MENUS
-
-/* OPEN/CLOSE THE DROPDOWN MENUS
-const DropDownOpenClose = (event) =>{
-   inputButtons.forEach((btn) => {
-      if (btn.nextElementSibling.classList.contains('show')){
-      ChangeInputtext(btn.firstElementChild.id,);
-      }
-     /* btn.nextElementSibling.classList.remove('show');
-      btn.parentNode.classList.remove('dropDownExpand');
-
-      if (event.target.parentNode.classList.contains('btn')){
-      event.target.parentNode.parentNode.classList.add('dropDownExpand');
-      }
-   });
-};
-// EVENT LISTENER: CLOSE ALL DROPDOWNS WHEN USER CLICKS OUTSIDE THE MENUS
-document.addEventListener('click', (event) => {
-   DropDownOpenClose(event);
-});
-document.addEventListener('Keyup', (event) => {
-   event.preventDefault();
-   if (event.key === 'Enter' || event.key === 13) {
-      DropDownOpenClose(event);
-      document.click();
-   }
-});
-*/
-// EVENT LISTENER: CLOSE ALL DROPDOWNS WHEN USER CLICKS OUTSIDE THE MENUS
-
 
 // EVENT LISTENERS ON ALL DROPDOWNS LIST "TAGS" FOR SEARCHING THE
 // RECIPES & ALSO CALLS THE FUNCTION WHICH GENERATES THE TAGS
@@ -301,29 +269,22 @@ const noRecipeMessage = () => {
 
 const updateDropdownList = (recipesLeftArray) => {
    const tagList = document.querySelectorAll('.tags');
-
    tagList.forEach((item) => {
       item.classList.add('hide');
     });
-
    tagList.forEach((tag) => {
-
       let normalizedTag = normalize(tag.innerHTML);
-
        recipesLeftArray.forEach((recipe) => {
-
          recipe.ingredients.forEach((items) => {
             let NormalizedIngredient = normalize(items.ingredient);
          if (normalizedTag === NormalizedIngredient) {
             tag.classList.remove("hide");
-
           } 
          });
          let Normalizedappliance = normalize(recipe.appliance);
          if (normalizedTag === Normalizedappliance) {
             tag.classList.remove("hide");
           }  
-
          if (recipe.ustensils.includes(normalizedTag)) {
             tag.classList.remove("hide");
          } 
@@ -377,7 +338,6 @@ const FilterRecipes = (tagListArray, RecipeArray) => {
       errorMessage.remove();
    }
 tagListArray.forEach((tagItem) => {
- 
    switch (tagItem.itemType) {
    case 'ingredientTag' :
       RecipeArray =  RecipeArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
@@ -482,18 +442,8 @@ searchNavigationInput.addEventListener("input", (event) => {
 });
  
 
-
-
-const ing = document.querySelectorAll("[data-category ='ingredientTag']");
-const app = document.querySelectorAll("[data-category ='applianceTag']");
-const ust = document.querySelectorAll("[data-category ='ustensilTag']");
-console.log (ing.length);
-console.log (app.length);
-console.log (ust.length);
-
-
-
 /*MAIN SEARCH BAR INPUT
+const ing = [...document.querySelectorAll("[data-category ='ingredientTag']")];
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 searchNavigationInput.addEventListener("input", (event) => {
@@ -531,3 +481,4 @@ searchNavigationInput.addEventListener("input", (event) => {
 });
 
 /*array1 = array1.filter(val => !array2.includes(val));*/
+
