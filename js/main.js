@@ -120,7 +120,7 @@ const DropdownTextListSearch = (category, categoryListId) => {
          list = div.getElementsByTagName("li");
          for (i = 0; i < list.length; i++) {
             let txtValue = list[i].textContent || list[i].innerText;
-            if (txtValue.toUpperCase().indexOf(stringEntered) > -1) {
+            if (txtValue.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().indexOf(stringEntered) > -1) {
             list[i].style.display = "";
             } else {
             list[i].style.display = "none";

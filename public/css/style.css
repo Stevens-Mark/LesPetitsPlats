@@ -101,6 +101,13 @@ body {
   width: 100%;
 }
 
+.refresh {
+  padding-left: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
 .tags {
   cursor: pointer;
 }
