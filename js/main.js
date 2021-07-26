@@ -49,7 +49,6 @@ import { recipes } from '../public/recipes.js';
     </div>
  </article>`;
    recipeElement.innerHTML = recipehtml;
-   /* see sources P7 for if statements inside template literals*/
  });
 }
 
@@ -208,10 +207,9 @@ let tagListArray = [];
       const tagType = event.target.getAttribute("data-category");
       let obj = {itemSelected : tagSelected, itemType : tagType };
       tagListArray.push(obj);
-      /* if tag not already selected create a new tag */
-     /* if (!tagListArray.includes(tagSelected)) { 
-         tagListArray.push(tagSelected);}*/
+      /* generate tag over dropdown*/
       GenerateTag(tagSelected, tagType);
+      /* filter recipes using either full list or edited list of recipes: depends if user has already entered in main search bar*/
       if (sortedrecipesLeftArray.length < 1) {
          FilterRecipes(tagListArray, recipes);
       } else {
@@ -236,6 +234,7 @@ let tagListArray = [];
 });
 
 // GENERATE/DISPLAY THE TAGS ABOVE DROPDOWNS
+// FILTER RECIPES BY TAG (PART OF ADVANCED SEARCH)
 
 const GenerateTag = (tagSelected, tagType) => {
    /* declare a place to put the tag selected icon in the DOM */
@@ -258,12 +257,11 @@ const GenerateTag = (tagSelected, tagType) => {
    tagSelectedIcon.forEach((icon) => {
       icon.addEventListener('click', (event) => {
          event.target.parentNode.remove();
-         /* remove tag from taglist array (used to avoid duplicates) so a new tag can be made if needed 
-         const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
-         if (index !== -1) tagListArray.splice(index, 1);*/
+         let tagToRemove = event.target.previousElementSibling.textContent;
          /*find the index of the chosen tag to delete & remove from the tagList array */
-        let tagIndex = tagListArray.map(function (item) { return item.itemSelected; }).indexOf(event.target.previousElementSibling.textContent);
+        let tagIndex = tagListArray.map(function (item) { return item.itemSelected; }).indexOf(tagToRemove);
          if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
+         /* filter recipes using either full list or edited list of recipes: depends if user has already entered in main search bar*/
          if (sortedrecipesLeftArray.length < 1) {
             FilterRecipes(tagListArray, recipes);
             } else {
@@ -308,7 +306,8 @@ const updateDropdownList = (recipesLeftArray) => {
    tagList.forEach((tag) => {
       let normalizedTag = normalize(tag.innerHTML);
 
-      recipesLeftArray.forEach((recipe) => {
+       recipesLeftArray.forEach((recipe) => {
+
          recipe.ingredients.forEach((items) => {
             let NormalizedIngredient = normalize(items.ingredient);
          if (normalizedTag === NormalizedIngredient) {
@@ -323,6 +322,20 @@ const updateDropdownList = (recipesLeftArray) => {
             tag.classList.remove("hide");
          } 
       });
+   });
+   RemoveDuplicates();
+};
+
+// REMOVE INGREDIENTS ALREADY SELECTED FROM THE DROPDOWN MENUS (avoid duplicate tags)
+const RemoveDuplicates = () => {
+   const tagAlreadySelectedList = document.querySelectorAll('.tags__selected');
+   const tagList = document.querySelectorAll('.tags');
+   tagAlreadySelectedList.forEach((tag) => {
+         tagList.forEach((item) => {
+           if (item.innerHTML === tag.textContent.trim()) {
+            item.classList.add("hide");
+           }
+         });
    });
 };
 
@@ -359,7 +372,7 @@ tagListArray.forEach((tagItem) => {
 if (RecipeArray.length < 1) {
    noRecipeMessage();
 };
-/*update dropdown & dIsplay recipes*/
+/*update dropdown & display recipes*/
    updateDropdownList(RecipeArray);
    DisplayRecipe(RecipeArray);
    console.log('RecipeArray');
@@ -390,7 +403,7 @@ const searchNavigationInput = document.getElementById('searchNavigation');
 let sortedrecipesLeftArray = [];
 searchNavigationInput.addEventListener("input", (event) => {
    const allRecipes = document.getElementsByTagName('article');
-   let recipesLeftArray =[];
+   let recipesLeftArray = [];
    /* clean input data (remove accents etc) */
    let NormalizedInput = normalize(event.target.value.trim());
    /*if no recipe error message displayed then remove it */
@@ -417,6 +430,7 @@ searchNavigationInput.addEventListener("input", (event) => {
             recipesLeftArray.push(recipes[i]);
             showRecipe = true;
             }
+            DisplayRecipe(recipesLeftArray);
                /*  for (let j = 0; j < recipes[i].ingredients; j++) {
                let NonNormalizedIngredient = recipes[i].ingredient[j]; 
                let NormalizedIngredient = normalize(NonNormalizedIngredient);
@@ -427,11 +441,11 @@ searchNavigationInput.addEventListener("input", (event) => {
                   recipesLeftArray.push(recipes[i]);
                }
                }*/
-            if (showRecipe) {
+       /*     if (showRecipe) {
                allRecipes[i].style.display = 'flex';
             } else {
                allRecipes[i].style.display = 'none';
-            }
+            }*/
 
          }  /*if no recipes left then display no recipes error message*/
          if (recipesLeftArray.length < 1) {
@@ -454,6 +468,7 @@ searchNavigationInput.addEventListener("input", (event) => {
       } */
    }
    /* Send for further filtering with tags*/
+   console.log(NormalizedInput);
    FilterRecipes(tagListArray, sortedrecipesLeftArray);
 });
  
