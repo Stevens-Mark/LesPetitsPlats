@@ -1,8 +1,6 @@
 
 import { recipes } from '../public/recipes.js';
-import  normalize  from './dropDown.js';
-
-/*let sortedrecipesLeftArray = [];*/
+import  { normalize, DropdownTextListSearch, noRecipeMessage, updateDropdownList, DisplayRecipe } from './otherFunctions.js';
 
 // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
 
@@ -102,33 +100,6 @@ createSearchArticles('#ustensilSearch', sortedUstensilsList,  'ustensilTag');
 
 CreateRecipes(recipes);
 
-// FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS INGREDIENTS,
-// APPLIANCE OR USTENSILS WHEN USER ENTERS A WORD IN THE INPUT FIELD
-
-const DropdownTextListSearch = (category, categoryListId) => {
-      const filter = document.getElementById(category);
-      if (typeof filter.addEventListener != "undefined") {
-      filter.addEventListener("keyup", function() {
-      FilterFunction();
-         });
-      };
-      const FilterFunction = () => {
-         let input,stringEntered, list, i;
-         input = document.getElementById(category);
-         stringEntered = input.value.toUpperCase().trim();
-         const div = document.getElementById(categoryListId);
-         list = div.getElementsByTagName("li");
-         for (i = 0; i < list.length; i++) {
-            let txtValue = list[i].textContent || list[i].innerText;
-            if (txtValue.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().indexOf(stringEntered) > -1) {
-            list[i].style.display = "";
-            } else {
-            list[i].style.display = "none";
-            }
-         }
-      }
-   };
-
 // EVENT LISTENERS ON DROPDOWN BUTTONS:
 // CHANGES BUTTON WIDTH &
 // CALLS SEARCH DROPDOWN LIST FUNCTION (ABOVE)
@@ -196,10 +167,6 @@ let tagListArray = [];
          let inputId = event.target.parentNode.previousElementSibling.firstElementChild.id;
          document.getElementById(inputId).focus();
       }
-      /* close dropdown on "Escape" key 
-      if (event.key === 'Escape' || event.key === 27) {
-        /* DropDownOpenClose(event);
-      }*/
    });
 });
 
@@ -243,93 +210,15 @@ const GenerateTag = (tagSelected, tagType) => {
       icon.addEventListener('keyup', (event) => {
          if (event.key === 'Enter' || event.key === 13) {
          event.target.parentNode.remove();
-        /* const index = tagListArray.indexOf(event.target.previousElementSibling.textContent);
-         if (index !== -1) tagListArray.splice(index, 1)*/
          icon.click();
          }
       });
    });
 };
 
-/* USED TO CLEAN TEXT (REMOVE ACCENTS ETC FOR SEARCHING)
-const normalize = (text) => {
-   return text
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase();
-  };*/
-
-  // NO RECIPE ERROR MESSAGE
-const noRecipeMessage = () => {
-   const recipeElement = document.querySelector('#card-container');
-   recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
-};
-
-// UPDATE DROPDOWN LISTS 
-
-const updateDropdownList = (recipesLeftArray) => {
-   const tagList = document.querySelectorAll('.tags');
-   tagList.forEach((item) => {
-      item.classList.add('hide');
-    });
-   tagList.forEach((tag) => {
-      let normalizedTag = normalize(tag.innerHTML);
-       recipesLeftArray.forEach((recipe) => {
-         recipe.ingredients.forEach((items) => {
-            let NormalizedIngredient = normalize(items.ingredient);
-         if (normalizedTag === NormalizedIngredient) {
-            tag.classList.remove("hide");
-          } 
-         });
-         let Normalizedappliance = normalize(recipe.appliance);
-         if (normalizedTag === Normalizedappliance) {
-            tag.classList.remove("hide");
-          }  
-         if (recipe.ustensils.includes(normalizedTag)) {
-            tag.classList.remove("hide");
-         } 
-      });
-   });
-   RemoveDuplicates();
-};
-
-// REMOVE INGREDIENTS ALREADY SELECTED FROM THE DROPDOWN MENUS (avoids duplicate tags)
-
-const RemoveDuplicates = () => {
-   const tagAlreadySelectedList = document.querySelectorAll('.tags__selected');
-   const tagList = document.querySelectorAll('.tags');
-   tagAlreadySelectedList.forEach((tag) => {
-         tagList.forEach((item) => {
-           if (item.innerHTML === tag.textContent.trim()) {
-            item.classList.add("hide");
-           }
-         });
-   });
-};
-
-// DISPLAYS RECIPES (TAG ONLY or MAIN/TAG COMBINED)
-
-const DisplayRecipe = (RecipeArray) => {
-   const allRecipes = document.getElementsByTagName('article');
-   for (let i = 0; i < recipes.length; i++) {
-      let showRecipe = false;
-      RecipeArray.forEach((item) => {
-         if (recipes[i].name == item.name) {  
-            showRecipe = true;
-            }
-      });
-      if (showRecipe) {
-         allRecipes[i].style.display = 'flex';
-      } else {
-         allRecipes[i].style.display = 'none';
-      }
-   } 
-};
-
 // SEARCH FILTER (ADVANCED)
 // USED TO FILTER BY TAG ONLY AS WELL AS
 // MAIN FILTER & TAGS TOGETHER
-/*let newArray = {...recipes};*/
 
 const FilterRecipes = (tagListArray, RecipeArray) => {
    /*if no recipe error message displayed remove it */
@@ -361,8 +250,6 @@ if (RecipeArray.length < 1) {
 /*update dropdown & display recipes*/
    updateDropdownList(RecipeArray);
    DisplayRecipe(RecipeArray);
-   console.log('RecipeArray');
-   console.log(RecipeArray);
 };
 
 // MAIN SEARCH BAR INPUT
@@ -388,33 +275,14 @@ searchNavigationInput.addEventListener("input", (event) => {
             let NormalizedName = normalize(NonNormalizedName);
             let NonNormalizedDescription = recipes[i].description; 
             let NormalizedDescription = normalize(NonNormalizedDescription);
-            /* let showRecipe = false;*/
-
             /* check title & description */
             if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-              /* showRecipe = true;*/
                recipesLeftArray.push(recipes[i]);
          } /* check ingredients */
          if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
             recipesLeftArray.push(recipes[i]);
-           /* showRecipe = true;*/
             }
             DisplayRecipe(recipesLeftArray);
-               /*  for (let j = 0; j < recipes[i].ingredients; j++) {
-               let NonNormalizedIngredient = recipes[i].ingredient[j]; 
-               let NormalizedIngredient = normalize(NonNormalizedIngredient);
-               console.log(NormalizedIngredient);
-
-               if (NormalizedIngredient.includes(NormalizedInput)) {
-                  showRecipe = true;
-                  recipesLeftArray.push(recipes[i]);
-               }
-               }*/
-            /* if (showRecipe) {
-               allRecipes[i].style.display = 'flex';
-            } else {
-               allRecipes[i].style.display = 'none';
-            }*/
 
          }  /*if no recipes left then display no recipes error message*/
          if (recipesLeftArray.length < 1) {
@@ -426,15 +294,6 @@ searchNavigationInput.addEventListener("input", (event) => {
       if (NormalizedInput.length < 3) {
          /* reset array*/
          sortedrecipesLeftArray = recipes;
-    /*     if (tagListArray.length < 1) {
-            /*if no tags chosen in advanced filter reset recipes displayed
-      for (let i = 0; i < recipes.length; i++) {
-      allRecipes[i].style.display = 'flex';
-         }
-        /* tagList.forEach((item) => {
-            item.classList.remove('hide');
-         });
-      } */
    }
    /* Send for further filtering with tags*/
    console.log(NormalizedInput);

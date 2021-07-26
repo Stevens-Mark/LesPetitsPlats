@@ -1,17 +1,11 @@
 @import "./utils/variables";
-@import "./utils/functions";
 @import "./utils/mixins";
 
-@import "./base/styles";
+@import "./base/variables_overrrides";
 @import "./base/base";
 @import "./base/typography";
 
-@import "./utils/keyframes";
-
 @import "./components/buttons";
-
-@import "./layout/header";
-@import "./layout/footer";
 
 @import "./pages/index";
 
