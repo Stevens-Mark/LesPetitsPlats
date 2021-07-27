@@ -274,6 +274,7 @@ searchNavigationInput.addEventListener("input", (event) => {
 
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
+      const t0 = performance.now();
       recipes.forEach((recipe) => {
          /* clean recipe data for search */
          let NormalizedRecipeName = normalize(recipe.name);
@@ -289,7 +290,9 @@ searchNavigationInput.addEventListener("input", (event) => {
             if (NormalizedIngredient.includes(NormalizedInput)) {
                recipesLeftArray.push(recipe);    
             }           
-         });    
+         });           
+         const t1 = performance.now();
+         console.log(`Call to doSomething took ${t1 - t0} milliseconds.`);
          DisplayRecipe(recipesLeftArray);
       });
       if (recipesLeftArray.length < 1) {
