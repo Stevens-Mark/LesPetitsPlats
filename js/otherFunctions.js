@@ -42,6 +42,58 @@ const noRecipeMessage = () => {
   recipeElement.insertAdjacentHTML("afterbegin",  `<div id="norecipes" class="text-center mt-5">Désolé, Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».</div>`);  
 };
 
+// NO ITEMS LEFT TO CHOOSE FROM ERROR MESSAGE
+
+const noItemMessage = (id) => {
+   const  dropdownElement = document.querySelector(id);
+   dropdownElement.insertAdjacentHTML("afterbegin",  `<div class="no-items text-center text-white">Il n'y a plus d'articles à choisir...</div>`);  
+   };
+
+// CHECK IF NO ITEMS LEFT TO CHOOSE FROM IN DROPDOWN MENUS
+
+const isItemLeft = () => {
+   /*remove no items left error message & replace if needed after tests below*/
+   let errorMessage = document.querySelectorAll('.no-items');
+   if (errorMessage) { 
+      errorMessage.forEach((message) =>{
+         message.remove();
+      });
+   }
+   /*check whether all ingredients have been used , ie none left to choose*/
+   const ingNodeList = document.querySelectorAll("[data-category ='ingredientTag']");
+   const ingNodeSameClass = document.getElementById('ingredientSearch').getElementsByClassName('hide');
+   if (ingNodeList.length === ingNodeSameClass.length) { 
+      noItemMessage('#ingredientSearch'); 
+   }   
+   /*check whether all appliances have been used , ie none left to choose*/
+   const appNodeList = document.querySelectorAll("[data-category ='applianceTag']");
+   const appNodeSameClass = document.getElementById('applianceSearch').getElementsByClassName('hide');
+   if (appNodeList.length === appNodeSameClass.length) { 
+      noItemMessage('#applianceSearch'); 
+   }
+   /*check whether all appliances have been used , ie none left to choose*/
+   const ustNodeList = document.querySelectorAll("[data-category ='ustensilTag']");
+   const ustNodesSameClass = document.getElementById('ustensilSearch').getElementsByClassName('hide');
+   if (ustNodeList.length === ustNodesSameClass.length) {
+      noItemMessage('#ustensilSearch');
+   }   
+};
+
+// REMOVE INGREDIENTS ALREADY SELECTED FROM THE DROPDOWN MENUS (avoids duplicate tags)
+
+const RemoveDuplicates = () => {
+   const tagAlreadySelectedList = document.querySelectorAll('.tags__selected');
+   const tagList = document.querySelectorAll('.tags');
+   tagAlreadySelectedList.forEach((tag) => {
+         tagList.forEach((item) => {
+           if (item.innerHTML === tag.textContent.trim()) {
+            item.classList.add("hide");
+           }
+         });
+   });
+   isItemLeft();
+ };
+
 // UPDATE DROPDOWN LISTS 
 
 const updateDropdownList = (recipesLeftArray) => {
@@ -70,20 +122,6 @@ const updateDropdownList = (recipesLeftArray) => {
   RemoveDuplicates();
 };
 
-// REMOVE INGREDIENTS ALREADY SELECTED FROM THE DROPDOWN MENUS (avoids duplicate tags)
-
-const RemoveDuplicates = () => {
-  const tagAlreadySelectedList = document.querySelectorAll('.tags__selected');
-  const tagList = document.querySelectorAll('.tags');
-  tagAlreadySelectedList.forEach((tag) => {
-        tagList.forEach((item) => {
-          if (item.innerHTML === tag.textContent.trim()) {
-           item.classList.add("hide");
-          }
-        });
-  });
-};
-
 // DISPLAYS RECIPES (TAG ONLY or MAIN/TAG COMBINED)
 
 const DisplayRecipe = (RecipeArray) => {
@@ -102,5 +140,5 @@ const DisplayRecipe = (RecipeArray) => {
      }
   } 
 };
-
+ 
 export { normalize, DropdownTextListSearch, noRecipeMessage, updateDropdownList, DisplayRecipe };

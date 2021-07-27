@@ -186,7 +186,7 @@ const GenerateTag = (tagSelected, tagType) => {
       };
    tagElements.insertAdjacentHTML("afterbegin",
    `<div class="tags__selected bg-${bgColor} d-flex align-items-baseline rounded text-white m-1">
-   <p class="text-capitalize m-0 mx-1 p-2" data-category="${tagType}">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
+   <p class="text-capitalize m-0 mx-1 p-2">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
    `
    );
    // EVENT LISTENER ON TAG CLOSE BUTTON TO REMOVE DE-SELECTED TAG
@@ -299,10 +299,29 @@ searchNavigationInput.addEventListener("input", (event) => {
    console.log(NormalizedInput);
    FilterRecipes(tagListArray, sortedrecipesLeftArray);
 });
- 
+
+
 
 /*MAIN SEARCH BAR INPUT
-const ing = [...document.querySelectorAll("[data-category ='ingredientTag']")];
+
+if($('applianceSearch').children(':visible').length == 0) {
+   // all are hidden
+}
+        // Select the required elements
+        let buttons = document.querySelectorAll("button");
+        
+  
+        // Convert the returned node list into an array
+        buttons = Array.from(buttons);
+  
+        // Check if all the selected elements have
+        // the class using every() method
+        let check = buttons.every((btn) 
+            => btn.classList.contains("active"));
+
+
+
+const ing = [...document.querySelectorAll("[data-category ='ingredientTag']");
 
 const searchNavigationInput = document.getElementById('searchNavigation');
 searchNavigationInput.addEventListener("input", (event) => {
