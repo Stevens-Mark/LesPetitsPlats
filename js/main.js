@@ -227,6 +227,7 @@ const FilterRecipes = (tagListArray, RecipeArray) => {
       errorMessage.remove();
    }
 tagListArray.forEach((tagItem) => {
+   console.log(tagItem.itemSelected);
    switch (tagItem.itemType) {
    case 'ingredientTag' :
       RecipeArray =  RecipeArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
@@ -267,29 +268,31 @@ searchNavigationInput.addEventListener("input", (event) => {
       errorMessage.remove();
    }
 
-   // START SEARCH IF THREE OR MORE LETTERS ENTERED
+// START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
-         for (let i = 0; i < recipes.length; i++) {
-            /* clean recipe data for search */
-            let NonNormalizedName = recipes[i].name; 
-            let NormalizedName = normalize(NonNormalizedName);
-            let NonNormalizedDescription = recipes[i].description; 
-            let NormalizedDescription = normalize(NonNormalizedDescription);
-            /* check title & description */
-            if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-               recipesLeftArray.push(recipes[i]);
-         } /* check ingredients */
-         if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
-            recipesLeftArray.push(recipes[i]);
-            }
-            DisplayRecipe(recipesLeftArray);
-
-         }  /*if no recipes left then display no recipes error message*/
-         if (recipesLeftArray.length < 1) {
-            noRecipeMessage();
+      recipes.forEach((recipe) => {
+         /* clean recipe data for search */
+         let NormalizedRecipeName = normalize(recipe.name);
+         let NormalizedDescription = normalize(recipe.description);
+         
+         /*search title & description*/
+         if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
+            recipesLeftArray.push(recipe);
          }
-         sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
+         /*search ingredients*/
+         recipe.ingredients.forEach((item) => {
+            let NormalizedIngredient = normalize(item.ingredient);
+            if (NormalizedIngredient.includes(NormalizedInput)) {
+               recipesLeftArray.push(recipe);    
+            }           
+         });    
+         DisplayRecipe(recipesLeftArray);
+      });
+      if (recipesLeftArray.length < 1) {
+         noRecipeMessage();
       }
+      sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
+   }
       //  IF LESS THAN THREE LETTERS THEN RESET
       if (NormalizedInput.length < 3) {
          /* reset array*/
@@ -300,63 +303,67 @@ searchNavigationInput.addEventListener("input", (event) => {
    FilterRecipes(tagListArray, sortedrecipesLeftArray);
 });
 
+// RESET SEARCH
 
+const resetButton = document.getElementById('resetSearch');
+resetButton.addEventListener('click', () => {
+   //Reset arrays
+   sortedrecipesLeftArray = recipes;
+   tagListArray = [];
+   //Reset recipes displayed
+   DisplayRecipe(recipes) ;
+   //Reset tags selected above dropdown
+   const tagElements = document.getElementById('tags-container');
+   tagElements.innerHTML ='';
+   // Reset dropdown menus
+      const tagList = document.querySelectorAll('.tags');
+      tagList.forEach((item) => {
+         item.classList.remove('hide');
+      });
+});
+   // SAME AS ABOVE (FOR KEYBOARD USERS)
+   resetButton.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter' || event.key === 13) {
+         resetButton.click();
+      }
+   });
 
 /*MAIN SEARCH BAR INPUT
 
-if($('applianceSearch').children(':visible').length == 0) {
-   // all are hidden
-}
-        // Select the required elements
-        let buttons = document.querySelectorAll("button");
-        
-  
-        // Convert the returned node list into an array
-        buttons = Array.from(buttons);
-  
-        // Check if all the selected elements have
-        // the class using every() method
-        let check = buttons.every((btn) 
-            => btn.classList.contains("active"));
-
-
-
-const ing = [...document.querySelectorAll("[data-category ='ingredientTag']");
-
-const searchNavigationInput = document.getElementById('searchNavigation');
-searchNavigationInput.addEventListener("input", (event) => {
-   
-   let recipesLeftArray =[];
-   let NormalizedInput = normalize(event.target.value.trim());
-   if (NormalizedInput.length < 1) { 
-      /*let tes = recipes.filter(val => !tagSearchArray.includes(val));
-      CreateRecipes(recipes);
-      CreateListForDropdown(recipes);
-      LoadDropdownListeners();
-   }
+   // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
+         for (let i = 0; i < recipes.length; i++) {
+            /* clean recipe data for search 
+            let NonNormalizedName = recipes[i].name; 
+            let NormalizedName = normalize(NonNormalizedName);
+            let NonNormalizedDescription = recipes[i].description; 
+            let NormalizedDescription = normalize(NonNormalizedDescription);
+            /* check title & description 
+            if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
+               recipesLeftArray.push(recipes[i]);
+            } /* check ingredients 
+            if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
+            recipesLeftArray.push(recipes[i]);
+            }
 
-   recipes.forEach((recipe) => {
-      let NormalizedRecipeName = normalize(recipe.name);
-      let NormalizedDescription = normalize(recipe.description);
-
-      if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-         recipesLeftArray.push(recipe);        
+            DisplayRecipe(recipesLeftArray);
+         }  /*if no recipes left then display no recipes error message
+         if (recipesLeftArray.length < 1) {
+            noRecipeMessage();
+         }
+         sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
       }
-      recipe.ingredients.forEach((item) => {
-         let NormalizedIngredient = normalize(item.ingredient);
-         if (NormalizedIngredient.includes(NormalizedInput)) {
-            recipesLeftArray.push(recipe);    
-         }       
-       });
-      
-   });
-   const sortedRecipesLeftArray = [...new Set(recipesLeftArray)].sort();
-   CreateRecipes(sortedRecipesLeftArray);
-   CreateListForDropdown(sortedRecipesLeftArray);
-   LoadDropdownListeners();
+      //  IF LESS THAN THREE LETTERS THEN RESET
+      if (NormalizedInput.length < 3) {
+         /* reset array
+         sortedrecipesLeftArray = recipes;
    }
+   /* Send for further filtering with tags
+   console.log(NormalizedInput);
+   FilterRecipes(tagListArray, sortedrecipesLeftArray);
 });
+
+
 
 /*array1 = array1.filter(val => !array2.includes(val));*/
 
