@@ -1,6 +1,10 @@
 
 import { recipes } from '../public/recipes.js';
-import  { normalize, DropdownTextListSearch, noRecipeMessage, updateDropdownList, DisplayRecipe } from './otherFunctions.js';
+import  { normalize, 
+   DropdownTextListSearch, 
+   noRecipeMessage, 
+   updateDropdownList, 
+   DisplayRecipe } from './otherFunctions.js';
 
 // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
 
