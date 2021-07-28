@@ -148,7 +148,7 @@ let tagListArray = [];
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
       const tagSelected = event.target.textContent.toLowerCase();
-      /* get category type & generate tag icon when user chooses item from dropdown list */
+      /* get category type for determining color of tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
       let obj = {itemSelected : tagSelected, itemType : tagType };
       tagListArray.push(obj);
@@ -262,8 +262,6 @@ if (RecipeArray.length < 1) {
 const searchNavigationInput = document.getElementById('searchNavigation');
 let sortedrecipesLeftArray = [];
 searchNavigationInput.addEventListener("input", (event) => {
-   /*const allRecipes = document.getElementsByTagName('article');*/
-   let recipesLeftArray = [];
    /* clean input data (remove accents etc) */
    let NormalizedInput = normalize(event.target.value.trim());
    /*if no recipe error message displayed then remove it */
@@ -274,27 +272,20 @@ searchNavigationInput.addEventListener("input", (event) => {
 
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
+     /* let NormalizedRecipeName = normalize(recipe.name);
+      let NormalizedDescription = normalize(recipe.description);*/
+      
       const t0 = performance.now();
-      recipes.forEach((recipe) => {
-         /* clean recipe data for search */
-         let NormalizedRecipeName = normalize(recipe.name);
-         let NormalizedDescription = normalize(recipe.description);
-         
-         /*search title & description*/
-         if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-            recipesLeftArray.push(recipe);
-         }
-         /*search ingredients*/
-         recipe.ingredients.forEach((item) => {
-            let NormalizedIngredient = normalize(item.ingredient);
-            if (NormalizedIngredient.includes(NormalizedInput)) {
-               recipesLeftArray.push(recipe);    
-            }           
-         });           
+      const recipesLeftArray = recipes.filter((recipe) => (recipe.name.toLowerCase().includes(event.target.value.trim()) || 
+           recipe.description.toLowerCase().includes(event.target.value.trim()) ||
+           recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(event.target.value.trim()))
+      ));
+      console.log(recipesLeftArray);
+       DisplayRecipe(recipesLeftArray);
+
          const t1 = performance.now();
          console.log(`Call to doSomething took ${t1 - t0} milliseconds.`);
-         DisplayRecipe(recipesLeftArray);
-      });
+   
       if (recipesLeftArray.length < 1) {
          noRecipeMessage();
       }
