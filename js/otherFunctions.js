@@ -53,9 +53,9 @@ const noItemMessage = (id) => {
 
 const isItemLeft = () => {
    /*remove no items left error message & replace if needed after tests below*/
-   let errorMessage = document.querySelectorAll('.no-items');
-   if (errorMessage) { 
-      errorMessage.forEach((message) =>{
+   let noItemErrorMessage = document.querySelectorAll('.no-items');
+   if (noItemErrorMessage) { 
+      noItemErrorMessage.forEach((message) =>{
          message.remove();
       });
    }

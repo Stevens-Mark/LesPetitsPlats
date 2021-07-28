@@ -154,7 +154,7 @@ let tagListArray = [];
       tagListArray.push(obj);
       /* generate tag over dropdown*/
       GenerateTag(tagSelected, tagType);
-      /* filter recipes using either full list or edited list of recipes: depends if user has already entered in main search bar*/
+      /* filter recipes using either full list or edited list of recipes: depends if user has already entered keyword in main search bar*/
       if (sortedrecipesLeftArray.length < 1) {
          FilterRecipes(tagListArray, recipes);
       } else {
@@ -202,7 +202,7 @@ const GenerateTag = (tagSelected, tagType) => {
          /*find the index of the chosen tag to delete & remove from the tagList array */
         let tagIndex = tagListArray.map(function (item) { return item.itemSelected; }).indexOf(tagToRemove);
          if (tagIndex !== -1) tagListArray.splice(tagIndex, 1);
-         /* filter recipes using either full list or edited list of recipes: depends if user has already entered in main search bar*/
+         /* filter recipes using either full list or edited list of recipes: depends if user has already entered keyword in main search bar*/
          if (sortedrecipesLeftArray.length < 1) {
             FilterRecipes(tagListArray, recipes);
             } else {
@@ -225,7 +225,7 @@ const GenerateTag = (tagSelected, tagType) => {
 // MAIN FILTER & TAGS TOGETHER
 
 const FilterRecipes = (tagListArray, RecipeArray) => {
-   /*if no recipe error message displayed remove it */
+   /*if no recipe error message displayed, remove it */
    let errorMessage = document.querySelector('#norecipes');
    if (errorMessage) { 
       errorMessage.remove();
@@ -234,15 +234,15 @@ tagListArray.forEach((tagItem) => {
    console.log(tagItem.itemSelected);
    switch (tagItem.itemType) {
    case 'ingredientTag' :
-      RecipeArray =  RecipeArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
+      RecipeArray =  RecipeArray.filter(recipe => recipe.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
    break;
 
    case 'applianceTag' :
-      RecipeArray =  RecipeArray.filter(x => x.appliance.toLowerCase() === tagItem.itemSelected);
+      RecipeArray =  RecipeArray.filter(recipe => recipe.appliance.toLowerCase() === tagItem.itemSelected);
    break;
 
    case 'ustensilTag' :
-      RecipeArray  =  RecipeArray.filter(x => x.ustensils.indexOf(tagItem.itemSelected) > -1);
+      RecipeArray  =  RecipeArray.filter(recipe => recipe.ustensils.indexOf(tagItem.itemSelected) > -1);
    break;
 
    default :console.log('no tag of this type');
@@ -274,15 +274,11 @@ searchNavigationInput.addEventListener("input", (event) => {
    if (NormalizedInput.length > 2) {
       
       const t0 = performance.now();
-      const recipesLeftArray = recipes.filter((recipe) => (recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
-
+      /*MAIN SEARCH ALGO: clean recipe title, description & ingredients & check against user input*/
+      const recipesLeftArray = recipes.filter(recipe => recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
            recipe.description.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) ||
-           
            recipe.ingredients.some((ingredient) => ingredient.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
-      ));
-
-     /* RecipeArray =  RecipeArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); */
-      console.log(recipesLeftArray);
+      );
        DisplayRecipe(recipesLeftArray);
 
          const t1 = performance.now();
@@ -299,7 +295,6 @@ searchNavigationInput.addEventListener("input", (event) => {
          sortedrecipesLeftArray = recipes;
    }
    /* Send for further filtering with tags*/
-   console.log(NormalizedInput);
    FilterRecipes(tagListArray, sortedrecipesLeftArray);
 });
 
@@ -307,10 +302,12 @@ searchNavigationInput.addEventListener("input", (event) => {
 
 const resetButton = document.getElementById('resetSearch');
 resetButton.addEventListener('click', () => {
-   //Reset arrays
+   // Reset arrays
    sortedrecipesLeftArray = recipes;
    tagListArray = [];
-   //Reset recipes displayed
+   // Reset main input
+   document.getElementById('searchNavigation').value ='';
+   // Reset recipes displayed
    DisplayRecipe(recipes) ;
    //Reset tags selected above dropdown
    const tagElements = document.getElementById('tags-container');
@@ -320,6 +317,17 @@ resetButton.addEventListener('click', () => {
       tagList.forEach((item) => {
          item.classList.remove('hide');
       });
+   // Reset error messages
+   let errorMessage = document.querySelector('#norecipes');
+   if (errorMessage) { 
+      errorMessage.remove();
+   }
+   let noItemErrorMessage = document.querySelectorAll('.no-items');
+   if (noItemErrorMessage) { 
+      noItemErrorMessage.forEach((message) =>{
+         message.remove();
+      });
+   }
 });
    // SAME AS ABOVE (FOR KEYBOARD USERS)
    resetButton.addEventListener('keypress', (event) => {
@@ -327,43 +335,6 @@ resetButton.addEventListener('click', () => {
          resetButton.click();
       }
    });
-
-/*MAIN SEARCH BAR INPUT
-
-   // START SEARCH IF THREE OR MORE LETTERS ENTERED
-   if (NormalizedInput.length > 2) {
-         for (let i = 0; i < recipes.length; i++) {
-            /* clean recipe data for search 
-            let NonNormalizedName = recipes[i].name; 
-            let NormalizedName = normalize(NonNormalizedName);
-            let NonNormalizedDescription = recipes[i].description; 
-            let NormalizedDescription = normalize(NonNormalizedDescription);
-            /* check title & description 
-            if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-               recipesLeftArray.push(recipes[i]);
-            } /* check ingredients 
-            if (recipes[i].ingredients.some(x => x.ingredient.toLowerCase() == NormalizedInput)) {
-            recipesLeftArray.push(recipes[i]);
-            }
-
-            DisplayRecipe(recipesLeftArray);
-         }  /*if no recipes left then display no recipes error message
-         if (recipesLeftArray.length < 1) {
-            noRecipeMessage();
-         }
-         sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
-      }
-      //  IF LESS THAN THREE LETTERS THEN RESET
-      if (NormalizedInput.length < 3) {
-         /* reset array
-         sortedrecipesLeftArray = recipes;
-   }
-   /* Send for further filtering with tags
-   console.log(NormalizedInput);
-   FilterRecipes(tagListArray, sortedrecipesLeftArray);
-});
-
-
 
 /*array1 = array1.filter(val => !array2.includes(val));*/
 
