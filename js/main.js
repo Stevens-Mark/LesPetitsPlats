@@ -4,7 +4,7 @@ import  { normalize,
    DropdownTextListSearch, 
    noRecipeMessage, 
    updateDropdownList, 
-   DisplayRecipe } from './otherFunctions.js';
+   DisplayRecipe } from './supportFunctions.js';
 
 // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
 
@@ -207,7 +207,7 @@ const GenerateTag = (tagSelected, tagType) => {
             FilterRecipes(tagListArray, recipes);
             } else {
                FilterRecipes(tagListArray, sortedrecipesLeftArray);
-               console.log(tagListArray);
+
             }      
       });
       // SAME AS ABOVE BUT FOR KEYBOARD USERS
@@ -221,8 +221,8 @@ const GenerateTag = (tagSelected, tagType) => {
 };
 
 // SEARCH FILTER (ADVANCED)
-// USED TO FILTER BY TAG ONLY AS WELL AS
-// MAIN FILTER & TAGS TOGETHER
+// CAN BE USED TO FILTER BY TAG ONLY
+// OR BY MAIN FILTER & TAGS TOGETHER
 
 const FilterRecipes = (tagListArray, RecipeArray) => {
    /*if no recipe error message displayed, remove it */
@@ -275,19 +275,17 @@ searchNavigationInput.addEventListener("input", (event) => {
       
       const t0 = performance.now();
       /*MAIN SEARCH ALGO: clean recipe title, description & ingredients & check against user input*/
-      const recipesLeftArray = recipes.filter(recipe => recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
+      sortedrecipesLeftArray = recipes.filter(recipe => recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
            recipe.description.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) ||
-           recipe.ingredients.some((ingredient) => ingredient.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
-      );
-       DisplayRecipe(recipesLeftArray);
-
+           recipe.ingredients.some(i => i.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
+           );
+      /* DisplayRecipe(recipesLeftArray);*/
          const t1 = performance.now();
          console.log(`Call to doSomething took ${t1 - t0} milliseconds.`);
    
-      if (recipesLeftArray.length < 1) {
+      if (sortedrecipesLeftArray.length < 1) {
          noRecipeMessage();
       }
-      sortedrecipesLeftArray = [...new Set(recipesLeftArray)];
    }
       //  IF LESS THAN THREE LETTERS THEN RESET
       if (NormalizedInput.length < 3) {
