@@ -50,12 +50,13 @@ const noItemMessage = (id) => {
    };
 
 // CHECK IF NO ITEMS LEFT TO CHOOSE FROM IN DROPDOWN MENUS
+// DISPLAY MESSAGE IF SO...
 
 const isItemLeft = () => {
    /*remove no items left error message & replace if needed after tests below*/
-   let errorMessage = document.querySelectorAll('.no-items');
-   if (errorMessage) { 
-      errorMessage.forEach((message) =>{
+   let noItemErrorMessage = document.querySelectorAll('.no-items');
+   if (noItemErrorMessage) { 
+      noItemErrorMessage.forEach((message) =>{
          message.remove();
       });
    }
@@ -122,7 +123,7 @@ const updateDropdownList = (recipesLeftArray) => {
   RemoveDuplicates();
 };
 
-// DISPLAYS RECIPES (TAG ONLY or MAIN/TAG COMBINED)
+// DISPLAYS RECIPES
 
 const DisplayRecipe = (RecipeArray) => {
   const allRecipes = document.getElementsByTagName('article');
@@ -140,7 +141,5 @@ const DisplayRecipe = (RecipeArray) => {
      }
   } 
 };
-
-
  
 export { normalize, DropdownTextListSearch, noRecipeMessage, updateDropdownList, DisplayRecipe };
