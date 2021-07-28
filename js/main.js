@@ -272,14 +272,16 @@ searchNavigationInput.addEventListener("input", (event) => {
 
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
-     /* let NormalizedRecipeName = normalize(recipe.name);
-      let NormalizedDescription = normalize(recipe.description);*/
       
       const t0 = performance.now();
-      const recipesLeftArray = recipes.filter((recipe) => (recipe.name.toLowerCase().includes(event.target.value.trim()) || 
-           recipe.description.toLowerCase().includes(event.target.value.trim()) ||
-           recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(event.target.value.trim()))
+      const recipesLeftArray = recipes.filter((recipe) => (recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
+
+           recipe.description.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) ||
+           
+           recipe.ingredients.some((ingredient) => ingredient.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
       ));
+
+     /* RecipeArray =  RecipeArray.filter(x => x.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); */
       console.log(recipesLeftArray);
        DisplayRecipe(recipesLeftArray);
 
