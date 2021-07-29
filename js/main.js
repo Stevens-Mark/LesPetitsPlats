@@ -273,7 +273,8 @@ searchNavigationInput.addEventListener("input", (event) => {
 
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
-      const t0 = performance.now();
+      // start code speed test
+      console.time();
       // MAIN SEARCH ALGO:
       recipes.forEach((recipe) => {
          /* clean recipe data for search */
@@ -290,10 +291,9 @@ searchNavigationInput.addEventListener("input", (event) => {
             if (NormalizedIngredient.includes(NormalizedInput)) {
                recipesLeftArray.push(recipe);    
             }           
-         });           
-         const t1 = performance.now();
-         console.log(`Call to doSomething took ${t1 - t0} milliseconds.`);
-         /*DisplayRecipe(recipesLeftArray);*/
+         });    
+         // finish code speed test       
+         console.timeEnd();
       });
       if (recipesLeftArray.length < 1) {
          noRecipeMessage();
