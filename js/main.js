@@ -276,25 +276,28 @@ searchNavigationInput.addEventListener("input", (event) => {
       // start code speed test
       console.time();
       // MAIN SEARCH ALGO:
-      recipes.forEach((recipe) => {
+      for (let i = 0; i < recipes.length; i++) {
          /* clean recipe data for search */
-         let NormalizedRecipeName = normalize(recipe.name);
-         let NormalizedDescription = normalize(recipe.description);
-         
-         /*search title & description*/
-         if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
-            recipesLeftArray.push(recipe);
-         }
-         /*search ingredients*/
-         recipe.ingredients.forEach((item) => {
-            let NormalizedIngredient = normalize(item.ingredient);
+         let NonNormalizedName = recipes[i].name; 
+         let NormalizedName = normalize(NonNormalizedName);
+         let NonNormalizedDescription = recipes[i].description; 
+         let NormalizedDescription = normalize(NonNormalizedDescription);
+   
+         if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
+            recipesLeftArray.push(recipes[i]);
+        }
+        for (let j = 0; j < recipes[i].ingredients.length; j++) {
+            let NonNormalizedIngredient = recipes[i].ingredients[j].ingredient; 
+            let NormalizedIngredient = normalize(NonNormalizedIngredient);
+   
             if (NormalizedIngredient.includes(NormalizedInput)) {
-               recipesLeftArray.push(recipe);    
-            }           
-         });    
-         // finish code speed test       
-         console.timeEnd();
-      });
+               recipesLeftArray.push(recipes[i]);
+            }
+         }
+      }   
+      // finish code speed test
+      console.timeEnd();
+
       if (recipesLeftArray.length < 1) {
          noRecipeMessage();
       }
