@@ -255,6 +255,7 @@ if (RecipeArray.length < 1) {
 /*update dropdown & display recipes*/
    updateDropdownList(RecipeArray);
    DisplayRecipe(RecipeArray);
+   console.group(RecipeArray);
 };
 
 // MAIN SEARCH BAR INPUT
@@ -272,16 +273,15 @@ searchNavigationInput.addEventListener("input", (event) => {
 
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
-      
-      const t0 = performance.now();
+      // start of code speed test
+      console.time();
       /*MAIN SEARCH ALGO: clean recipe title, description & ingredients & check against user input*/
       sortedrecipesLeftArray = recipes.filter(recipe => recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
            recipe.description.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) ||
            recipe.ingredients.some(i => i.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
            );
-      /* DisplayRecipe(recipesLeftArray);*/
-         const t1 = performance.now();
-         console.log(`Call to doSomething took ${t1 - t0} milliseconds.`);
+      // end of code speed test     
+      console.timeEnd();
    
       if (sortedrecipesLeftArray.length < 1) {
          noRecipeMessage();
