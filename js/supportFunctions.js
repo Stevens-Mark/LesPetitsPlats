@@ -72,7 +72,7 @@ const isItemLeft = () => {
    if (appNodeList.length === appNodeSameClass.length) { 
       noItemMessage('#applianceSearch'); 
    }
-   /*check whether all appliances have been used , ie none left to choose*/
+   /*check whether all ustensils have been used , ie none left to choose*/
    const ustNodeList = document.querySelectorAll("[data-category ='ustensilTag']");
    const ustNodesSameClass = document.getElementById('ustensilSearch').getElementsByClassName('hide');
    if (ustNodeList.length === ustNodesSameClass.length) {

@@ -255,6 +255,7 @@ if (RecipeArray.length < 1) {
 /*update dropdown & display recipes*/
    updateDropdownList(RecipeArray);
    DisplayRecipe(RecipeArray);
+   console.log(RecipeArray);
 };
 
 // MAIN SEARCH BAR INPUT
@@ -309,8 +310,15 @@ searchNavigationInput.addEventListener("input", (event) => {
          /* reset array*/
          sortedrecipesLeftArray = recipes;
    }
-   /* Send for further filtering with tags*/
+   // if no tags selected pass straight to display recipes
+   if (tagListArray.length  < 1) {
+      updateDropdownList(sortedrecipesLeftArray);
+      DisplayRecipe(sortedrecipesLeftArray);
+      console.log(sortedrecipesLeftArray);
+   } else {
+   // otherwise Send for further filtering with tags
    FilterRecipes(tagListArray, sortedrecipesLeftArray);
+   }
 });
 
 // RESET SEARCH
