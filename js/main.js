@@ -255,7 +255,7 @@ if (RecipeArray.length < 1) {
 /*update dropdown & display recipes*/
    updateDropdownList(RecipeArray);
    DisplayRecipe(RecipeArray);
-   console.group(RecipeArray);
+   console.log(RecipeArray);
 };
 
 // MAIN SEARCH BAR INPUT
@@ -275,25 +275,32 @@ searchNavigationInput.addEventListener("input", (event) => {
    if (NormalizedInput.length > 2) {
       // start of code speed test
       console.time();
-      /*MAIN SEARCH ALGO: clean recipe title, description & ingredients & check against user input*/
+      // MAIN SEARCH ALGO: clean recipe title, description & ingredients & check against user input
       sortedrecipesLeftArray = recipes.filter(recipe => recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
            recipe.description.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) ||
            recipe.ingredients.some(i => i.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
            );
       // end of code speed test     
       console.timeEnd();
-   
+      // if no recipes left display error message
       if (sortedrecipesLeftArray.length < 1) {
          noRecipeMessage();
       }
    }
-      //  IF LESS THAN THREE LETTERS THEN RESET
+      //  IF LESS THAN THREE LETTERS INPUT BY USER THEN RESET
       if (NormalizedInput.length < 3) {
          /* reset array*/
          sortedrecipesLeftArray = recipes;
    }
-   /* Send for further filtering with tags*/
+   // if no tags selected pass straight to display recipes
+   if (tagListArray.length  < 1) {
+      updateDropdownList(sortedrecipesLeftArray);
+      DisplayRecipe(sortedrecipesLeftArray);
+      console.log(sortedrecipesLeftArray);
+   } else {
+   // otherwise Send for further filtering with tags
    FilterRecipes(tagListArray, sortedrecipesLeftArray);
+   }
 });
 
 // RESET SEARCH
