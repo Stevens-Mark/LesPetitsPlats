@@ -275,7 +275,7 @@ searchNavigationInput.addEventListener("input", (event) => {
 // START SEARCH IF THREE OR MORE LETTERS ENTERED
    if (NormalizedInput.length > 2) {
       // start code speed test
-      console.time();
+      // console.time();
       // MAIN SEARCH ALGO:
       recipes.forEach((recipe) => {
          /* clean recipe data for search */
@@ -285,16 +285,17 @@ searchNavigationInput.addEventListener("input", (event) => {
          /*search title & description*/
          if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
             recipesLeftArray.push(recipe);
-         }
-         /*search ingredients*/
-         recipe.ingredients.forEach((item) => {
-            let NormalizedIngredient = normalize(item.ingredient);
-            if (NormalizedIngredient.includes(NormalizedInput)) {
-               recipesLeftArray.push(recipe);    
-            }           
-         });    
+         } else {
+         /*otherwise search ingredients*/
+            recipe.ingredients.forEach((item) => {
+               let NormalizedIngredient = normalize(item.ingredient);
+               if (NormalizedIngredient.includes(NormalizedInput)) {
+                  recipesLeftArray.push(recipe);    
+               }        
+            });   
+         } 
          // finish code speed test       
-         console.timeEnd();
+         // console.timeEnd();
       });
       // if no recipes left display error message
       if (recipesLeftArray.length < 1) {
