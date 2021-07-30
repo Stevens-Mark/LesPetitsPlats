@@ -283,16 +283,18 @@ searchNavigationInput.addEventListener("input", (event) => {
          let NormalizedName = normalize(NonNormalizedName);
          let NonNormalizedDescription = recipes[i].description; 
          let NormalizedDescription = normalize(NonNormalizedDescription);
-   
+         /* search title & description */
          if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
             recipesLeftArray.push(recipes[i]);
-        }
-        for (let j = 0; j < recipes[i].ingredients.length; j++) {
-            let NonNormalizedIngredient = recipes[i].ingredients[j].ingredient; 
-            let NormalizedIngredient = normalize(NonNormalizedIngredient);
-   
-            if (NormalizedIngredient.includes(NormalizedInput)) {
-               recipesLeftArray.push(recipes[i]);
+        } else {
+         /* otherwise search ingredients */
+         for (let j = 0; j < recipes[i].ingredients.length; j++) {
+               let NonNormalizedIngredient = recipes[i].ingredients[j].ingredient; 
+               let NormalizedIngredient = normalize(NonNormalizedIngredient);
+      
+               if (NormalizedIngredient.includes(NormalizedInput)) {
+                  recipesLeftArray.push(recipes[i]);
+               }
             }
          }
       }   
