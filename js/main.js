@@ -276,10 +276,9 @@ searchNavigationInput.addEventListener("input", (event) => {
       // start of code speed test
       console.time();
       // MAIN SEARCH ALGO: clean recipe title, description & ingredients & check against user input
-      sortedrecipesLeftArray = recipes.filter(recipe => recipe.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) || 
-           recipe.description.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput) ||
-           recipe.ingredients.some(i => i.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(NormalizedInput))
-           );
+      sortedrecipesLeftArray = recipes.filter(recipe => normalize(recipe.name).includes(NormalizedInput) || 
+           normalize(recipe.description).includes(NormalizedInput) ||
+           recipe.ingredients.some(i => normalize(i.ingredient).includes(NormalizedInput)));
       // end of code speed test     
       console.timeEnd();
       // if no recipes left display error message
