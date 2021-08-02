@@ -8,7 +8,7 @@ const normalize = (text) => {
      .toLowerCase();
    };
 
-// FUNCTION TO SEARCH FOR RELEVANT ITEMS IN THE DROPDOWN LISTS INGREDIENTS,
+// FUNCTION TO DISPLAY THE RELEVANT ITEMS IN THE DROPDOWN LISTS INGREDIENTS,
 // APPLIANCE OR USTENSILS WHEN USER ENTERS A WORD IN THE INPUT FIELD
 
 const DropdownTextListSearch = (category, categoryListId) => {
@@ -50,7 +50,7 @@ const noItemMessage = (id) => {
    };
 
 // CHECK IF NO ITEMS LEFT TO CHOOSE FROM IN DROPDOWN MENUS
-// & DISPLAY MESSAGE IF SO... 
+// & DISPLAY MESSAGE IF THZERE ARE NONE LEFT... 
 
 const isItemLeft = () => {
    /*remove no items left error message & replace if needed after tests below*/

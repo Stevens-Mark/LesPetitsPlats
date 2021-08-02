@@ -18,11 +18,14 @@ let  NormalizedInput = normalize('testNameHere');
       recipes.forEach((recipe) => {
          let NormalizedRecipeName = normalize(recipe.name);
          let NormalizedDescription = normalize(recipe.description);
+
          if (NormalizedRecipeName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
             recipesLeftArray.push(recipe);
          } else {
+
            recipe.ingredients.forEach((item) => {
               let NormalizedIngredient = normalize(item.ingredient);
+              
               if (NormalizedIngredient.includes(NormalizedInput)) {
                  recipesLeftArray.push(recipe);    
               }           
@@ -49,8 +52,10 @@ let  NormalizedInput = normalize('testNameHere');
    
          if (NormalizedName.includes(NormalizedInput) || NormalizedDescription.includes(NormalizedInput)) {
             recipesLeftArray.push(recipes[i]);
+
         } else {
           for (let j = 0; j < recipes[i].ingredients.length; j++) {
+
               let NonNormalizedIngredient = recipes[i].ingredients[j].ingredient; 
               let NormalizedIngredient = normalize(NonNormalizedIngredient);
 
