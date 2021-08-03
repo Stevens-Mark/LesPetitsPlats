@@ -50,7 +50,7 @@ const noItemMessage = (id) => {
    };
 
 // CHECK IF NO ITEMS LEFT TO CHOOSE FROM IN DROPDOWN MENUS
-// & DISPLAY MESSAGE IF THZERE ARE NONE LEFT... 
+// & DISPLAY MESSAGE IF THERE ARE NONE LEFT... 
 
 const isItemLeft = () => {
    /*remove no items left error message & replace if needed after tests below*/

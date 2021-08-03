@@ -8,7 +8,7 @@ import  { normalize,
 
 // FUNCTION TO CREATE ALL THE RECIPES ON THE PAGE
 
-  const CreateRecipes = (recipes) => {
+const CreateRecipes = (recipes) => {
    /* declare a place to put the recipes in the dom */
  const recipeElement = document.querySelector('#card-container');
    let recipehtml = '';
