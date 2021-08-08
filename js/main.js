@@ -150,11 +150,8 @@ let tagListArray = [];
       const tagSelected = event.target.textContent.toLowerCase();
       /* get category type for determining color of tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
-      let obj = {itemSelected : tagSelected, itemType : tagType };
-      
+      let obj = {itemSelected : tagSelected, itemType : tagType };   
       tagListArray.push(obj);
-      console.log(obj);
-      console.log(tagListArray);
       /* generate tag over dropdown*/
       GenerateTag(tagSelected, tagType);
       /* filter recipes using either full list or edited list of recipes: depends if user has already entered keyword in main search bar*/
