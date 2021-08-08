@@ -115,9 +115,12 @@ const updateDropdownList = (recipesLeftArray) => {
         if (normalizedTag === Normalizedappliance) {
            tag.classList.remove("hide");
          }  
-        if (recipe.ustensils.includes(normalizedTag)) {
-           tag.classList.remove("hide");
-        } 
+         recipe.ustensils.forEach((item) => {
+            let NormalizedUstensil = normalize(item);
+               if (normalizedTag === NormalizedUstensil) {
+                  tag.classList.remove("hide");
+               } 
+            });  
      });
   });
   RemoveDuplicates();
