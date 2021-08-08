@@ -147,11 +147,12 @@ let tagListArray = [];
    tagList.forEach((item) => {
    item.addEventListener('click', (event) => {
       /* Make sure tag name is lowercase ready for search */
-      const tagSelected = event.target.textContent.toLowerCase();
+      const tagSelected = event.target.textContent;
       /* get category type for determining color of tag icon when user chooses item from dropdown list */
       const tagType = event.target.getAttribute("data-category");
       let obj = {itemSelected : tagSelected, itemType : tagType };   
       tagListArray.push(obj);
+      console.log(tagListArray);
       /* generate tag over dropdown*/
       GenerateTag(tagSelected, tagType);
       /* filter recipes using either full list or edited list of recipes: depends if user has already entered keyword in main search bar*/
@@ -239,11 +240,11 @@ tagListArray.forEach((tagItem) => {
    console.log(tagItem.itemSelected);
    switch (tagItem.itemType) {
    case 'ingredientTag' :
-      RecipeArray =  RecipeArray.filter(recipe => recipe.ingredients.some(i => i.ingredient.toLowerCase() === tagItem.itemSelected)); 
+      RecipeArray =  RecipeArray.filter(recipe => recipe.ingredients.some(i => normalize(i.ingredient) === normalize(tagItem.itemSelected))); 
    break;
 
    case 'applianceTag' :
-      RecipeArray =  RecipeArray.filter(recipe => recipe.appliance.toLowerCase() === tagItem.itemSelected);
+      RecipeArray =  RecipeArray.filter(recipe => normalize(recipe.appliance) === normalize(tagItem.itemSelected));
    break;
 
    case 'ustensilTag' :
