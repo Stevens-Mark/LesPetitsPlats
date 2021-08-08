@@ -106,7 +106,7 @@ CreateRecipes(recipes);
 
 // EVENT LISTENERS ON DROPDOWN BUTTONS:
 // CHANGES BUTTON WIDTH &
-// CALLS SEARCH DROPDOWN LIST FUNCTION (ABOVE)
+// CALLS SEARCH DROPDOWN LIST FUNCTION 
 
 const inputButtons = document.querySelectorAll('.btn');
 inputButtons.forEach((btn) => {
@@ -193,6 +193,11 @@ const GenerateTag = (tagSelected, tagType) => {
    <p class="text-capitalize m-0 mx-1 p-2">${tagSelected}</p><i tabindex="0" class="tags__closeBtn far fa-times-circle p-1"></i></div>    
    `
    );
+   // remove button width after tag selection
+   inputButtons.forEach((btn) => {
+      btn.parentNode.parentNode.classList.remove('buttonExpand');
+   });
+
    // EVENT LISTENER ON TAG CLOSE BUTTON TO REMOVE DE-SELECTED TAG
    const tagSelectedIcon = document.querySelectorAll('.tags__closeBtn');
    tagSelectedIcon.forEach((icon) => {

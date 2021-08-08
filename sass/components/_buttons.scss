@@ -1,22 +1,22 @@
 /* Arrow up Icon on buttons when the collapsible content is hidden*/
 .btn:after {
+    background-image: url("/public/images/icons/chevron-up.svg");
+    content: "";
     float: right;
+    height: 1rem;
     margin-left: -10px;
     margin-top: 8px;
-    content: "";
-    background-image: url("/public/images/icons/chevron-up.svg");
     pointer-events: none;
     width: 1rem;
-    height: 1rem;
     
   }
   /* Arrow down Icon on buttons when the collapsible content is shown */
   .btn.show:after {
-    content: "";
     background-image: url("/public/images/icons/chevron-down.svg");
+    content: "";
+    height: 1rem;
     pointer-events: none;
     width: 1rem;
-    height: 1rem;
   }
 
   /* remove bootstrap icon from button */

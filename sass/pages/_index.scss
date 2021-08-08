@@ -5,18 +5,18 @@
 
 .form-control::placeholder { 
   color: white;
-  opacity: 80%; 
   font-family: "Lato";
   font-size: 1.125rem;
+  opacity: 80%; 
 }
 
 // MAIN SEARCH INPUT BAR STYLING
 .SearchBar {
-  justify-content: center;
   align-items: center;
-  height: 69px;
   background: #E7E7E7;
   border-radius: 5px;
+  height: 69px;
+  justify-content: center;
   margin-right:  -12px;
   ::placeholder{
     color: grey; 
@@ -25,15 +25,15 @@
     font-size: 32px;
     margin: 10px;
   }
-  &__filter { //width for drtopdown menus when on mobile/tablette
+  &__filter { //width for dropdown menus when on mobile/tablette
     width: 100%;
   }
 }
 // REFESH SEARCH "X" ICON
 .refresh {
-  padding-left: 5px;
-  cursor: pointer;
   color: black;
+  cursor: pointer;
+  padding-left: 5px;
 }
 
 // STYLING FOR TAGS (DROPDOWN LISTS & SELECTED TAG ICONS)
@@ -65,10 +65,10 @@
    width: 455px;
   }
 }
-
+/*
 .dropdown-item {
   width: 25%;
-}
+}*/
 
 .buttonExpand {
   width: 100%;
@@ -77,7 +77,7 @@
   }
 }
 
-// NEED FOR ALIGNMENT OF DROPDWON MENU FILTERS
+// NEEDED FOR ALIGNMENT OF DROPDOWN MENU FILTERS
 .searchFilters {
   position: absolute;
   z-index: 999;
@@ -91,7 +91,6 @@
   position: relative;
   padding: unset;
   top: 190px;
-   /* margin: -6px;*/
     @media only screen and (min-width: $largeDevice) {
     top: 70px;
   }
@@ -126,9 +125,9 @@
   &__description {
     font-family: "Roboto";
     font-size: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     height: 175px;
+   /* overflow: hidden;
+    text-overflow: ellipsis;*/
   }
   &__ingredient {
     font-weight: 700;
