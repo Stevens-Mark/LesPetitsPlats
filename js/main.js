@@ -247,6 +247,8 @@ tagListArray.forEach((tagItem) => {
    break;
 
    case 'ustensilTag' :
+      /*const name = tagItem.itemSelected;
+      const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);*/
       RecipeArray  =  RecipeArray.filter(recipe => recipe.ustensils.indexOf(tagItem.itemSelected) > -1);
    break;
 
