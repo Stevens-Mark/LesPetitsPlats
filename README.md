@@ -18,7 +18,7 @@ For more information (scenario, etc.) on this project, please see the "Project b
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [EsLint] (https://eslint.org/) v2.2.2
 - [LiveServer] (https://ritwickdey.github.io/vscode-live-server/) v5.6.1
-
+- [sass](https://sass-lang.com/)
 
 # Installation 
 
@@ -52,7 +52,7 @@ Pour plus d'informations (scénario, etc.) sur ce projet, veuillez consulter le 
 - [Visual Studio Code](https://code.visualstudio.com/) 
 - [EsLint] (https://eslint.org/) v2.2.2
 - [LiveServer] (https://ritwickdey.github.io/vscode-live-server/) v5.6.1
-
+- [sass](https://sass-lang.com/)
 
 # Installation 
 
