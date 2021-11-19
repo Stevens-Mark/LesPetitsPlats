@@ -39,10 +39,11 @@ There are a lot of sites offering cooking recipes and the team felt that one of 
 
 ## Used
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [EsLint] (https://eslint.org/) v2.2.2
-- [LiveServer] (https://ritwickdey.github.io/vscode-live-server/) v5.6.1
-- [sass](https://sass-lang.com/)
+- [Visual Studio Code](https://code.visualstudio.com/) 
+- [EsLint](https://eslint.org/) v2.2.2
+- [LiveServer](https://ritwickdey.github.io/vscode-live-server/) v5.6.1
+- [SaSS](https://sass-lang.com/)
+
 
 # Installation 
 
@@ -92,9 +93,9 @@ Il existe de nombreux sites proposant des recettes de cuisine et l'équipe a est
 ## Utilisé
 
 - [Visual Studio Code](https://code.visualstudio.com/) 
-- [EsLint] (https://eslint.org/) v2.2.2
-- [LiveServer] (https://ritwickdey.github.io/vscode-live-server/) v5.6.1
-- [sass](https://sass-lang.com/)
+- [EsLint](https://eslint.org/) v2.2.2
+- [LiveServer](https://ritwickdey.github.io/vscode-live-server/) v5.6.1
+- [SaSS](https://sass-lang.com/)
 
 # Installation 
 
