@@ -8,7 +8,10 @@
 
 After having published cookbooks for several years, the company has decided to launch a new project: to create its own recipe website like Marmiton or 750g.  A Recipe site with multiple search options:
 
-For more information (scenario, etc.) on this project, please see the "Project brief" folder.
+
+- [Figma](https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petits-Plats-FR?node-id=0%3A1)
+- Further information (scenario, etc.) on this project, please see the the folder `Les Petits Plats Brief`
+
 
 - Languages: HTML5, Sass (stylesheet language) & Javascript
 - Frameworks: BootStrap5
@@ -42,6 +45,11 @@ For more information (scenario, etc.) on this project, please see the "Project b
 Après avoir édité des livres de cuisine pendant plusieurs années, l’entreprise a décidé de se lancer dans un nouveau projet : réaliser son propre site de recettes de cuisine à l’instar de Marmiton ou 750g.  Un site de recettes avec de multiples options de recherche :
 
 Pour plus d'informations (scénario, etc.) sur ce projet, veuillez consulter le dossier " Project brief ".
+
+
+- [Figma](https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petits-Plats-FR?node-id=0%3A1)
+- Pour plus d'informations (scénario, etc.) sur ce projet, veuillez consulter le dossier `Les Petits Plats Brief`
+
 
 - Langues : Sass (stylesheet language) & Javascript
 -	Frameworks: BootStrap5
