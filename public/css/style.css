@@ -1,10 +1,4 @@
 @charset "UTF-8";
-/* 
-Extra small <576px none
-Small ≥576px -sm 
-Medium ≥768px -md
-Large ≥992px -lg
-Extra large ≥1200px -xl */
 .bg-success {
   background: #68D9A4 !important;
 }
@@ -46,23 +40,23 @@ body {
 }
 /* Arrow up Icon on buttons when the collapsible content is hidden*/
 .btn:after {
+  background-image: url("public/images/icons/chevron-up.svg");
+  content: "";
   float: right;
+  height: 1rem;
   margin-left: -10px;
   margin-top: 8px;
-  content: "";
-  background-image: url("/public/images/icons/chevron-up.svg");
   pointer-events: none;
   width: 1rem;
-  height: 1rem;
 }
 
 /* Arrow down Icon on buttons when the collapsible content is shown */
 .btn.show:after {
+  background-image: url("public/images/icons/chevron-down.svg");
   content: "";
-  background-image: url("/public/images/icons/chevron-down.svg");
+  height: 1rem;
   pointer-events: none;
   width: 1rem;
-  height: 1rem;
 }
 
 /* remove bootstrap icon from button */
@@ -77,17 +71,17 @@ body {
 
 .form-control::placeholder {
   color: white;
-  opacity: 80%;
   font-family: "Lato";
   font-size: 1.125rem;
+  opacity: 80%;
 }
 
 .SearchBar {
-  justify-content: center;
   align-items: center;
-  height: 69px;
   background: #E7E7E7;
   border-radius: 5px;
+  height: 69px;
+  justify-content: center;
   margin-right: -12px;
 }
 .SearchBar ::placeholder {
@@ -102,10 +96,9 @@ body {
 }
 
 .refresh {
-  padding-left: 5px;
-  cursor: pointer;
-  text-decoration: none;
   color: black;
+  cursor: pointer;
+  padding-left: 5px;
 }
 
 .tags {
@@ -120,7 +113,6 @@ body {
 }
 .tags__selected:hover {
   transition: 0.3s;
-  /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   /* x,y,blur,spread*/
 }
@@ -139,10 +131,10 @@ body {
   }
 }
 
+/*
 .dropdown-item {
   width: 25%;
-}
-
+}*/
 .buttonExpand {
   width: 100%;
 }
@@ -166,7 +158,6 @@ body {
   position: relative;
   padding: unset;
   top: 190px;
-  /* margin: -6px;*/
 }
 @media only screen and (min-width: 992px) {
   .cards {
@@ -184,7 +175,6 @@ body {
 }
 .card:hover {
   transition: 0.3s;
-  /*box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);*/
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   /* x,y,blur,spread*/
 }
@@ -206,9 +196,9 @@ body {
 .card__description {
   font-family: "Roboto";
   font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   height: 175px;
+  /* overflow: hidden;
+   text-overflow: ellipsis;*/
 }
 .card__ingredient {
   font-weight: 700;
