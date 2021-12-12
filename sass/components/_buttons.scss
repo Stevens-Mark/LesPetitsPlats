@@ -1,6 +1,6 @@
 /* Arrow up Icon on buttons when the collapsible content is hidden*/
 .btn:after {
-    background-image: url("/public/images/icons/chevron-up.svg");
+    background-image: url("public/images/icons/chevron-up.svg");
     content: "";
     float: right;
     height: 1rem;
@@ -12,7 +12,7 @@
   }
   /* Arrow down Icon on buttons when the collapsible content is shown */
   .btn.show:after {
-    background-image: url("/public/images/icons/chevron-down.svg");
+    background-image: url("public/images/icons/chevron-down.svg");
     content: "";
     height: 1rem;
     pointer-events: none;
