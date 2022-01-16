@@ -103,10 +103,6 @@
     transition: 0.3s;
     @include card-hovershadow;
   }
- /* &__heading {
-    align-items: baseline;
-    justify-content: space-between;
-  }*/
   &__image {
     object-fit: cover;
   }
@@ -116,18 +112,14 @@
   &__timing {
     font-size: 18px;
     font-weight: 700;
-   /* white-space: nowrap;*/
   }
   &__information {
-   /* justify-content: space-between;*/
     font-size: 12px;
   }
   &__description {
     font-family: "Roboto";
     font-size: 12px;
     height: 175px;
-   /* overflow: hidden;
-    text-overflow: ellipsis;*/
   }
   &__ingredient {
     font-weight: 700;
