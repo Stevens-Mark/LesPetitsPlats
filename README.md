@@ -3,8 +3,8 @@
 # OPENCLASSROOMS PROJECT 7 *(English)*
 
 # Les Petits Plats
-
-Open website at Git pages: https://stevens-mark.github.io/StevensMark_P7_12072021/
+ 
+Open website at [Petit Plats](https://stevens-mark.github.io/StevensMark_P7_12072021/)
 
 ## Develop a search algorithm in JavaScript
 
@@ -60,7 +60,7 @@ There are a lot of sites offering cooking recipes and the team felt that one of 
 
 # Les Petits Plats
 
-Ouvrir le site web aux pages Git: https://stevens-mark.github.io/StevensMark_P7_12072021/
+Ouvrir le site web à [Petit Plats](https://stevens-mark.github.io/StevensMark_P7_12072021/)
 
 ## Développez un algorithme de recherche en JavaScript 
 
