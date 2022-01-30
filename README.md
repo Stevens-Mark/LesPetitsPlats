@@ -8,8 +8,6 @@ Open website at [Petit Plats](https://stevens-mark.github.io/StevensMark_P7_1207
 
 ## Develop a search algorithm in JavaScript
 
-(This project is part of the "Front-End Developer" training by OpenClassrooms).
-
 After having published cookbooks for several years, the company has decided to launch a new project: to create its own recipe website like Marmiton or 750g.  A Recipe site with multiple search options:
 
 ## Scenario
@@ -63,8 +61,6 @@ There are a lot of sites offering cooking recipes and the team felt that one of 
 Ouvrir le site web à [Petit Plats](https://stevens-mark.github.io/StevensMark_P7_12072021/)
 
 ## Développez un algorithme de recherche en JavaScript 
-
-(Ce projet fait partie de la formation "Développeur Front-End" d'OpenClassrooms)
 
 Après avoir édité des livres de cuisine pendant plusieurs années, l’entreprise a décidé de se lancer dans un nouveau projet : réaliser son propre site de recettes de cuisine à l’instar de Marmiton ou 750g.  Un site de recettes avec de multiples options de recherche :
 
