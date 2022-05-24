@@ -18,6 +18,20 @@ ul.dropdown-menu {
   border: 0px !important;
 }
 
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  padding: 0px;
+  border: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 html,
 body {
   font-family: "Lato", "Roboto", Arial, serif;
@@ -30,6 +44,7 @@ body {
   src: url("../fonts/Lato-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   /* Définition of font called Roboto*/
@@ -37,10 +52,11 @@ body {
   src: url("../fonts/Roboto-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 /* Arrow up Icon on buttons when the collapsible content is hidden*/
 .btn:after {
-  background-image: url("public/images/icons/chevron-up.svg");
+  background-image: url("/public/images/icons/chevron-up.svg");
   content: "";
   float: right;
   height: 1rem;
@@ -52,7 +68,7 @@ body {
 
 /* Arrow down Icon on buttons when the collapsible content is shown */
 .btn.show:after {
-  background-image: url("public/images/icons/chevron-down.svg");
+  background-image: url("/public/images/icons/chevron-down.svg");
   content: "";
   height: 1rem;
   pointer-events: none;
@@ -65,6 +81,11 @@ body {
   content: "";
 }
 
+.header__logo {
+  width: 268px;
+  height: 93px;
+}
+
 .form-control {
   cursor: pointer;
 }
@@ -73,7 +94,7 @@ body {
   color: white;
   font-family: "Lato";
   font-size: 1.125rem;
-  opacity: 80%;
+  opacity: 100%;
 }
 
 .SearchBar {
@@ -168,10 +189,6 @@ body {
 .card {
   border-radius: 5px;
   transition: 0.4s;
-  /* &__heading {
-     align-items: baseline;
-     justify-content: space-between;
-   }*/
 }
 .card:hover {
   transition: 0.3s;
@@ -187,18 +204,14 @@ body {
 .card__timing {
   font-size: 18px;
   font-weight: 700;
-  /* white-space: nowrap;*/
 }
 .card__information {
-  /* justify-content: space-between;*/
   font-size: 12px;
 }
 .card__description {
   font-family: "Roboto";
   font-size: 12px;
   height: 175px;
-  /* overflow: hidden;
-   text-overflow: ellipsis;*/
 }
 .card__ingredient {
   font-weight: 700;
