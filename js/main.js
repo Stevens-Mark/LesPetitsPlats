@@ -23,7 +23,7 @@ const CreateRecipes = (recipes) => {
     recipehtml += `
  <article class="col-12 col-md-6 col-lg-4 mb-4">
     <div class="card bg-light h-100">
-       <img class="card-img-top card__image" src="./public/images/photos/${recipe.name}.jpg" height="178" alt="${recipe.name}">
+       <img class="card-img-top card__image" src="./public/images/photos/${recipe.name}.webp" height="178" alt="${recipe.name}">
        <div class="card-body bg-light">
           <div class="card__heading d-flex justify-content-between align-items-baseline">
              <h2 tabindex="0" class="card__title">${recipe.name}</h2>
