@@ -1,10 +1,12 @@
 ![Petit Plats](/public/images/logo//logo.svg)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f03ce3ce-20df-4420-89b5-8b2752ed032a/deploy-status)](https://app.netlify.com/sites/petitplat/deploys)
+
 # OPENCLASSROOMS PROJECT 7 *(English)*
 
 # Les Petits Plats
  
-Open website at [Petit Plats](https://stevens-mark.github.io/StevensMark_P7_12072021/)
+Open website at [Petit Plats](https://petitplat.netlify.app/)
 
 ## Develop a search algorithm in JavaScript
 
@@ -58,7 +60,7 @@ There are a lot of sites offering cooking recipes and the team felt that one of 
 
 # Les Petits Plats
 
-Ouvrir le site web à [Petit Plats](https://stevens-mark.github.io/StevensMark_P7_12072021/)
+Ouvrir le site web à [Petit Plats](https://petitplat.netlify.app/)
 
 ## Développez un algorithme de recherche en JavaScript 
 
