@@ -168,10 +168,6 @@ body {
 .card {
   border-radius: 5px;
   transition: 0.4s;
-  /* &__heading {
-     align-items: baseline;
-     justify-content: space-between;
-   }*/
 }
 .card:hover {
   transition: 0.3s;
@@ -187,18 +183,14 @@ body {
 .card__timing {
   font-size: 18px;
   font-weight: 700;
-  /* white-space: nowrap;*/
 }
 .card__information {
-  /* justify-content: space-between;*/
   font-size: 12px;
 }
 .card__description {
   font-family: "Roboto";
   font-size: 12px;
   height: 175px;
-  /* overflow: hidden;
-   text-overflow: ellipsis;*/
 }
 .card__ingredient {
   font-weight: 700;
