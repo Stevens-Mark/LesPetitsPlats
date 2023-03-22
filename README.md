@@ -2,9 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f03ce3ce-20df-4420-89b5-8b2752ed032a/deploy-status)](https://app.netlify.com/sites/petitplat/deploys)
 
-# OPENCLASSROOMS PROJECT 7 *(English)*
 
-# Les Petits Plats
+## Les Petits Plats
  
 Open website at [Petit Plats](https://petitplat.netlify.app/)
 
@@ -35,7 +34,7 @@ There are a lot of sites offering cooking recipes and the team felt that one of 
 - Frameworks: BootStrap5
 
 
-## Competences assessed
+## Competences
 
 - [x]	Analyse a computer problem
 - [x]	Develop an algorithm to solve a problem
@@ -56,9 +55,7 @@ There are a lot of sites offering cooking recipes and the team felt that one of 
 
 
 
-# OPENCLASSROOMS PROJECT 7 *(francais)*
-
-# Les Petits Plats
+## Les Petits Plats
 
 Ouvrir le site web à [Petit Plats](https://petitplat.netlify.app/)
 
@@ -90,7 +87,7 @@ Il existe de nombreux sites proposant des recettes de cuisine et l'équipe a est
 -	Frameworks: BootStrap5
 
 
-## Compétences évaluées
+## Compétences
 
 - [x]	Analyser un problème informatique
 - [x] Développer un algorithme pour résoudre un problème
