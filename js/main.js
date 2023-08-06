@@ -47,7 +47,7 @@ const CreateRecipes = (recipes) => {
                          }
                 </li>`).join('')}
              </ul>
-             <div tabindex="0" class="card__description col-6">${recipe.description}</div>
+             <div tabindex="0" class="card__description col-6  overflow-hidden">${recipe.description}</div>
           </div>         
        </div>
     </div>
